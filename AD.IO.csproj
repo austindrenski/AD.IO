@@ -78,19 +78,45 @@
     <Compile Include="src\Write\WriteXml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\Templates\app.xml" />
-    <Content Include="src\Templates\core.xml" />
-    <Content Include="src\Templates\document.xml" />
-    <Content Include="src\Templates\document.xml.rels.xml" />
-    <Content Include="src\Templates\footer1.xml" />
-    <Content Include="src\Templates\footer2.xml" />
-    <Content Include="src\Templates\header1.xml" />
-    <Content Include="src\Templates\header2.xml" />
-    <Content Include="src\Templates\rels.xml" />
-    <Content Include="src\Templates\settings.xml" />
-    <Content Include="src\Templates\styles.xml" />
-    <Content Include="src\Templates\theme1.xml" />
-    <Content Include="src\Templates\[Content_Types].xml" />
+    <Content Include="src\Templates\app.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\core.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\document.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\document.xml.rels.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\footer1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\footer2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\header1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\header2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\rels.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\styles.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\theme1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\Templates\[Content_Types].xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
