@@ -1,0 +1,9 @@
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\AD.IO.Tests.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\AD.IO.Tests.pdb
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\AD.IO.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\System.IO.Compression.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\AD.IO.pdb
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\obj\Debug\AD.IO.Tests.csprojResolveAssemblyReference.cache
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\obj\Debug\AD.IO.Tests.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\obj\Debug\AD.IO.Tests.pdb
