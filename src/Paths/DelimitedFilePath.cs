@@ -136,7 +136,8 @@ namespace AD.IO
         /// <exception cref="ArgumentException"/>
         public static explicit operator UrlPath(DelimitedFilePath delimitedFilePath)
         {
-            return new UrlPath(delimitedFilePath);
+            Uri uri = new Uri(delimitedFilePath);
+            return new UrlPath(uri.AbsoluteUri);
         }
 
         IEnumerator<char> IEnumerable<char>.GetEnumerator()
