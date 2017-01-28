@@ -40,7 +40,8 @@ namespace AD.IO
             }
             _path = directoryPath;
             Extension = null;
-            Name = Path.GetDirectoryName(directoryPath);
+            string temp = Path.GetDirectoryName(directoryPath);
+            Name = temp.Substring(temp.LastIndexOfAny(new char[] { '/', '\\' }) + 1);
         }
 
         /// <summary>

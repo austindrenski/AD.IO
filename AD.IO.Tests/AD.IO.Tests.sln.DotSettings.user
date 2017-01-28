@@ -1,13 +1,17 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=AC881C31DC1A44D0AA8990D1C7F7B389/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=AC881C31DC1A44D0AA8990D1C7F7B389/ProductVersion/@EntryValue">2016.3.2</s:String>
-	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=AC881C31DC1A44D0AA8990D1C7F7B389/SnapshotLocation/@EntryValue">C:\Users\adren\AppData\Local\Temp\ssm.Ricudow.tmp</s:String>
-	<s:Boolean x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=C98B7790DE374CE5A85F397A8F30FF8D/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=C98B7790DE374CE5A85F397A8F30FF8D/ProductVersion/@EntryValue">2016.3.2</s:String>
-	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=C98B7790DE374CE5A85F397A8F30FF8D/SnapshotLocation/@EntryValue">C:\Users\adren\AppData\Local\Temp\ssm.Dicuruh.tmp</s:String>
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=FCA66B3CE69C48DFAD95E203E730E344/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=FCA66B3CE69C48DFAD95E203E730E344/ProductVersion/@EntryValue">2016.3.2</s:String>
 	<s:String x:Key="/Default/CoverageSessionsPersistenceManagerSettings/SessionPersistentData/=FCA66B3CE69C48DFAD95E203E730E344/SnapshotLocation/@EntryValue">C:\Users\adren\AppData\Local\Temp\ssm.Fuhocyx.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/PersistentDataLocation/@EntryValue">C:\Users\adren\AppData\Local\Temp\JetBrains\ContinuousTesting\a48b91d4-363a-4216-b743-2d02d2a6c9ff</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\adren\AppData\Local\Temp\ssm.Ryzujaw.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/Strategy/@EntryValue">RunTests</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/TriggerMode/@EntryValue">OnSave</s:String>
 	
 	
 	</wpf:ResourceDictionary>

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #pragma warning disable 219
@@ -101,13 +103,81 @@ namespace AD.IO.Tests
             {
                 Directory.EnumerateFiles(path).ToList().ForEach(File.Delete);
                 Directory.Delete(path);
-            }            
+            }
 
             // Act
             DirectoryPath directoryPath = DirectoryPath.Create(path);
 
             // Assert
             Assert.IsTrue(directoryPath.ToString() == path);
+        }
+
+        [TestMethod]
+        public void DirectoryPathTest7()
+        {
+            // Arrange 
+            string path = Path.Combine(Path.GetTempPath(), "testdirectory");
+            DirectoryPath directoryPath = path;
+
+            // Act
+            string extension = directoryPath.Extension;
+
+            // Assert
+            Assert.IsTrue(extension == null);
+        }
+
+        [TestMethod]
+        public void DirectoryPathTest8()
+        {
+            // Arrange 
+            DirectoryPath directoryPath = Path.GetTempPath();
+
+            // Act
+            string name = directoryPath.Name;
+
+            // Assert
+            Assert.IsTrue(name.Equals("temp", System.StringComparison.OrdinalIgnoreCase));
+        }
+        
+        [TestMethod]
+        public void DirectoryPathTest9()
+        {
+            // Arrange 
+            DirectoryPath directoryPath;
+            IPath path = directoryPath;
+
+            // Act
+            IPath test = path.Create(Path.GetTempPath());
+
+            // Assert
+            Assert.IsTrue(test.Name.Equals("temp", System.StringComparison.OrdinalIgnoreCase));
+        }
+
+        [TestMethod]
+        public void DirectoryPathTest10()
+        {
+            // Arrange 
+            DirectoryPath directoryPath = Path.GetTempPath();
+
+            // Act
+            IEnumerable<char> charPath = directoryPath.Select(x => x);
+
+            // Assert
+            Assert.IsTrue(string.Join(null, charPath).Equals(directoryPath.ToString()));
+        }
+
+        [TestMethod]
+        public void DirectoryPathTest11()
+        {
+            // Arrange 
+            DirectoryPath directoryPath = Path.GetTempPath();
+            IEnumerable enumerable = directoryPath.AsEnumerable();
+
+            // Act
+            bool test = enumerable.GetEnumerator().MoveNext();
+
+            // Assert
+            Assert.IsTrue(test);
         }
     }
 }

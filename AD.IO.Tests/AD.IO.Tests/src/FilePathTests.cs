@@ -95,12 +95,8 @@ namespace AD.IO.Tests
         {
             // Arrange 
             string path = Path.Combine(Path.GetTempPath(), "testdirectory", ".txt");
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
 
-            // Act
+            // Act 
             FilePath filePath = FilePath.Create(path);
 
             // Assert
