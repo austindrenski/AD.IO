@@ -17,6 +17,8 @@ namespace AD.IO
         /// <param name="line">The delimited string to be split.</param>
         /// <param name="delimiter">The character that delimits the string.</param>
         /// <returns>An enumerable collection of the strings between comma characters.</returns>
+        [CanBeNull]
+        [Pure]
         public static IEnumerable<string> SplitDelimitedLine(this string line, char delimiter)
         {
             bool insideQuote = false;
@@ -82,6 +84,8 @@ namespace AD.IO
         /// <param name="lines">The enumerable collection of delimited strings to be split.</param>
         /// <param name="delimiter">The character delimiting the strings.</param>
         /// <returns>An enumerable of enumerable collections of the split strings.</returns>
+        [CanBeNull]
+        [Pure]
         public static IEnumerable<IEnumerable<string>> SplitDelimitedLine(this IEnumerable<string> lines, char delimiter)
         {
             return lines.Select(x => x.SplitDelimitedLine(delimiter));
@@ -93,9 +97,11 @@ namespace AD.IO
         /// <param name="lines">The enumerable collection of delimited strings to be split.</param>
         /// <param name="delimiter">The character delimiting the strings.</param>
         /// <returns>An enumerable of enumerable collections of the split strings.</returns>
+        [CanBeNull]
+        [Pure]
         public static ParallelQuery<ParallelQuery<string>> SplitDelimitedLine(this ParallelQuery<string> lines, char delimiter)
         {
-            return lines.Select(x => x.SplitDelimitedLine(delimiter).AsParallel());
+            return lines.Select(x => x.SplitDelimitedLine(delimiter)?.AsParallel());
         }
     }
 }

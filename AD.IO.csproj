@@ -42,7 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <HintPath>AD.IO.Tests\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -78,19 +78,19 @@
     <Compile Include="src\Write\WriteXml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\Templates\app.xml" />
-    <Content Include="src\Templates\core.xml" />
-    <Content Include="src\Templates\document.xml" />
-    <Content Include="src\Templates\document.xml.rels.xml" />
-    <Content Include="src\Templates\footer1.xml" />
-    <Content Include="src\Templates\footer2.xml" />
-    <Content Include="src\Templates\header1.xml" />
-    <Content Include="src\Templates\header2.xml" />
-    <Content Include="src\Templates\rels.xml" />
-    <Content Include="src\Templates\settings.xml" />
-    <Content Include="src\Templates\styles.xml" />
-    <Content Include="src\Templates\theme1.xml" />
-    <Content Include="src\Templates\[Content_Types].xml" />
+    <EmbeddedResource Include="src\Templates\app.xml" />
+    <EmbeddedResource Include="src\Templates\core.xml" />
+    <EmbeddedResource Include="src\Templates\document.xml" />
+    <EmbeddedResource Include="src\Templates\document.xml.rels.xml" />
+    <EmbeddedResource Include="src\Templates\footer1.xml" />
+    <EmbeddedResource Include="src\Templates\footer2.xml" />
+    <EmbeddedResource Include="src\Templates\header1.xml" />
+    <EmbeddedResource Include="src\Templates\header2.xml" />
+    <EmbeddedResource Include="src\Templates\rels.xml" />
+    <EmbeddedResource Include="src\Templates\settings.xml" />
+    <EmbeddedResource Include="src\Templates\styles.xml" />
+    <EmbeddedResource Include="src\Templates\theme1.xml" />
+    <EmbeddedResource Include="src\Templates\[Content_Types].xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AD.IO.nuspec" />

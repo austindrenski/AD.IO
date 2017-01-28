@@ -6,3 +6,4 @@
 /obj/Debug
 *.DotSettings
 *.nupkg
+/nuget.exe
