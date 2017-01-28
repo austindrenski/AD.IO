@@ -36,6 +36,32 @@ namespace AD.IO.Tests
         }
 
         [TestMethod]
+        public void SplitDelimitedCommaLineTest2()
+        {
+            // Arrange
+            const string delimited = "a,b,c,d,e,\"f,g\",\r\na,b,c,d,e|,\"f|g\"";
+
+            // Act
+            IEnumerable<string> result = delimited.SplitDelimitedLine(',');
+
+            // Assert
+            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }.SequenceEqual(result));
+        }
+
+        [TestMethod]
+        public void SplitDelimitedCommaLineTest3()
+        {
+            // Arrange
+            const string delimited = "a|b|c|d|e|\"f|g\"|\r\na|b|c|d|e,|\"f,g\"";
+
+            // Act
+            IEnumerable<string> result = delimited.SplitDelimitedLine('|');
+
+            // Assert
+            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f|g", "a", "b", "c", "d", "e,", "f,g" }.SequenceEqual(result));
+        }
+
+        [TestMethod]
         public void SplitDelimitedPipeLineTest0()
         {
             // Arrange
@@ -94,6 +120,45 @@ namespace AD.IO.Tests
 
             // Act
             string[][] result = delimited.SplitDelimitedLine(',').Select(x => x.ToArray()).ToArray();
+
+            // Assert
+            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+        }
+
+        [TestMethod]
+        public void SplitDelimitedCommaLinesTest2()
+        {
+            // Arrange
+            string[] delimited = new string[] { "a,b,c,d,e,\"f\"", "g,h,i,j,k,\"l\"" };
+            string[][] expected = new string[][]
+            {
+                new string[] { "a", "b", "c", "d", "e", "f" },
+                new string[] { "g", "h", "i", "j", "k", "l" }
+            };
+
+            // Act
+            IEnumerable<IEnumerable<string>> strings = delimited.AsParallel().SplitDelimitedLine(',');
+            string[][] result = strings.Select(x => x.ToArray()).ToArray();
+
+            // Assert
+            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+        }
+
+        [TestMethod]
+        public void SplitDelimitedCommaLinesTest3()
+        {
+            // Arrange
+            string[] delimited = new string[] { "a,b,c,d,e,\"f,f\"", "g,h,i,j,k,\"l,l\"" };
+            string[][] expected = new string[][]
+            {
+                new string[] { "a", "b", "c", "d", "e", "f,f" },
+                new string[] { "g", "h", "i", "j", "k", "l,l" }
+            };
+
+            // Act
+            string[][] result = delimited.AsParallel().SplitDelimitedLine(',').Select(x => x.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));

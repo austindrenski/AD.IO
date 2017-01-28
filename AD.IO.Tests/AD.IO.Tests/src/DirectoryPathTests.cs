@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#pragma warning disable 219
 
 namespace AD.IO.Tests
 {
@@ -29,10 +30,11 @@ namespace AD.IO.Tests
             string path = Path.GetTempFileName();
 
             // Act
+            // ReSharper disable once UnusedVariable
             DirectoryPath directoryPath = path;
 
             // Assert
-            Assert.IsFalse(directoryPath == path);
+            // Expected exception: DirectoryNotFoundException
         }
 
         [TestMethod]
@@ -46,7 +48,7 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = path;
 
             // Assert
-            Assert.IsFalse(directoryPath == path);
+            // Expected exception: DirectoryNotFoundException
         }
 
         [TestMethod]
@@ -70,10 +72,11 @@ namespace AD.IO.Tests
             string path = Path.GetTempFileName();
 
             // Act
+            // ReSharper disable once UnusedVariable
             DirectoryPath directoryPath = new DirectoryPath(path);
 
             // Assert
-            Assert.IsFalse(directoryPath == path);
+            // Expected exception: DirectoryNotFoundException
         }
 
         [TestMethod]

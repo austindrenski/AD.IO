@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#pragma warning disable 219
 
 namespace AD.IO.Tests
 {
@@ -27,10 +28,11 @@ namespace AD.IO.Tests
             string path = Path.GetTempPath();
 
             // Act
+            // ReSharper disable once UnusedVariable
             FilePath filePath = path;
 
             // Assert
-            Assert.IsFalse(filePath == path);
+            // Expected exception: FileNotFoundException
         }
 
         [TestMethod]
@@ -44,7 +46,7 @@ namespace AD.IO.Tests
             FilePath filePath = path;
 
             // Assert
-            Assert.IsFalse(filePath == path);
+            // Expected exception: FileNotFoundException
         }
 
         [TestMethod]
@@ -68,10 +70,11 @@ namespace AD.IO.Tests
             string path = Path.GetTempPath();
 
             // Act
+            // ReSharper disable once UnusedVariable
             FilePath filePath = new FilePath(path);
 
             // Assert
-            Assert.IsFalse(filePath == path);
+            // Expected exception: FileNotFoundException
         }
 
         [TestMethod]
