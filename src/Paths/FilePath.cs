@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -124,7 +125,8 @@ namespace AD.IO
         /// <exception cref="System.ArgumentException"/>
         public static explicit operator UrlPath(FilePath filePath)
         {
-            return new UrlPath(filePath);
+            Uri uri = new Uri(filePath);
+            return new UrlPath(uri.AbsoluteUri);
         }
     }
 }
