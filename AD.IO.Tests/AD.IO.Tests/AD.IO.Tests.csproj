@@ -64,6 +64,7 @@
     <Compile Include="src\ToDelimitedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\UrlPathTests.cs" />
+    <Compile Include="src\ZipFilePathTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AD.IO.csproj">

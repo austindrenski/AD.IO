@@ -55,13 +55,13 @@ namespace AD.IO
         /// <exception cref="ArgumentException"/>
         public static ZipFilePath Create(string zipFilePath)
         {
-            if (Path.GetExtension(zipFilePath) != ".zip")
-            {
-                throw new ArgumentException("Path is not a zip file.");
-            }
             if (!File.Exists(zipFilePath))
             {
                 File.Create(zipFilePath).Dispose();
+            }
+            if (Path.GetExtension(zipFilePath) != ".zip")
+            {
+                throw new ArgumentException("Path is not a zip file.");
             }
             return new ZipFilePath(zipFilePath);
         }
@@ -117,7 +117,7 @@ namespace AD.IO
         /// <exception cref="ArgumentException"/>
         public static explicit operator UrlPath(ZipFilePath zipFilePath)
         {
-            return new UrlPath(zipFilePath);
+            return new UrlPath(new Uri(zipFilePath).AbsoluteUri);
         }
 
         IEnumerator<char> IEnumerable<char>.GetEnumerator()

@@ -8,3 +8,4 @@ C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\JetBrains.Annotations.xm
 C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\obj\Debug\AD.IO.Tests.csprojResolveAssemblyReference.cache
 C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\obj\Debug\AD.IO.Tests.dll
 C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\obj\Debug\AD.IO.Tests.pdb
+C:\Source\Repos\AD.IO\AD.IO.Tests\AD.IO.Tests\bin\Debug\AD.IO.xml
