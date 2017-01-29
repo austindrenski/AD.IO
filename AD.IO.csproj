@@ -61,7 +61,6 @@
     <Compile Include="src\Paths\DelimitedFilePath.cs" />
     <Compile Include="src\Paths\DirectoryPath.cs" />
     <Compile Include="src\Paths\DocxFilePath.cs" />
-    <Compile Include="src\Paths\DotxFilePath.cs" />
     <Compile Include="src\Paths\FilePath.cs" />
     <Compile Include="src\Paths\HtmlFilePath.cs" />
     <Compile Include="src\Paths\IPath.cs" />
