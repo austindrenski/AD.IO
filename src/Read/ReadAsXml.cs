@@ -36,7 +36,7 @@ namespace AD.IO
         {
             XName record = "record";
             XName[] headers = File.ReadLines(filePath)
-                                   .First()
+                                   .FirstOrDefault()?
                                    .Replace(" ", null)
                                    .Replace("(", null)
                                    .Replace(")", null)

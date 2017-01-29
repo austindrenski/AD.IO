@@ -229,35 +229,20 @@ namespace AD.IO.Tests
         }
 
         [TestMethod]
-        public void DelimitedFilePathTest16()
-        {
-            // Arrange 
-            string path = Path.Combine(Path.GetTempPath(), "test.csv");
-            DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
-            using (StreamWriter writer = new StreamWriter(delimitedPath))
-            {
-                writer.WriteLine("a,b,c");
-                writer.WriteLine("1,2,3");
-            }
-
-            // Act 
-            string headers = delimitedPath.HeaderRow;
-
-            // Assert
-            Assert.AreEqual(headers, "a,b,c");
-        }
-
-        [TestMethod]
         public void DelimitedFilePathTest17()
         {
             // Arrange 
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
-            DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
-            using (StreamWriter writer = new StreamWriter(delimitedPath))
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            using (StreamWriter writer = new StreamWriter(path))
             {
                 writer.WriteLine("a,b,c");
                 writer.WriteLine("1,2,3");
             }
+            DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
 
             // Act 
             IEnumerable<string> headers = delimitedPath.Headers;

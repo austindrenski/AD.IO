@@ -59,8 +59,9 @@
     <Compile Include="src\DelimitedFilePathTests.cs" />
     <Compile Include="src\DirectoryPathTests.cs" />
     <Compile Include="src\FilePathTests.cs" />
+    <Compile Include="src\ReadAsXmlTests.cs" />
     <Compile Include="src\SplitDelimitedTests.cs" />
-    <Compile Include="src\ToDelimitedExtensionsTests.cs" />
+    <Compile Include="src\ToDelimitedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
