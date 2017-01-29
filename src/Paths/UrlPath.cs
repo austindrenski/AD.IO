@@ -59,7 +59,6 @@ namespace AD.IO
             return new UrlPath(urlPath);
         }
 
-
         /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
@@ -112,7 +111,7 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Implicitly casts a UrlPath as a Uri. An exception is thrown if the url is not a file path URI.
+        /// Explicitly casts a UrlPath as a Uri. An exception is thrown if the url is not a file path URI.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         public static explicit operator FilePath(UrlPath urlPath)
@@ -121,11 +120,11 @@ namespace AD.IO
             {
                 throw new FileNotFoundException("The specified urlPath is not a file URI.");
             }
-            return new FilePath(urlPath);
+            return new FilePath(urlPath.UriPath.AbsolutePath);
         }
 
         /// <summary>
-        /// Implicitly casts a UrlPath as a Uri. An exception is thrown if the url is not a file path URI.
+        /// Explicitly casts a UrlPath as a Uri. An exception is thrown if the url is not a file path URI.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
@@ -135,7 +134,7 @@ namespace AD.IO
             {
                 throw new FileNotFoundException("The specified urlPath is not a file URI.");
             }
-            return new ZipFilePath(urlPath);
+            return new ZipFilePath(urlPath.UriPath.AbsolutePath);
         }
     }
 }
