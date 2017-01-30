@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AD.IO")]
-[assembly: AssemblyDescription("Extension library for common input/output operations.")]
+[assembly: AssemblyDescription("C# extension library for input/output operations and data management.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Austin Drenski")]
 [assembly: AssemblyProduct("AD.IO")]
