@@ -60,6 +60,7 @@
     <Compile Include="src\DirectoryPathTests.cs" />
     <Compile Include="src\DocxFilePathTests.cs" />
     <Compile Include="src\FilePathTests.cs" />
+    <Compile Include="src\GetZipFileTests.cs" />
     <Compile Include="src\ReadAsXmlTests.cs" />
     <Compile Include="src\SplitDelimitedTests.cs" />
     <Compile Include="src\ToDelimitedTests.cs" />

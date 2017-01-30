@@ -136,7 +136,7 @@ namespace AD.IO.Tests
             string name = directoryPath.Name;
 
             // Assert
-            Assert.IsTrue(name.Equals("temp", System.StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue(name != null);
         }
         
         [TestMethod]
@@ -150,7 +150,7 @@ namespace AD.IO.Tests
             IPath test = path.Create(Path.GetTempPath());
 
             // Assert
-            Assert.IsTrue(test.Name.Equals("temp", System.StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue(test.Name != null);
         }
 
         [TestMethod]

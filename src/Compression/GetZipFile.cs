@@ -25,7 +25,7 @@ namespace AD.IO
             }
             HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(urlPath.UriPath);
             webRequest.Method = "GET";
-            webRequest.ContinueTimeout = 3600000;
+            webRequest.Timeout = 3600000;
             using (WebResponse webResponse = webRequest.GetResponseAsync().Result)
             {
                 using (Stream stream = webResponse.GetResponseStream())
