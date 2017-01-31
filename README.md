@@ -10,11 +10,20 @@ PM> Install-Package AD.IO
 
 ## Documentation
 
-|[AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)            |
-|:---------------------------------------------------------------------------------------------|
-|[GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#GetZipFile)        |
-|[TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#TryGetZipFile)  |
-|[ExtractZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#ExtractZipFile)|
+|[AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)              |                                                                 |
+|:-----------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
+|[GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#GetZipFile)          |GetZipFile(this UrlPath, ZipFilePath, bool)                      |
+|[TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#TryGetZipFile)    |TryGetZipFile(this UrlPath, ZipFilePath, bool, string)           |
+|[ExtractZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#ExtractZipFile)  |ExtractZipFile(this ZipFilePath, FilePath, bool)                 |
+|                                                                                                |ExtractZipFile(this ZipFilePath, FilePath, bool, string)         |
+|                                                                                                |ExtractZipFile(this ZipFilePath, ZipFilePath, bool)              |
+|                                                                                                |ExtractZipFile(this ZipFilePath, ZipFilePath, bool, string)      |
+|                                                                                                |ExtractZipFile(this ZipFilePath, DelimitedFilePath, bool)        |
+|                                                                                                |ExtractZipFile(this ZipFilePath, DelimitedFilePath, bool, string)|
+|                                                                                                |ExtractZipFile(this ZipFilePath, XmlFilePath, bool)              |
+|                                                                                                |ExtractZipFile(this ZipFilePath, XmlFilePath, bool, string)      |
+|[ExtractZipFiles](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#ExtractZipFiles)|ExtractZipFiles(this ZipFilePath, DirectoryPath, bool)           |
+|                                                                                                |ExtractZipFiles(this ZipFilePath, DirectoryPath, bool, string)   |
 
 |[AD.IO.Paths](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths)                         |
 |:----------------------------------------------------------------------------------------------|
@@ -29,15 +38,15 @@ PM> Install-Package AD.IO
 |[ZipFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#ZipFilePath)             |
 
 
-### [AD.IO.Read](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Read)
+|[AD.IO.Read](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Read)                           |
+|:----------------------------------------------------------------------------------------------|
+|[ReadAsXml](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Read#ReadAsXml)                  |
 
-* [ReadAsXml](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Read#ReadAsXml)
-
-### [AD.IO.Text](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text)
-
-* [SplitDelimited](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text#SplitDelimited)
-* [ToCapitalized](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text#ToCapitalized)
-* [ToDelimited](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text#ToDelimited)
+|[AD.IO.Text](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text)                           |
+|:----------------------------------------------------------------------------------------------|
+|[SplitDelimited](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text#SplitDelimited)        |
+|[ToCapitalized](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text#ToCapitalized)          |
+|[ToDelimited](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text#ToDelimited)              |
 
 ### [AD.IO.Write](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Write)
 
