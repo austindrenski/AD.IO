@@ -6,3 +6,6 @@ PM> Install-Package AD.IO
 ```
 ## [AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)
 ## [AD.IO.Paths](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths)
+## [AD.IO.Read](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Read)
+## [AD.IO.Text](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Text)
+## [AD.IO.Write](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Write)
