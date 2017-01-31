@@ -4,7 +4,7 @@ C# extension library for input/output operations and data management.
 
 ## Install from NuGet:
 
-```Powershell
+```Powershell 
 PM> Install-Package AD.IO
 ```
 
