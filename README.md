@@ -4,7 +4,7 @@ C# extension library for input/output operations and data management.
 ```
 PM> Install-Package AD.IO
 ```
-## Documentation:
+## Documentation
 ### [AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)
 * [GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#getzipfile)
 * [TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#trygetzipfile)
