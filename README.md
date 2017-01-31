@@ -10,8 +10,7 @@ PM> Install-Package AD.IO
 
 ## Documentation
 
-### [AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)     
-|                                                                                                |                                                                 |
+|[AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)              |                                                                 |
 |:-----------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
 |[GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#GetZipFile)          |GetZipFile(this UrlPath, ZipFilePath, bool)                      |
 |[TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#TryGetZipFile)    |TryGetZipFile(this UrlPath, ZipFilePath, bool, string)           |
@@ -26,8 +25,7 @@ PM> Install-Package AD.IO
 |[ExtractZipFiles](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#ExtractZipFiles)|ExtractZipFiles(this ZipFilePath, DirectoryPath, bool)           |
 |                                                                                                |ExtractZipFiles(this ZipFilePath, DirectoryPath, bool, string)   |
 
-### [AD.IO.Paths](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths)
-|                                                                                               |                           |
+|[AD.IO.Paths](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths)                         |                           |
 |:----------------------------------------------------------------------------------------------|:--------------------------|
 |[DelimitedFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DelimitedFilePath) |DelimitedPath(string, char)|
 |[DirectoryPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DirectoryPath)         |DirectoryPath(string)      |
