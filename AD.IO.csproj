@@ -68,6 +68,7 @@
     <Compile Include="src\Paths\XmlFilePath.cs" />
     <Compile Include="src\Paths\ZipFilePath.cs" />
     <Compile Include="src\Read\ReadAsXml.cs" />
+    <Compile Include="src\Text\Parse.cs" />
     <Compile Include="src\Text\SplitDelimited.cs" />
     <Compile Include="src\Text\ToCapitalized.cs" />
     <Compile Include="src\Text\ToDelimited.cs" />

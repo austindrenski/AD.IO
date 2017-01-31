@@ -1007,6 +1007,27 @@
             <exception cref="T:System.IO.PathTooLongException"/>
             <exception cref="T:System.UnauthorizedAccessException"/>
         </member>
+        <member name="T:AD.IO.ParseExtensions">
+            <summary>
+            Parses <see cref="T:System.Collections.Generic.IEnumerator`1"/> as numbers.
+            </summary>
+        </member>
+        <member name="M:AD.IO.ParseExtensions.Parse(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            Filters an enumerable of characters for the numeric component, 
+            concatenates the characters, and then parses the string as an integer.
+            </summary>
+            <param name="enumerable">The source enumerable.</param>
+            <returns>The numeric components of the source <see cref="T:System.Collections.Generic.IEnumerable`1"/> as an integer.</returns>
+        </member>
+        <member name="M:AD.IO.ParseExtensions.ParseDouble(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            Filters an enumerable of characters for the numeric component, 
+            concatenates the characters, and then parses the string as a double.
+            </summary>
+            <param name="enumerable">The source enumerable.</param>
+            <returns>The numeric components of the source <see cref="T:System.Collections.Generic.IEnumerable`1"/> as a double.</returns>
+        </member>
         <member name="T:AD.IO.SplitDelimitedExtensions">
             <summary>
             Extension methods to split delimited strings into enumerable collections.
