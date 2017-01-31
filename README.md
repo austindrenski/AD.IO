@@ -10,23 +10,24 @@ PM> Install-Package AD.IO
 
 ## Documentation
 
-### [AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)
+|[AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)            |
+|:---------------------------------------------------------------------------------------------|
+|[GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#GetZipFile)        |
+|[TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#TryGetZipFile)  |
+|[ExtractZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#ExtractZipFile)|
 
-* [GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#GetZipFile)
-* [TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#TryGetZipFile)
-* [ExtractZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#ExtractZipFile)
+|[AD.IO.Paths](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths)                         |
+|:----------------------------------------------------------------------------------------------|
+|[DelimitedFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DelimitedFilePath) |
+|[DirectoryPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DirectoryPath)         |
+|[DocxFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DocxFilePath)           |
+|[FilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#FilePath)                   |
+|[HtmlFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#HtmlFilePath)           |
+|[IPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#IPath)                         |
+|[UrlPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#UrlPath)                     |
+|[XmlFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#XmlFilePath)             |
+|[ZipFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#ZipFilePath)             |
 
-### [AD.IO.Paths](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths)
-
-* [DelimitedFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DelimitedFilePath)
-* [DirectoryPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DirectoryPath)
-* [DocxFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#DocxFilePath)
-* [FilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#FilePath)
-* [HtmlFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#HtmlFilePath)
-* [IPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#IPath)
-* [UrlPath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#UrlPath)
-* [XmlFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#XmlFilePath)
-* [ZipFilePath](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Paths#ZipFilePath)
 
 ### [AD.IO.Read](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Read)
 
