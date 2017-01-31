@@ -10,7 +10,8 @@ PM> Install-Package AD.IO
 
 ## Documentation
 
-|[AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)              |                                                                 |
+### [AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)     
+|                                                                                                |                                                                 |
 |:-----------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
 |[GetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#GetZipFile)          |GetZipFile(this UrlPath, ZipFilePath, bool)                      |
 |[TryGetZipFile](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression#TryGetZipFile)    |TryGetZipFile(this UrlPath, ZipFilePath, bool, string)           |
