@@ -11,7 +11,7 @@ namespace AD.IO
     /// Path to an HTML file on the system. An exception is thrown if the file does not exist, or if it is not an HTML file.
     /// </summary>
     [PublicAPI]
-    public struct HtmlFilePath : IPath
+    public class HtmlFilePath : IPath
     {
         /// <summary>
         /// The full file path.

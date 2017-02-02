@@ -90,7 +90,7 @@ namespace AD.IO.Tests
         {
             // Arrange
             string path = Path.GetTempFileName();
-            IPath iPath = new ZipFilePath();
+            IPath iPath = new ZipFilePath(Path.ChangeExtension(path, ".zip"));
 
             // Act
             // ReSharper disable once UnusedVariable
@@ -186,7 +186,7 @@ namespace AD.IO.Tests
             // Arrange
             string path = Path.GetTempFileName();
             string zip = path.Replace(".tmp", ".zip");
-            IPath iPath = new ZipFilePath();
+            IPath iPath = new ZipFilePath(zip);
 
             // Act
             ZipFilePath test = (ZipFilePath)iPath.Create(zip);

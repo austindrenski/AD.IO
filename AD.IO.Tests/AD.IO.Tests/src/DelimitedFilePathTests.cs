@@ -256,14 +256,14 @@ namespace AD.IO.Tests
         {
             // Arrange 
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
-            DelimitedFilePath delimitedPath = new DelimitedFilePath();
+            DelimitedFilePath delimitedPath = new DelimitedFilePath(path, ',');
             IPath iPath = delimitedPath;
 
             // Act 
             DelimitedFilePath test = (DelimitedFilePath)iPath.Create(path);
 
             // Assert
-            Assert.AreEqual(test.ToString(), path);
+            Assert.AreEqual(test.ToString(), delimitedPath.ToString());
         }
     }
 }

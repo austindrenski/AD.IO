@@ -11,7 +11,7 @@ namespace AD.IO
     /// Path to a file on the system. An exception is thrown if the file does not exist.
     /// </summary>
     [PublicAPI]
-    public struct FilePath : IPath
+    public class FilePath : IPath
     {
         /// <summary>
         /// The full file path.

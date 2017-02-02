@@ -89,8 +89,8 @@ namespace AD.IO.Tests
         public void DocxFilePathTest5()
         {
             // Arrange
-            string path = Path.GetTempFileName();
-            IPath iPath = new ZipFilePath();
+            ZipFilePath path = new ZipFilePath(Path.ChangeExtension(Path.GetTempFileName(), ".zip"));
+            IPath iPath = new ZipFilePath(path);
 
             // Act
             // ReSharper disable once UnusedVariable
@@ -186,7 +186,7 @@ namespace AD.IO.Tests
             // Arrange
             string path = Path.GetTempFileName();
             string zip = path.Replace(".tmp", ".zip");
-            IPath iPath = new ZipFilePath();
+            IPath iPath = new ZipFilePath(zip);
 
             // Act
             ZipFilePath test = (ZipFilePath)iPath.Create(zip);

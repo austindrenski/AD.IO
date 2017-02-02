@@ -10,7 +10,7 @@ namespace AD.IO
     /// Path to a directory on the system. An exception is thrown if the directory does not exist.
     /// </summary>
     [PublicAPI]
-    public struct DirectoryPath : IPath
+    public class DirectoryPath : IPath
     {
         /// <summary>
         /// The full directory path.

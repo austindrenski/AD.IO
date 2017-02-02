@@ -138,7 +138,7 @@ namespace AD.IO.Tests
         public void FilePathTest9()
         {
             // Arrange 
-            FilePath filePath;
+            FilePath filePath = new FilePath(Path.GetTempFileName());
             IPath path = filePath;
             string name = Path.GetTempFileName().Replace(".tmp", "0.tmp");
 

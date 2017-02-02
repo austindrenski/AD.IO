@@ -6,9 +6,19 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <summary>
+    /// Extension methods to write an <see cref="IEnumerable{XElement}"/> to a delimited file.
+    /// </summary>
     [PublicAPI]
     public static class WriteDelimitedExtensions
     {
+        /// <summary>
+        /// Writes the <see cref="IEnumerable{XElement}"/> as a delimited file.
+        /// </summary>
+        /// <param name="elements">The source enumerable.</param>
+        /// <param name="filePath">The file to which the content is written.</param>
+        /// <param name="delimiter">The character used to delimit values.</param>
+        /// <param name="overwrite">True to overwrite an existing file.</param>
         public static void WriteDelimited(this IEnumerable<XElement> elements, DelimitedFilePath filePath, string delimiter = "|", bool overwrite = true)
         {
             if (!overwrite)
@@ -24,6 +34,14 @@ namespace AD.IO
             }
         }
 
+        /// <summary>
+        /// Writes the <see cref="IEnumerable{XElement}"/> as a delimited file.
+        /// </summary>
+        /// <param name="elements">The source enumerable.</param>
+        /// <param name="filePath">The file to which the content is written.</param>
+        /// <param name="completedMessage">The message written to the console upon completion.</param>
+        /// <param name="delimiter">The character used to delimit values.</param>
+        /// <param name="overwrite">True to overwrite an existing file.</param>
         public static void WriteDelimited(this IEnumerable<XElement> elements, DelimitedFilePath filePath, string completedMessage, string delimiter = "|", bool overwrite = true)
         {
             elements.WriteDelimited(filePath, delimiter, overwrite);

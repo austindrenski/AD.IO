@@ -82,19 +82,19 @@ namespace AD.IO
         [Pure]
         public static XElement ReadAsXml(this DocxFilePath filePath, string entryPath)
         {
-            XDocument document;
+            XElement element;
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (ZipArchive file = new ZipArchive(fileStream))
                 {
                     using (Stream stream = file.GetEntry(entryPath).Open())
                     {
-                        document = XDocument.Load(stream);
+                        element = XElement.Load(stream);
                     }
                 }
             }
-            document.Root?.Add(new XAttribute("fileName", Path.GetFileNameWithoutExtension(filePath)));
-            return document.Root;
+            element.SetAttributeValue("fileName", filePath.Name);
+            return element;
         }
 
         /// <summary>

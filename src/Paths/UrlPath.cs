@@ -11,7 +11,7 @@ namespace AD.IO
     /// Represents a URL. Exceptions are thrown if the URL is invalid.
     /// </summary>
     [PublicAPI]
-    public struct UrlPath : IPath
+    public class UrlPath : IPath
     {
         /// <summary>
         /// The string representation of the URL path.

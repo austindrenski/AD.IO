@@ -11,7 +11,7 @@ namespace AD.IO
     /// Path to a zip file on the system. An exception is thrown if the file does not exist, or if it is not a zip file.
     /// </summary>
     [PublicAPI]
-    public struct ZipFilePath : IPath
+    public class ZipFilePath : IPath
     {
         /// <summary>
         /// The full file path.

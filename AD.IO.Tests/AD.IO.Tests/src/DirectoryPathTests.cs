@@ -143,14 +143,14 @@ namespace AD.IO.Tests
         public void DirectoryPathTest9()
         {
             // Arrange 
-            DirectoryPath directoryPath;
+            DirectoryPath directoryPath = new DirectoryPath(Path.GetTempPath());
             IPath path = directoryPath;
 
             // Act
             IPath test = path.Create(Path.GetTempPath());
 
             // Assert
-            Assert.IsTrue(test.Name != null);
+            Assert.AreEqual(test.ToString(), directoryPath.ToString());
         }
 
         [TestMethod]

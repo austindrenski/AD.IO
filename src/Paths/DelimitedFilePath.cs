@@ -11,7 +11,7 @@ namespace AD.IO
     /// Path to a delimited file on the system. An exception is thrown if the file does not exist, or if it is not a delimited file.
     /// </summary>
     [PublicAPI]
-    public struct DelimitedFilePath : IPath
+    public class DelimitedFilePath : IPath
     {
         /// <summary>
         /// The full file path.

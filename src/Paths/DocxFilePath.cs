@@ -14,7 +14,7 @@ namespace AD.IO
     /// Path to a Microsoft Word file on the system. An exception is thrown if the file does not exist.
     /// </summary>
     [PublicAPI]
-    public struct DocxFilePath : IPath
+    public class DocxFilePath : IPath
     {
         /// <summary>
         /// The full file path.

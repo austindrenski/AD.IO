@@ -85,7 +85,7 @@ namespace AD.IO.Tests
             // Arrange
             string path = Path.GetTempFileName();
             Uri uri = new Uri(path);
-            IPath url = new UrlPath();
+            IPath url = new UrlPath(path);
 
             // Act
             UrlPath urlPath = (UrlPath) url.Create(uri.AbsoluteUri);

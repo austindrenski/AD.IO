@@ -6,9 +6,19 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <summary>
+    /// Extension methods to write an <see cref="IEnumerable{XElement}"/> to an XML file.
+    /// </summary>
     [PublicAPI]
     public static class WriteXmlExtensions
     {
+        /// <summary>
+        /// Writes the <see cref="IEnumerable{XElement}"/> as an XML file.
+        /// </summary>
+        /// <param name="elements">The source enumerable.</param>
+        /// <param name="xmlFilePath">The file to which the content is written.</param>
+        /// <param name="saveOptions">Specifies serialization options.</param>
+        /// <param name="overwrite">True to overwrite an existing file.</param>
         public static void WriteXml(this IEnumerable<XElement> elements, XmlFilePath xmlFilePath, SaveOptions saveOptions = SaveOptions.None, bool overwrite = true)
         {
             if (!overwrite)
@@ -25,6 +35,14 @@ namespace AD.IO
             }
         }
 
+        /// <summary>
+        /// Writes the <see cref="IEnumerable{XElement}"/> as an XML file.
+        /// </summary>
+        /// <param name="elements">The source enumerable.</param>
+        /// <param name="xmlFilePath">The file to which the content is written.</param>
+        /// <param name="completedMessage">The message written to the console upon completion.</param>
+        /// <param name="saveOptions">Specifies serialization options.</param>
+        /// <param name="overwrite">True to overwrite an existing file.</param>
         public static void WriteXml(this IEnumerable<XElement> elements, XmlFilePath xmlFilePath, string completedMessage, SaveOptions saveOptions = SaveOptions.None, bool overwrite = true)
         {
             elements.WriteXml(xmlFilePath, saveOptions, overwrite);
