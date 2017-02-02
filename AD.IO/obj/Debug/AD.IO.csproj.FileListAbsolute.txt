@@ -1,0 +1,10 @@
+C:\Users\austin.drenski\Source\Repos\AD.IO\bin\Debug\AD.IO.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\bin\Debug\AD.IO.pdb
+C:\Users\austin.drenski\Source\Repos\AD.IO\bin\Debug\JetBrains.Annotations.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\bin\Debug\JetBrains.Annotations.xml
+C:\Users\austin.drenski\Source\Repos\AD.IO\obj\Debug\AD.IO.Properties.Resources.resources
+C:\Users\austin.drenski\Source\Repos\AD.IO\obj\Debug\AD.IO.csproj.GenerateResource.Cache
+C:\Users\austin.drenski\Source\Repos\AD.IO\obj\Debug\AD.IO.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\obj\Debug\AD.IO.pdb
+C:\Users\austin.drenski\Source\Repos\AD.IO\bin\Debug\AD.IO.XML
+C:\Users\austin.drenski\Source\Repos\AD.IO\obj\Debug\AD.IO.csprojResolveAssemblyReference.cache
