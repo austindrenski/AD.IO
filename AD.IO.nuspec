@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>AD.IO</id>
+    <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>Austin Drenski</authors>
-    <owners>Austin Drenski</owners>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
     <licenseUrl>https://github.com/austindrenski/AD.IO/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Extension libraries for common input/output operations.</description>
+    <description>$description$</description>
     <releaseNotes>Initial publication.</releaseNotes>
-    <copyright>Copyright 2017</copyright>
+    <copyright>$copyright$</copyright>
     <tags>IO filepath xml delimited read</tags>
   </metadata>
 </package>

@@ -699,6 +699,31 @@
             <exception cref="T:System.IO.FileNotFoundException"/>
             <exception cref="T:System.ArgumentException"/>
         </member>
+        <member name="T:AD.IO.IPath">
+            <summary>
+            Defines common functionality for system paths.
+            </summary>
+        </member>
+        <member name="P:AD.IO.IPath.Extension">
+            <summary>
+            The file extension or null.
+            </summary>
+        </member>
+        <member name="P:AD.IO.IPath.Name">
+            <summary>
+            The file name or null.
+            </summary>
+        </member>
+        <member name="M:AD.IO.IPath.Create(System.String)">
+            <summary>
+            Creates a new path.
+            </summary>
+        </member>
+        <member name="M:AD.IO.IPath.ToString">
+            <summary>
+            Returns the internal string path.
+            </summary>
+        </member>
         <member name="T:AD.IO.UrlPath">
             <summary>
             Represents a URL. Exceptions are thrown if the URL is invalid.
@@ -1179,6 +1204,30 @@
             <returns>A string delimited by the delimiter.</returns>
             <exception cref="T:System.ArgumentException"/>
         </member>
+        <member name="T:AD.IO.WriteDelimitedExtensions">
+            <summary>
+            Extension methods to write an <see cref="T:System.Collections.Generic.IEnumerable`1"/> to a delimited file.
+            </summary>
+        </member>
+        <member name="M:AD.IO.WriteDelimitedExtensions.WriteDelimited(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},AD.IO.DelimitedFilePath,System.String,System.Boolean)">
+            <summary>
+            Writes the <see cref="T:System.Collections.Generic.IEnumerable`1"/> as a delimited file.
+            </summary>
+            <param name="elements">The source enumerable.</param>
+            <param name="filePath">The file to which the content is written.</param>
+            <param name="delimiter">The character used to delimit values.</param>
+            <param name="overwrite">True to overwrite an existing file.</param>
+        </member>
+        <member name="M:AD.IO.WriteDelimitedExtensions.WriteDelimited(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},AD.IO.DelimitedFilePath,System.String,System.String,System.Boolean)">
+            <summary>
+            Writes the <see cref="T:System.Collections.Generic.IEnumerable`1"/> as a delimited file.
+            </summary>
+            <param name="elements">The source enumerable.</param>
+            <param name="filePath">The file to which the content is written.</param>
+            <param name="completedMessage">The message written to the console upon completion.</param>
+            <param name="delimiter">The character used to delimit values.</param>
+            <param name="overwrite">True to overwrite an existing file.</param>
+        </member>
         <member name="T:AD.IO.WriteHtmlExtensions">
             <summary>
             Extension methods to write <see cref="T:System.Xml.Linq.XElement"/> objects to HTML files.
@@ -1254,6 +1303,30 @@
             </summary>
             <param name="fromFilePath">The file that is copied.</param>
             <param name="toFilePath">The file into which <paramref name="fromFilePath"/> is copied.</param>
+        </member>
+        <member name="T:AD.IO.WriteXmlExtensions">
+            <summary>
+            Extension methods to write an <see cref="T:System.Collections.Generic.IEnumerable`1"/> to an XML file.
+            </summary>
+        </member>
+        <member name="M:AD.IO.WriteXmlExtensions.WriteXml(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},AD.IO.XmlFilePath,System.Xml.Linq.SaveOptions,System.Boolean)">
+            <summary>
+            Writes the <see cref="T:System.Collections.Generic.IEnumerable`1"/> as an XML file.
+            </summary>
+            <param name="elements">The source enumerable.</param>
+            <param name="xmlFilePath">The file to which the content is written.</param>
+            <param name="saveOptions">Specifies serialization options.</param>
+            <param name="overwrite">True to overwrite an existing file.</param>
+        </member>
+        <member name="M:AD.IO.WriteXmlExtensions.WriteXml(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},AD.IO.XmlFilePath,System.String,System.Xml.Linq.SaveOptions,System.Boolean)">
+            <summary>
+            Writes the <see cref="T:System.Collections.Generic.IEnumerable`1"/> as an XML file.
+            </summary>
+            <param name="elements">The source enumerable.</param>
+            <param name="xmlFilePath">The file to which the content is written.</param>
+            <param name="completedMessage">The message written to the console upon completion.</param>
+            <param name="saveOptions">Specifies serialization options.</param>
+            <param name="overwrite">True to overwrite an existing file.</param>
         </member>
     </members>
 </doc>
