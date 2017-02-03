@@ -38,6 +38,10 @@
     <DocumentationFile>bin\Release\AD.IO.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AD.Collections, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AD.Collections.1.1.0\lib\net461\AD.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
@@ -68,6 +72,7 @@
     <Compile Include="src\Paths\XmlFilePath.cs" />
     <Compile Include="src\Paths\ZipFilePath.cs" />
     <Compile Include="src\Read\ReadAsXml.cs" />
+    <Compile Include="src\Read\ReadData.cs" />
     <Compile Include="src\Text\Parse.cs" />
     <Compile Include="src\Text\SplitDelimited.cs" />
     <Compile Include="src\Text\ToCapitalized.cs" />

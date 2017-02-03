@@ -9,3 +9,5 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\JetBrains.Ann
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.csprojResolveAssemblyReference.cache
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.pdb
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.xml
