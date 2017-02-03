@@ -62,6 +62,7 @@
     <Compile Include="src\FilePathTests.cs" />
     <Compile Include="src\GetZipFileTests.cs" />
     <Compile Include="src\ReadAsXmlTests.cs" />
+    <Compile Include="src\ReadDataTests.cs" />
     <Compile Include="src\SplitDelimitedTests.cs" />
     <Compile Include="src\ToDelimitedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -39,7 +39,7 @@ namespace AD.IO
             {
                 for (int j = 0; j < headers.Length; j++)
                 {
-                    data[headers[j]][j] = lines[i][j];
+                    data[headers[j]][i] = lines[i][j];
                 }
             }
             
