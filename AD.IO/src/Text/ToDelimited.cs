@@ -128,7 +128,15 @@ namespace AD.IO
                 return enumerable.Select(x => $"{x}").ToDelimited();
             }
 
-            PropertyInfo[] properties = typeof(T).GetProperties();
+            enumerable = enumerable as T[] ?? enumerable.ToArray();
+
+            PropertyInfo[] properties =
+                typeof(T) == typeof(object)
+                    ? enumerable.FirstOrDefault()?
+                                .GetType()
+                                .GetProperties()
+                      ?? new PropertyInfo[0]
+                    : typeof(T).GetProperties();
 
             return enumerable.Select(
                                  x =>
@@ -154,7 +162,13 @@ namespace AD.IO
                 return enumerable.Select(x => $"{x}").ToDelimited();
             }
 
-            PropertyInfo[] properties = typeof(T).GetProperties();
+            PropertyInfo[] properties =
+                typeof(T) == typeof(object)
+                    ? enumerable.FirstOrDefault()?
+                                .GetType()
+                                .GetProperties()
+                      ?? new PropertyInfo[0]
+                    : typeof(T).GetProperties();
 
             return enumerable.Select(
                                  x =>
