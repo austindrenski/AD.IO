@@ -11,3 +11,5 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.d
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.pdb
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.xml
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\System.Collections.Immutable.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\System.Collections.Immutable.xml

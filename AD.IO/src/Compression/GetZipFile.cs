@@ -57,11 +57,12 @@ namespace AD.IO
                 {
                     urlPath.GetZipFile(zipFilePath, overwrite);
                     Console.WriteLine(completedMessage, DateTime.Now.TimeOfDay);
+                    Console.Beep();
                     return;
                 }
                 catch
                 {
-                    Console.WriteLine(@">> An exception occured while downloading the zip file. Retrying...");
+                    Console.Error.WriteLine(@">> An exception occured while downloading the zip file. Retrying...");
                 }
             }
         }

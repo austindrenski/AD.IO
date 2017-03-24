@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -32,24 +33,39 @@ namespace AD.IO
         /// <exception cref="System.Security.SecurityException"/>
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
+        [NotNull]
+        [ItemNotNull]
         public static IEnumerable<XElement> ReadAsXml(this DelimitedFilePath filePath)
         {
-            XName record = "record";
-            XName[] headers = File.ReadLines(filePath)
-                                   .FirstOrDefault()?
-                                   .Replace(" ", null)
-                                   .Replace("(", null)
-                                   .Replace(")", null)
-                                   .Replace("$", null)
-                                   .Replace(".", null)
-                                   .SplitDelimitedLine(filePath.Delimiter)?
-                                   .Select(x => (XName) x)
-                                   .ToArray();
-            if (headers == null)
+            string firstRow =
+                File.ReadLines(filePath)
+                    .FirstOrDefault();
+
+            if (firstRow == null)
             {
-                throw new ArgumentException("First row of file does not contain header information.");
+                return Enumerable.Empty<XElement>();
             }
+
+            XName record = "record";
+
+            ImmutableArray<XName> headers =
+                firstRow.Replace(" ", null)
+                        .Replace("(", null)
+                        .Replace(")", null)
+                        .Replace("$", null)
+                        .Replace(".", null)
+                        .SplitDelimitedLine(filePath.Delimiter)
+                        .Where(x => !string.IsNullOrWhiteSpace(x))
+                        .Select(x => (XName) x)
+                        .ToImmutableArray();
+
+            if (!headers.Any())
+            {
+                throw new ArgumentException("No valid data found on the first line of the input file.");
+            }
+
             ConcurrentBag<XElement> concurrentBag = new ConcurrentBag<XElement>();
+
             Parallel.ForEach(
                 File.ReadLines(filePath, Encoding.UTF8).Skip(1),
                 line =>
@@ -57,8 +73,10 @@ namespace AD.IO
                     concurrentBag.Add(
                         new XElement(
                             record,
-                            line.SplitDelimitedLine(filePath.Delimiter)?
-                                .Select((y, i) => new XElement(headers[i], y))));
+                            line.SplitDelimitedLine(filePath.Delimiter)
+                                .Select(
+                                    (y, i) =>
+                                        new XElement(headers[i], y))));
                 });
             return concurrentBag;
         }

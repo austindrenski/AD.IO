@@ -17,12 +17,13 @@ namespace AD.IO
         /// <param name="line">The delimited string to be split.</param>
         /// <param name="delimiter">The character that delimits the string.</param>
         /// <returns>An enumerable collection of the strings between comma characters.</returns>
-        [CanBeNull]
         [Pure]
-        public static IEnumerable<string> SplitDelimitedLine(this string line, char delimiter)
+        [NotNull]
+        [ItemCanBeNull]
+        public static IEnumerable<string> SplitDelimitedLine([NotNull] this string line, char delimiter)
         {
             bool insideQuote = false;
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder(line.Length);
             for (int i = 0; i < line.Length; i++)
             {
                 switch (line[i])
@@ -47,11 +48,7 @@ namespace AD.IO
                     }
                     case ',':
                     {
-                        if (insideQuote)
-                        {
-                            goto default;
-                        }
-                        if (!delimiter.Equals(','))
+                        if (insideQuote || !delimiter.Equals(','))
                         {
                             goto default;
                         }
@@ -61,11 +58,7 @@ namespace AD.IO
                     }
                     case '|':
                     {
-                        if (insideQuote)
-                        {
-                            goto default;
-                        }
-                        if (!delimiter.Equals('|'))
+                        if (insideQuote || !delimiter.Equals('|'))
                         {
                             goto default;
                         }
@@ -84,11 +77,12 @@ namespace AD.IO
         /// <param name="lines">The enumerable collection of delimited strings to be split.</param>
         /// <param name="delimiter">The character delimiting the strings.</param>
         /// <returns>An enumerable of enumerable collections of the split strings.</returns>
-        [CanBeNull]
         [Pure]
-        public static IEnumerable<IEnumerable<string>> SplitDelimitedLine(this IEnumerable<string> lines, char delimiter)
+        [NotNull]
+        [ItemCanBeNull]
+        public static IEnumerable<IEnumerable<string>> SplitDelimitedLine([NotNull][ItemCanBeNull] this IEnumerable<string> lines, char delimiter)
         {
-            return lines.Select(x => x.SplitDelimitedLine(delimiter));
+            return lines.Select(x => x?.SplitDelimitedLine(delimiter));
         }
 
         /// <summary>
@@ -97,11 +91,12 @@ namespace AD.IO
         /// <param name="lines">The enumerable collection of delimited strings to be split.</param>
         /// <param name="delimiter">The character delimiting the strings.</param>
         /// <returns>An enumerable of enumerable collections of the split strings.</returns>
-        [CanBeNull]
         [Pure]
-        public static ParallelQuery<ParallelQuery<string>> SplitDelimitedLine(this ParallelQuery<string> lines, char delimiter)
+        [NotNull]
+        [ItemCanBeNull]
+        public static ParallelQuery<ParallelQuery<string>> SplitDelimitedLine([NotNull][ItemCanBeNull] this ParallelQuery<string> lines, char delimiter)
         {
-            return lines.Select(x => x.SplitDelimitedLine(delimiter)?.AsParallel());
+            return lines.Select(x => x?.SplitDelimitedLine(delimiter).AsParallel());
         }
     }
 }

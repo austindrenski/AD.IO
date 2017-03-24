@@ -29,3 +29,5 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.pdb
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.Collections.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.Collections.xml
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.Collections.Immutable.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.Collections.Immutable.xml

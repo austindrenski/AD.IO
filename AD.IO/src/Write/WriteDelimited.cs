@@ -13,6 +13,50 @@ namespace AD.IO
     public static class WriteDelimitedExtensions
     {
         /// <summary>
+        /// Writes the <see cref="IEnumerable{T}"/> as a delimited file.
+        /// </summary>
+        /// <param name="elements">The source enumerable.</param>
+        /// <param name="filePath">The file to which the content is written.</param>
+        /// <param name="delimiter">The character used to delimit values.</param>
+        /// <param name="overwrite">True to overwrite an existing file.</param>
+        public static void WriteDelimited<T>(this IEnumerable<T> elements, DelimitedFilePath filePath, string delimiter = "|", bool overwrite = true)
+        {
+            if (!overwrite)
+            {
+                return;
+            }
+            using (FileStream stream = new FileStream(filePath, FileMode.Truncate))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(elements.ToDelimited(delimiter));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes the <see cref="IEnumerable{T}"/> as a delimited file.
+        /// </summary>
+        /// <param name="elements">The source enumerable.</param>
+        /// <param name="filePath">The file to which the content is written.</param>
+        /// <param name="delimiter">The character used to delimit values.</param>
+        /// <param name="overwrite">True to overwrite an existing file.</param>
+        public static void WriteDelimited<T>(this IEnumerable<IEnumerable<T>> elements, DelimitedFilePath filePath, string delimiter = "|", bool overwrite = true)
+        {
+            if (!overwrite)
+            {
+                return;
+            }
+            using (FileStream stream = new FileStream(filePath, FileMode.Truncate))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(elements.ToDelimited(delimiter));
+                }
+            }
+        }
+
+        /// <summary>
         /// Writes the <see cref="IEnumerable{XElement}"/> as a delimited file.
         /// </summary>
         /// <param name="elements">The source enumerable.</param>

@@ -26,9 +26,11 @@ namespace AD.IO
             double[][] lines = 
                 File.ReadLines(delimitedFilePath)
                     .Skip(1)
-                    .SplitDelimitedLine(',')?
-                    .Select(x => x.Select(double.Parse))
-                    .ToJaggedArray() ?? new double[0][];
+                    .SplitDelimitedLine(',')
+                    .Select(x => x?.Select(double.Parse))
+                    .ToJaggedArray()
+                    ?? 
+                    new double[0][];
             
             foreach (string header in delimitedFilePath.Headers)
             {
