@@ -269,6 +269,19 @@ namespace AD.IO
         }
 
         /// <summary>
+        /// Appends the elements of the enumerable collection by a delimiter.
+        /// </summary>
+        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [CanBeNull]
+        public static string ToDelimited<T>(this ImmutableArray<ImmutableArray<T>> enumerable, [CanBeNull] string delimiter = "|")
+        {
+            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+        }
+
+        /// <summary>
         /// Appends the elements of the document by a delimiter.
         /// </summary>
         /// <param name="document">An XDocument to be transformed into a delimited string.</param>

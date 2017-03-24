@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,6 +10,23 @@ namespace AD.IO.Tests
     [TestClass]
     public class ToDelimitedExtensionsTests
     {
+        [TestMethod]
+        public void ToDelimitedTest00()
+        {
+            // Arrange
+            var test =
+                ImmutableArray.Create(
+                    ImmutableArray.Create(new { a = "aa", b = "bb" }),
+                    ImmutableArray.Create(new { a = "aa", b = "bb" }),
+                    ImmutableArray.Create(new { a = "aa", b = "bb" }));
+
+            // Act
+            string result = test.ToDelimited();
+
+            // Assert
+            Assert.AreEqual(result, "aa|bb\r\naa|bb\r\naa|bb");
+        }
+
         [TestMethod]
         public void ToDelimitedTest0()
         {
