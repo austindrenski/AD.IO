@@ -20,7 +20,9 @@ namespace AD.IO
         {
             return int.Parse(
                 enumerable.Where(char.IsNumber)
-                          .Aggregate("", (current, x) => current + x));
+                          .DefaultIfEmpty('0')
+                          .Select(x => x.ToString())
+                          .Aggregate((current, x) => current + x));
         }
 
         /// <summary>
@@ -33,7 +35,9 @@ namespace AD.IO
         {
             return double.Parse(
                 enumerable.Where(x => char.IsNumber(x) || x == '.')
-                          .Aggregate("", (current, x) => current + x));
+                          .DefaultIfEmpty('0')
+                          .Select(x => x.ToString())
+                          .Aggregate((current, x) => current + x));
         }
 
     }

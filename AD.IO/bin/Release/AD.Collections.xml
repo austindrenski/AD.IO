@@ -17,7 +17,23 @@
             <param name="enumerable">An enumerable of enumerables to flatten.</param>
             <returns>An array of type T[].</returns>
         </member>
+        <member name="M:AD.Collections.FlattenExtensions.Flatten``1(``0[])">
+            <summary>
+            Converts an enumerable of enumerables into a one-dimensional array (e.g. T[]).
+            </summary>
+            <typeparam name="T">The type of the inner elements and the resulting one-dimensional array.</typeparam>
+            <param name="enumerable">An enumerable of enumerables to flatten.</param>
+            <returns>An array of type T[].</returns>
+        </member>
         <member name="M:AD.Collections.FlattenExtensions.Flatten``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Converts an enumerable of enumerables into a one-dimensional array (e.g. T[]).
+            </summary>
+            <typeparam name="T">The type of the inner elements and the resulting one-dimensional array.</typeparam>
+            <param name="enumerable">An enumerable of enumerables to flatten.</param>
+            <returns>An array of type T[].</returns>
+        </member>
+        <member name="M:AD.Collections.FlattenExtensions.Flatten``1(``0[][])">
             <summary>
             Converts an enumerable of enumerables into a one-dimensional array (e.g. T[]).
             </summary>
@@ -33,7 +49,23 @@
             <param name="enumerable">An enumerable of enumerables to flatten.</param>
             <returns>An array of type T[].</returns>
         </member>
+        <member name="M:AD.Collections.FlattenExtensions.Flatten``1(``0[][][])">
+            <summary>
+            Converts an enumerable of enumerables into a one-dimensional array (e.g. T[]).
+            </summary>
+            <typeparam name="T">The type of the inner elements and the resulting one-dimensional array.</typeparam>
+            <param name="enumerable">An enumerable of enumerables to flatten.</param>
+            <returns>An array of type T[].</returns>
+        </member>
         <member name="M:AD.Collections.FlattenExtensions.Flatten``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}}}})">
+            <summary>
+            Converts an enumerable of enumerables into a one-dimensional array (e.g. T[]).
+            </summary>
+            <typeparam name="T">The type of the inner elements and the resulting one-dimensional array.</typeparam>
+            <param name="enumerable">An enumerable of enumerables to flatten.</param>
+            <returns>An array of type T[].</returns>
+        </member>
+        <member name="M:AD.Collections.FlattenExtensions.Flatten``1(``0[][][][])">
             <summary>
             Converts an enumerable of enumerables into a one-dimensional array (e.g. T[]).
             </summary>
