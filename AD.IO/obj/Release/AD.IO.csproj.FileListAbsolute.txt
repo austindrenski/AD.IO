@@ -30,3 +30,4 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.Collections.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.Collections.xml
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.Collections.Immutable.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.Collections.Immutable.xml
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
