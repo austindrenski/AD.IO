@@ -388,6 +388,12 @@
             </summary>
             <exception cref="T:System.ArgumentException"/>
         </member>
+        <member name="M:AD.IO.DelimitedFilePath.Create(System.String)">
+            <summary>
+            Creates a delimited file along the path if one does not exist.
+            </summary>
+            <exception cref="T:System.ArgumentException"/>
+        </member>
         <member name="M:AD.IO.DelimitedFilePath.AD#IO#IPath#Create(System.String)">
             <summary>
             Explicit IPath implementation.

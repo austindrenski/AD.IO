@@ -60,7 +60,7 @@ namespace AD.IO
             Extension = Path.GetExtension(delimitedFilePath);
             Name = Path.GetFileNameWithoutExtension(delimitedFilePath);
             HeaderRow = File.ReadLines(delimitedFilePath).FirstOrDefault();
-            Headers = HeaderRow?.SplitDelimitedLine(',');
+            Headers = HeaderRow?.SplitDelimitedLine(delimiter);
             Delimiter = delimiter;
         }
 
@@ -78,11 +78,20 @@ namespace AD.IO
         }
 
         /// <summary>
+        /// Creates a delimited file along the path if one does not exist.
+        /// </summary>
+        /// <exception cref="ArgumentException"/>
+        public static DelimitedFilePath Create(string path)
+        {
+            return Create(path, '|');
+        }
+
+        /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
         IPath IPath.Create(string path)
         {
-            return Create(path, ',');
+            return Create(path);
         }
 
         /// <summary>
@@ -108,7 +117,7 @@ namespace AD.IO
         /// <exception cref="ArgumentException"/>
         public static implicit operator DelimitedFilePath(string delimitedFilePath)
         {
-            return new DelimitedFilePath(delimitedFilePath, ',');
+            return new DelimitedFilePath(delimitedFilePath);
         }
 
         /// <summary>
