@@ -50,15 +50,11 @@ namespace AD.IO
         /// <param name="delimiter">The character that delimits the file.</param>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
-        public DelimitedFilePath(string delimitedFilePath, char delimiter)
+        public DelimitedFilePath(string delimitedFilePath, char delimiter = '|')
         {
             if (!File.Exists(delimitedFilePath))
             {
                 throw new FileNotFoundException();
-            }
-            if (Path.GetExtension(delimitedFilePath) != ".csv")
-            {
-                throw new ArgumentException("Path is not a delimited file.");
             }
             _path = delimitedFilePath;
             Extension = Path.GetExtension(delimitedFilePath);
@@ -74,10 +70,6 @@ namespace AD.IO
         /// <exception cref="ArgumentException"/>
         public static DelimitedFilePath Create(string delimitedFilePath, char delimiter)
         {
-            if (Path.GetExtension(delimitedFilePath) != ".csv")
-            {
-                throw new ArgumentException("Path is not a delimited file.");
-            }
             if (!File.Exists(delimitedFilePath))
             {
                 File.Create(delimitedFilePath).Dispose();

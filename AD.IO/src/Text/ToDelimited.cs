@@ -125,7 +125,7 @@ namespace AD.IO
         {
             if (typeof(T).IsPrimitive)
             {
-                return enumerable.Select(x => $"{x}").ToDelimited();
+                return enumerable.Select(x => $"{x}").ToDelimited(delimiter);
             }
 
             enumerable = enumerable as T[] ?? enumerable.ToArray();
@@ -143,7 +143,7 @@ namespace AD.IO
                                      properties.Select(
                                                    y =>
                                                        $"{y.GetValue(x)}")
-                                               .ToDelimited())
+                                               .ToDelimited(delimiter))
                              .ToDelimited(Environment.NewLine);
         }
 
@@ -159,7 +159,7 @@ namespace AD.IO
         {
             if (typeof(T).IsPrimitive)
             {
-                return enumerable.Select(x => $"{x}").ToDelimited();
+                return enumerable.Select(x => $"{x}").ToDelimited(delimiter);
             }
 
             PropertyInfo[] properties =
@@ -175,7 +175,7 @@ namespace AD.IO
                                      properties.Select(
                                                    y =>
                                                        $"{y.GetValue(x)}")
-                                               .ToDelimited())
+                                               .ToDelimited(delimiter))
                              .ToDelimited(Environment.NewLine);
         }
 
