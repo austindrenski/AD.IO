@@ -978,23 +978,6 @@
             <exception cref="T:System.IO.PathTooLongException"/>
             <exception cref="T:System.UnauthorizedAccessException"/>
         </member>
-        <member name="M:AD.IO.ReadAsXmlExtensions.ReadAsXml(AD.IO.DocxFilePath)">
-            <summary>
-            Opens a Microsoft Word document (.docx) as an <see cref="T:System.Xml.Linq.XElement"/>.
-            </summary>
-            <param name="filePath">The file path of the .docx file to be opened. The file name is stored as an attribure of the root element.</param>
-            <returns>An <see cref="T:System.Xml.Linq.XElement"/> representing the document root of the Microsoft Word document.</returns>
-            <exception cref="T:System.ArgumentException"/>
-            <exception cref="T:System.ArgumentNullException"/>
-            <exception cref="T:System.IO.DirectoryNotFoundException"/>
-            <exception cref="T:System.IO.FileNotFoundException"/>
-            <exception cref="T:System.IO.InvalidDataException"/>
-            <exception cref="T:System.IO.IOException"/>
-            <exception cref="T:System.NotSupportedException"/>
-            <exception cref="T:System.ObjectDisposedException"/>
-            <exception cref="T:System.IO.PathTooLongException"/>
-            <exception cref="T:System.UnauthorizedAccessException"/>
-        </member>
         <member name="M:AD.IO.ReadAsXmlExtensions.ReadAsXml(System.Collections.Generic.IEnumerable{AD.IO.DocxFilePath})">
             <summary>
             Opens Microsoft Word documents (.docx) as an <see cref="T:System.Collections.Generic.IEnumerable`1"/>. 
@@ -1389,12 +1372,12 @@
         </member>
         <member name="M:AD.IO.WriteIntoExtensions.WriteInto(AD.IO.DocxFilePath,AD.IO.DocxFilePath,System.String,System.String)">
             <summary>
-            Saves the file at <param name="fromEntryPath"/> in <paramref name="fromFilePath"/> into <param name="toEntryPath"/> in <paramref name="toFilePath"/>.
+            Saves a doucment part from one file into another file at the given path.
             </summary>
             <param name="fromFilePath">The file that is copied.</param>
             <param name="toFilePath">The file into which <paramref name="fromFilePath"/> is copied.</param>
-            <param name="fromEntryPath">The location that is copied to the <paramref name="toEntryPath"/>.</param>
-            <param name="toEntryPath">The location to which the <paramref name="fromEntryPath"/> is copied.</param>
+            <param name="fromEntryPath">The location that is copied to the file.</param>
+            <param name="toEntryPath">The location to which the file is copied.</param>
         </member>
         <member name="M:AD.IO.WriteIntoExtensions.WriteInto(AD.IO.DocxFilePath,AD.IO.DocxFilePath)">
             <summary>

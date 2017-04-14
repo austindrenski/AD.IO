@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
 using JetBrains.Annotations;
@@ -17,16 +18,27 @@ namespace AD.IO
         /// <param name="element">The <see cref="XElement"/> that is written.</param>
         /// <param name="toFilePath">The file into which the <see cref="XElement"/> is written.</param>
         /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
-        public static void WriteInto(this XElement element, DocxFilePath toFilePath, string entryPath)
+        public static void WriteInto([NotNull] this XElement element, [NotNull] DocxFilePath toFilePath, [NotNull] string entryPath)
         {
+            if (element is null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+            if (toFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(toFilePath));
+            }
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
             element.DescendantsAndSelf().Attributes("fileName").Remove();
             using (ZipArchive file = ZipFile.Open(toFilePath, ZipArchiveMode.Update))
             {
                 file.GetEntry(entryPath)?.Delete();
                 using (StreamWriter writer = new StreamWriter(file.CreateEntry(entryPath).Open()))
                 {
-                    //writer.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-                    //writer.WriteLine(element);
                     element.Save(writer);
                 }
             }
@@ -38,8 +50,21 @@ namespace AD.IO
         /// <param name="fromFilePath">The file that is copied.</param>
         /// <param name="toFilePath">The file into which <paramref name="fromFilePath"/> is copied.</param>
         /// <param name="entryPath">The location to which the <paramref name="toFilePath"/> is copied.</param>
-        public static void WriteInto(this DocxFilePath fromFilePath, DocxFilePath toFilePath, string entryPath)
+        public static void WriteInto([NotNull] this DocxFilePath fromFilePath, [NotNull] DocxFilePath toFilePath, [NotNull] string entryPath)
         {
+            if (fromFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(fromFilePath));
+            }
+            if (toFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(toFilePath));
+            }
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
             string temp = Path.GetTempFileName();
             using (ZipArchive fromFile = ZipFile.Open(fromFilePath, ZipArchiveMode.Read))
             {
@@ -52,14 +77,31 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Saves the file at <param name="fromEntryPath"/> in <paramref name="fromFilePath"/> into <param name="toEntryPath"/> in <paramref name="toFilePath"/>.
+        /// Saves a doucment part from one file into another file at the given path.
         /// </summary>
         /// <param name="fromFilePath">The file that is copied.</param>
         /// <param name="toFilePath">The file into which <paramref name="fromFilePath"/> is copied.</param>
-        /// <param name="fromEntryPath">The location that is copied to the <paramref name="toEntryPath"/>.</param>
-        /// <param name="toEntryPath">The location to which the <paramref name="fromEntryPath"/> is copied.</param>
-        public static void WriteInto(this DocxFilePath fromFilePath, DocxFilePath toFilePath, string fromEntryPath, string toEntryPath)
+        /// <param name="fromEntryPath">The location that is copied to the file.</param>
+        /// <param name="toEntryPath">The location to which the file is copied.</param>
+        public static void WriteInto([NotNull] this DocxFilePath fromFilePath, [NotNull] DocxFilePath toFilePath, [NotNull] string fromEntryPath, [NotNull] string toEntryPath)
         {
+            if (fromFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(fromFilePath));
+            }
+            if (toFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(toFilePath));
+            }
+            if (fromEntryPath is null)
+            {
+                throw new ArgumentNullException(nameof(fromEntryPath));
+            }
+            if (toEntryPath is null)
+            {
+                throw new ArgumentNullException(nameof(toEntryPath));
+            }
+
             string temp = Path.GetTempFileName();
             using (ZipArchive fromFile = ZipFile.Open(fromFilePath, ZipArchiveMode.Read))
             {
@@ -76,8 +118,17 @@ namespace AD.IO
         /// </summary>
         /// <param name="fromFilePath">The file that is copied.</param>
         /// <param name="toFilePath">The file into which <paramref name="fromFilePath"/> is copied.</param>
-        public static void WriteInto(this DocxFilePath fromFilePath, DocxFilePath toFilePath)
+        public static void WriteInto([NotNull] this DocxFilePath fromFilePath, [NotNull] DocxFilePath toFilePath)
         {
+            if (fromFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(fromFilePath));
+            }
+            if (toFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(toFilePath));
+            }
+
             using (ZipArchive toFile = ZipFile.Open(toFilePath, ZipArchiveMode.Update))
             {
                 toFile.CreateEntryFromFile(fromFilePath, $"word/{fromFilePath.Name}{fromFilePath.Extension}");

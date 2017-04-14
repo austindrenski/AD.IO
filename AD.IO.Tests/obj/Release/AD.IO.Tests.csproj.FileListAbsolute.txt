@@ -12,3 +12,17 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.p
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.xml
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\System.Collections.Immutable.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.IO.Tests.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.IO.Tests.pdb
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.IO.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\JetBrains.Annotations.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\System.Collections.Immutable.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.IO.pdb
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.IO.xml
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\JetBrains.Annotations.xml
+C:\Source\Repos\AD.IO\AD.IO.Tests\bin\Release\AD.Collections.xml
+C:\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.csprojResolveAssemblyReference.cache
+C:\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.dll
+C:\Source\Repos\AD.IO\AD.IO.Tests\obj\Release\AD.IO.Tests.pdb

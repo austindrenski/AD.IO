@@ -61,48 +61,49 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\Compression\ExtractZipFile.cs" />
-    <Compile Include="src\Compression\GetZipFile.cs" />
+    <Compile Include="Compression\ExtractZipFile.cs" />
+    <Compile Include="Compression\GetZipFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Paths\DelimitedFilePath.cs" />
-    <Compile Include="src\Paths\DirectoryPath.cs" />
-    <Compile Include="src\Paths\DocxFilePath.cs" />
-    <Compile Include="src\Paths\FilePath.cs" />
-    <Compile Include="src\Paths\HtmlFilePath.cs" />
-    <Compile Include="src\Paths\IPath.cs" />
-    <Compile Include="src\Paths\UrlPath.cs" />
-    <Compile Include="src\Paths\XmlFilePath.cs" />
-    <Compile Include="src\Paths\ZipFilePath.cs" />
-    <Compile Include="src\Read\ReadAsXml.cs" />
-    <Compile Include="src\Read\ReadData.cs" />
-    <Compile Include="src\Text\Parse.cs" />
-    <Compile Include="src\Text\SplitDelimited.cs" />
-    <Compile Include="src\Text\ToCapitalized.cs" />
-    <Compile Include="src\Text\ToDelimited.cs" />
-    <Compile Include="src\Write\WriteDelimited.cs" />
-    <Compile Include="src\Write\WriteHtml.cs" />
-    <Compile Include="src\Write\WriteInto.cs" />
-    <Compile Include="src\Write\WriteXml.cs" />
+    <Compile Include="Paths\DelimitedFilePath.cs" />
+    <Compile Include="Paths\DirectoryPath.cs" />
+    <Compile Include="Paths\DocxFilePath.cs" />
+    <Compile Include="Paths\FilePath.cs" />
+    <Compile Include="Paths\HtmlFilePath.cs" />
+    <Compile Include="Paths\IPath.cs" />
+    <Compile Include="Paths\UrlPath.cs" />
+    <Compile Include="Paths\XmlFilePath.cs" />
+    <Compile Include="Paths\ZipFilePath.cs" />
+    <Compile Include="ReadAsXml.cs" />
+    <Compile Include="ReadData.cs" />
+    <Compile Include="Parse.cs" />
+    <Compile Include="SplitDelimited.cs" />
+    <Compile Include="ToCapitalized.cs" />
+    <Compile Include="ToDelimited.cs" />
+    <Compile Include="WriteDelimited.cs" />
+    <Compile Include="WriteHtml.cs" />
+    <Compile Include="WriteInto.cs" />
+    <Compile Include="WriteXml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\Templates\app.xml" />
-    <EmbeddedResource Include="src\Templates\core.xml" />
-    <EmbeddedResource Include="src\Templates\document.xml" />
-    <EmbeddedResource Include="src\Templates\document.xml.rels.xml" />
-    <EmbeddedResource Include="src\Templates\footer1.xml" />
-    <EmbeddedResource Include="src\Templates\footer2.xml" />
-    <EmbeddedResource Include="src\Templates\header1.xml" />
-    <EmbeddedResource Include="src\Templates\header2.xml" />
-    <EmbeddedResource Include="src\Templates\rels.xml" />
-    <EmbeddedResource Include="src\Templates\settings.xml" />
-    <EmbeddedResource Include="src\Templates\styles.xml" />
-    <EmbeddedResource Include="src\Templates\theme1.xml" />
-    <EmbeddedResource Include="src\Templates\[Content_Types].xml" />
+    <EmbeddedResource Include="Templates\app.xml" />
+    <EmbeddedResource Include="Templates\core.xml" />
+    <EmbeddedResource Include="Templates\document.xml" />
+    <EmbeddedResource Include="Templates\document.xml.rels.xml" />
+    <EmbeddedResource Include="Templates\footer1.xml" />
+    <EmbeddedResource Include="Templates\footer2.xml" />
+    <EmbeddedResource Include="Templates\header1.xml" />
+    <EmbeddedResource Include="Templates\header2.xml" />
+    <EmbeddedResource Include="Templates\rels.xml" />
+    <EmbeddedResource Include="Templates\settings.xml" />
+    <EmbeddedResource Include="Templates\styles.xml" />
+    <EmbeddedResource Include="Templates\theme1.xml" />
+    <EmbeddedResource Include="Templates\[Content_Types].xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
