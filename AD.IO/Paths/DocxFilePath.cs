@@ -19,16 +19,19 @@ namespace AD.IO
         /// <summary>
         /// The full file path.
         /// </summary>
+        [NotNull]
         private readonly string _path;
 
         /// <summary>
         /// The file extension.
         /// </summary>
+        [NotNull]
         public string Extension { get; }
 
         /// <summary>
         /// The file name.
         /// </summary>
+        [NotNull]
         public string Name { get; }
 
         /// <summary>
@@ -36,11 +39,15 @@ namespace AD.IO
         /// </summary>
         /// <param name="filePath">A string file path.</param>
         /// <exception cref="FileNotFoundException"/>
-        public DocxFilePath(string filePath)
+        public DocxFilePath([NotNull] string filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException();
+                throw new FileNotFoundException(filePath);
             }
             if (Path.GetExtension(filePath) != ".docx")
             {
@@ -50,6 +57,7 @@ namespace AD.IO
             {
                 throw new ArgumentException("File path contains a tilda character. It may be invalid.");
             }
+
             _path = filePath;
             Extension = Path.GetExtension(filePath);
             Name = Path.GetFileNameWithoutExtension(filePath);
@@ -58,25 +66,43 @@ namespace AD.IO
         /// <summary>
         /// Creates a file along the path if one does not exist.
         /// </summary>
-        public static DocxFilePath Create(string filePath)
+        [NotNull]
+        public static DocxFilePath Create([NotNull] string filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             return File.Exists(filePath) ? new DocxFilePath(filePath) : CreateNew(filePath);
         }
 
         /// <summary>
         /// Creates a file along the path, overwriting any existing file.
         /// </summary>
-        public static DocxFilePath Create(string filePath, bool overwrite)
+        [NotNull]
+        public static DocxFilePath Create([NotNull] string filePath, bool overwrite)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
             if (!overwrite)
             {
                 throw new Exception("This method requires approval to overwrite any existing file at the toPath.");
             }
+
             return CreateNew(filePath);
         }
 
-        IPath IPath.Create(string path)
+        [NotNull]
+        IPath IPath.Create([NotNull] string path)
         {
+            if (path is null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
             return Create(path);
         }
 
@@ -84,8 +110,14 @@ namespace AD.IO
         /// Creates a docx file from the given docx file.
         /// </summary>
         /// <exception cref="System.ArgumentException"/>
-        private static DocxFilePath CreateNew(string toPath)
+        [NotNull]
+        private static DocxFilePath CreateNew([NotNull] string toPath)
         {
+            if (toPath is null)
+            {
+                throw new ArgumentNullException(nameof(toPath));
+            }
+
             string directory = Path.GetTempFileName().Replace(".tmp", null);
             Directory.CreateDirectory(directory);
             if (File.Exists(toPath))
@@ -161,7 +193,7 @@ namespace AD.IO
         {
             return _path;
         }
-
+        
         IEnumerator<char> IEnumerable<char>.GetEnumerator()
         {
             return _path.AsEnumerable().GetEnumerator();
@@ -175,8 +207,14 @@ namespace AD.IO
         /// <summary>
         /// Implicitly casts a FilePath as its internal file path string.
         /// </summary>
-        public static implicit operator string(DocxFilePath filePath)
+        [NotNull]
+        public static implicit operator string([NotNull] DocxFilePath filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             return filePath._path;
         }
 
@@ -184,8 +222,14 @@ namespace AD.IO
         /// Implicitly casts a string as a DocxFilePath. An exception is thrown if the file is not found.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
-        public static implicit operator DocxFilePath(string filePath)
+        [NotNull]
+        public static implicit operator DocxFilePath([NotNull] string filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             return new DocxFilePath(filePath);
         }
 
@@ -193,8 +237,14 @@ namespace AD.IO
         /// Implicitly casts a string as a DocxFilePath. An exception is thrown if the file is not found.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
-        public static implicit operator FilePath(DocxFilePath filePath)
+        [NotNull]
+        public static implicit operator FilePath([NotNull] DocxFilePath filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             return new FilePath(filePath);
         }
 
@@ -203,8 +253,14 @@ namespace AD.IO
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="System.ArgumentException"/>
-        public static explicit operator ZipFilePath(DocxFilePath filePath)
+        [NotNull]
+        public static explicit operator ZipFilePath([NotNull] DocxFilePath filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             return new ZipFilePath(filePath);
         }
 
@@ -213,8 +269,14 @@ namespace AD.IO
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="System.ArgumentException"/>
-        public static explicit operator UrlPath(DocxFilePath filePath)
+        [NotNull]
+        public static explicit operator UrlPath([NotNull] DocxFilePath filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             return new UrlPath(filePath);
         }
     }

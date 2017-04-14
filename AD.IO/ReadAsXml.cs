@@ -35,8 +35,13 @@ namespace AD.IO
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static IEnumerable<XElement> ReadAsXml(this DelimitedFilePath filePath)
+        public static IEnumerable<XElement> ReadAsXml([NotNull] this DelimitedFilePath filePath)
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             string firstRow =
                 File.ReadLines(filePath)
                     .FirstOrDefault();
@@ -74,9 +79,7 @@ namespace AD.IO
                         new XElement(
                             record,
                             line.SplitDelimitedLine(filePath.Delimiter)
-                                .Select(
-                                    (y, i) =>
-                                        new XElement(headers[i], y))));
+                                .Select((y, i) => new XElement(headers[i], y))));
                 });
             return concurrentBag;
         }
@@ -98,43 +101,35 @@ namespace AD.IO
         /// <exception cref="PathTooLongException"/>
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
-        public static XElement ReadAsXml(this DocxFilePath filePath, string entryPath)
+        [CanBeNull]
+        public static XElement ReadAsXml([NotNull] this DocxFilePath filePath, [NotNull] string entryPath = "word/document.xml")
         {
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+            
             XElement element;
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                using (ZipArchive file = new ZipArchive(fileStream))
+                using (ZipArchive file = new ZipArchive(fileStream, ZipArchiveMode.Read))
                 {
-                    using (Stream stream = file.GetEntry(entryPath).Open())
+                    ZipArchiveEntry entry = file.GetEntry(entryPath);
+                    if (entry is null)
+                    {
+                        return null;
+                    }
+                    using (Stream stream = entry.Open())
                     {
                         element = XElement.Load(stream);
                     }
                 }
             }
             element.SetAttributeValue("fileName", filePath.Name);
-            return element;
-        }
-
-        /// <summary>
-        /// Opens a Microsoft Word document (.docx) as an <see cref="XElement"/>.
-        /// </summary>
-        /// <param name="filePath">The file path of the .docx file to be opened. The file name is stored as an attribure of the root element.</param>
-        /// <returns>An <see cref="XElement"/> representing the document root of the Microsoft Word document.</returns>
-        /// <exception cref="ArgumentException"/>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="DirectoryNotFoundException"/>
-        /// <exception cref="FileNotFoundException"/>
-        /// <exception cref="InvalidDataException"/>
-        /// <exception cref="IOException"/>
-        /// <exception cref="NotSupportedException"/>
-        /// <exception cref="ObjectDisposedException"/>
-        /// <exception cref="PathTooLongException"/>
-        /// <exception cref="UnauthorizedAccessException"/>
-        [Pure]
-        public static XElement ReadAsXml(this DocxFilePath filePath)
-        {
-            XElement element = filePath.ReadAsXml("word/document.xml");
-            element.SetAttributeValue("fileName", Path.GetFileNameWithoutExtension(filePath));
             return element;
         }
 
@@ -154,8 +149,15 @@ namespace AD.IO
         /// <exception cref="PathTooLongException"/>
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
-        public static IEnumerable<XElement> ReadAsXml(this IEnumerable<DocxFilePath> filePaths)
+        [NotNull]
+        [ItemCanBeNull]
+        public static IEnumerable<XElement> ReadAsXml([NotNull][ItemNotNull] this IEnumerable<DocxFilePath> filePaths)
         {
+            if (filePaths is null)
+            {
+                throw new ArgumentNullException(nameof(filePaths));
+            }
+
             return filePaths.Select(x => x.ReadAsXml());
         }
 
@@ -176,8 +178,15 @@ namespace AD.IO
         /// <exception cref="PathTooLongException"/>
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
-        public static ParallelQuery<XElement> ReadAsXml(this ParallelQuery<DocxFilePath> filePaths)
+        [NotNull]
+        [ItemCanBeNull]
+        public static ParallelQuery<XElement> ReadAsXml([NotNull][ItemNotNull] this ParallelQuery<DocxFilePath> filePaths)
         {
+            if (filePaths is null)
+            {
+                throw new ArgumentNullException(nameof(filePaths));
+            }
+
             return filePaths.Select(x => x.ReadAsXml());
         }
     }
