@@ -6,103 +6,91 @@ using JetBrains.Annotations;
 namespace AD.IO
 {
     /// <summary>
-    /// Parses <see cref="IEnumerator{Char}"/> as numbers.
+    /// Parses an <see cref="IEnumerable{Char}"/> as a number.
     /// </summary>
     [PublicAPI]
     public static class ParseExtensions
     {
         /// <summary>
-        /// Filters an enumerable of characters for the numeric component, 
-        /// concatenates the characters, and then parses the string as an integer.
+        /// Filters an enumerable of characters for the numeric component, concatenates the characters, and then parses the string as an integer.
         /// </summary>
-        /// <param name="enumerable">The source enumerable.</param>
+        /// <param name="souce">The source enumerable.</param>
         /// <returns>The numeric components of the source <see cref="IEnumerable{Char}"/> as an integer.</returns>
-        [Obsolete("Use a nullable method instead.")]
-        public static int Parse(this IEnumerable<char> enumerable)
-        {
-            string numerics =
-                enumerable.Where(char.IsNumber)
-                          .DefaultIfEmpty('0')
-                          .Select(x => x.ToString())
-                          .Aggregate((current, x) => current + x);
-
-
-            return int.Parse(numerics);
-        }
-
-
-        /// <summary>
-        /// Filters an enumerable of characters for the numeric component, 
-        /// concatenates the characters, and then parses the string as an integer.
-        /// </summary>
-        /// <param name="enumerable">The source enumerable.</param>
-        /// <returns>The numeric components of the source <see cref="IEnumerable{Char}"/> as an integer.</returns>
+        [Pure]
         [CanBeNull]
-        public static short? ParseShort(this IEnumerable<char> enumerable)
+        public static short? ParseShort([NotNull] this IEnumerable<char> souce)
         {
-            string numerics =
-                enumerable.Where(char.IsNumber)
-                          .DefaultIfEmpty('0')
-                          .Select(x => x.ToString())
-                          .Aggregate((current, x) => current + x);
+            if (souce is null)
+            {
+                throw new ArgumentNullException(nameof(souce));
+            }
 
+            string numerics =
+                souce.Where(char.IsNumber)
+                     .Aggregate(default(string), (current, x) => current + x);
 
             return short.TryParse(numerics, out short result) ? (short?) result : null;
         }
 
         /// <summary>
-        /// Filters an enumerable of characters for the numeric component, 
-        /// concatenates the characters, and then parses the string as an integer.
+        /// Filters an enumerable of characters for the numeric component, concatenates the characters, and then parses the string as an integer.
         /// </summary>
-        /// <param name="enumerable">The source enumerable.</param>
+        /// <param name="souce">The source enumerable.</param>
         /// <returns>The numeric components of the source <see cref="IEnumerable{Char}"/> as an integer.</returns>
+        [Pure]
         [CanBeNull]
-        public static int? ParseInt(this IEnumerable<char> enumerable)
+        public static int? ParseInt([NotNull] this IEnumerable<char> souce)
         {
+            if (souce is null)
+            {
+                throw new ArgumentNullException(nameof(souce));
+            }
+
             string numerics =
-                enumerable.Where(char.IsNumber)
-                          .DefaultIfEmpty('0')
-                          .Select(x => x.ToString())
-                          .Aggregate((current, x) => current + x);
-
-
+                souce.Where(char.IsNumber)
+                     .Aggregate(default(string), (current, x) => current + x);
+            
             return int.TryParse(numerics, out int result) ? (int?) result : null;
         }
 
         /// <summary>
-        /// Filters an enumerable of characters for the numeric component, 
-        /// concatenates the characters, and then parses the string as a long.
+        /// Filters an enumerable of characters for the numeric component, concatenates the characters, and then parses the string as a long.
         /// </summary>
-        /// <param name="enumerable">The source enumerable.</param>
+        /// <param name="souce">The source enumerable.</param>
         /// <returns>The numeric components of the source <see cref="IEnumerable{Char}"/> as a long.</returns>
+        [Pure]
         [CanBeNull]
-        public static long? ParseLong(this IEnumerable<char> enumerable)
+        public static long? ParseLong([NotNull] this IEnumerable<char> souce)
         {
-            string numerics =
-                enumerable.Where(char.IsNumber)
-                          .DefaultIfEmpty('0')
-                          .Select(x => x.ToString())
-                          .Aggregate((current, x) => current + x);
+            if (souce is null)
+            {
+                throw new ArgumentNullException(nameof(souce));
+            }
 
+            string numerics =
+                souce.Where(char.IsNumber)
+                     .Aggregate(default(string), (current, x) => current + x);
 
             return long.TryParse(numerics, out long result) ? (long?) result : null;
         }
 
         /// <summary>
-        /// Filters an enumerable of characters for the numeric component, 
-        /// concatenates the characters, and then parses the string as a double.
+        /// Filters an enumerable of characters for the numeric component, concatenates the characters, and then parses the string as a double.
         /// </summary>
-        /// <param name="enumerable">The source enumerable.</param>
+        /// <param name="souce">The source enumerable.</param>
         /// <returns>The numeric components of the source <see cref="IEnumerable{Char}"/> as a double.</returns>
+        [Pure]
         [CanBeNull]
-        public static double? ParseDouble(this IEnumerable<char> enumerable)
+        public static double? ParseDouble(this IEnumerable<char> souce)
         {
-            string numerics =
-                enumerable.Where(x => char.IsNumber(x) || x == '.')
-                          .DefaultIfEmpty('0')
-                          .Select(x => x.ToString())
-                          .Aggregate((current, x) => current + x);
+            if (souce is null)
+            {
+                throw new ArgumentNullException(nameof(souce));
+            }
 
+            string numerics =
+                souce.Where(x => char.IsNumber(x) || x == '.')
+                     .Aggregate(default(string), (current, x) => current + x);
 
             return double.TryParse(numerics, out double result) ? (double?) result : null;
         }
