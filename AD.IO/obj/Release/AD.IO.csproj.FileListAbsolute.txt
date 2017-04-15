@@ -44,3 +44,4 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csproj.Genera
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.pdb
 C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
