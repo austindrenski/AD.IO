@@ -24,11 +24,11 @@ namespace AD.IO
         [NotNull]
         private static string MakeSafeString([CanBeNull] string value, [CanBeNull] string delimiter)
         {
-            if (value == null)
+            if (value is null)
             {
                 return "";
             }
-            if (delimiter == null)
+            if (delimiter is null)
             {
                 return value;
             }
@@ -47,14 +47,19 @@ namespace AD.IO
         /// Appends the strings of the enumerable collection by a delimiter. 
         /// Strings containing the delimiter are enclosed in double quotation marks.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<string> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<string> source, [CanBeNull] string delimiter = "|")
         {
-            IEnumerable<string> safeEnumerable = enumerable.Select(x => MakeSafeString(x, delimiter));
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            
+            IEnumerable<string> safeEnumerable = source.Select(x => MakeSafeString(x, delimiter));
             return string.Join(delimiter, safeEnumerable);
         }
 
@@ -62,255 +67,351 @@ namespace AD.IO
         /// Appends the strings of the enumerable collection by a delimiter. 
         /// Strings containing the delimiter are enclosed in double quotation marks.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<string> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<string> source, [CanBeNull] string delimiter = "|")
         {
-            ParallelQuery<string> safeEnumerable = enumerable.Select(x => MakeSafeString(x, delimiter));
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            ParallelQuery<string> safeEnumerable = source.Select(x => MakeSafeString(x, delimiter));
             return string.Join(delimiter, safeEnumerable);
         }
 
         /// <summary>
         /// Returns the delimited values of the <see cref="XElement"/>.
         /// </summary>
-        /// <param name="element">The <see cref="XElement"/> from which values are retrieved.</param>
+        /// <param name="source">The <see cref="XElement"/> from which values are retrieved.</param>
         /// <param name="delimiter">The character to delimit the values of the child elements.</param>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull] this XElement element, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull] this XElement source, [CanBeNull] string delimiter = "|")
         {
-            return element.HasElements 
-                ? element.Elements().Select(x => x.Value).ToDelimited(delimiter) 
-                : element.Value;
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.HasElements 
+                ? source.Elements().Select(x => x.Value).ToDelimited(delimiter) 
+                : source.Value;
         }
 
         /// <summary>
         /// Returns the delimiter delimited values of the children each <see cref="XElement"/> delimited by new lines.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter and new lines.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<XElement> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<XElement> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Returns the delimiter delimited values of the children each <see cref="XElement"/> delimited by new lines.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter and new lines.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<XElement> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<XElement> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
-        }
-
-        /// <summary>
-        /// Appends the elements of the enumerable collection by a delimiter.
-        /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<T> enumerable, [CanBeNull] string delimiter = "|")
-        {
-            if (typeof(T).IsPrimitive)
+            if (source is null)
             {
-                return enumerable.Select(x => $"{x}").ToDelimited(delimiter);
+                throw new ArgumentNullException(nameof(source));
             }
 
-            enumerable = enumerable as T[] ?? enumerable.ToArray();
-
-            PropertyInfo[] properties =
-                typeof(T) == typeof(object)
-                    ? enumerable.FirstOrDefault()?
-                                .GetType()
-                                .GetProperties()
-                      ?? new PropertyInfo[0]
-                    : typeof(T).GetProperties();
-
-            return enumerable.Select(
-                                 x =>
-                                     properties.Select(
-                                                   y =>
-                                                       $"{y.GetValue(x)}")
-                                               .ToDelimited(delimiter))
-                             .ToDelimited(Environment.NewLine);
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<T> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<T> source, [CanBeNull] string delimiter = "|")
         {
-            if (typeof(T).IsPrimitive)
+            if (source is null)
             {
-                return enumerable.Select(x => $"{x}").ToDelimited(delimiter);
+                throw new ArgumentNullException(nameof(source));
             }
 
-            PropertyInfo[] properties =
-                typeof(T) == typeof(object)
-                    ? enumerable.FirstOrDefault()?
+            if (typeof(T).IsPrimitive)
+            {
+                return source.Select(x => $"{x}").ToDelimited(delimiter);
+            }
+
+            source = source as T[] ?? source.ToArray();
+
+            Func<T, IEnumerable<object>> selector;
+
+            if (typeof(T).FullName.Contains("ValueTuple"))
+            {
+                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x));
+            }
+            else
+            {
+                PropertyInfo[] properties =
+                    typeof(T) == typeof(object)
+                        ? source.FirstOrDefault()?
                                 .GetType()
                                 .GetProperties()
-                      ?? new PropertyInfo[0]
-                    : typeof(T).GetProperties();
+                          ?? new PropertyInfo[0]
+                        : typeof(T).GetProperties();
 
-            return enumerable.Select(
-                                 x =>
-                                     properties.Select(
-                                                   y =>
-                                                       $"{y.GetValue(x)}")
-                                               .ToDelimited(delimiter))
-                             .ToDelimited(Environment.NewLine);
-        }
+                selector = x => properties.Select(y => y.GetValue(x));
+            }
 
-        /// <summary>
-        /// Appends the elements of the enumerable collection by a delimiter.
-        /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<IEnumerable<string>> enumerable, [CanBeNull] string delimiter = "|")
-        {
-            return enumerable.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            return
+                source.Select(selector)
+                      .Select(x => x?.ToString().ToDelimited(delimiter))
+                      .ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<ParallelQuery<string>> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<T> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
-        }
-        /// <summary>
-        /// Appends the elements of the enumerable collection by a delimiter.
-        /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<IEnumerable<string>> enumerable, [CanBeNull] string delimiter = "|")
-        {
-            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
-        }
-        
-        /// <summary>
-        /// Appends the elements of the enumerable collection by a delimiter.
-        /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<ParallelQuery<string>> enumerable, [CanBeNull] string delimiter = "|")
-        {
-            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (typeof(T).IsPrimitive)
+            {
+                return source.Select(x => x?.ToString()).ToDelimited(delimiter);
+            }
+
+            Func<T, IEnumerable<object>> selector;
+
+            if (typeof(T).FullName.Contains("ValueTuple"))
+            {
+                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x));
+            }
+            else
+            {
+                PropertyInfo[] properties =
+                    typeof(T) == typeof(object)
+                        ? source.FirstOrDefault()?
+                                .GetType()
+                                .GetProperties()
+                          ?? new PropertyInfo[0]
+                        : typeof(T).GetProperties();
+
+                selector = x => properties.Select(y => y.GetValue(x));
+            }
+
+            return
+                source.Select(selector)
+                      .Select(x => x?.ToString().ToDelimited(delimiter))
+                      .ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<IEnumerable<T>> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<IEnumerable<string>> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<ParallelQuery<T>> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this IEnumerable<ParallelQuery<string>> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+        }
+        /// <summary>
+        /// Appends the elements of the enumerable collection by a delimiter.
+        /// </summary>
+        /// <param name="source">A collection to be delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [CanBeNull]
+        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<IEnumerable<string>> source, [CanBeNull] string delimiter = "|")
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<IEnumerable<T>> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull][ItemCanBeNull] this ParallelQuery<ParallelQuery<string>> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<ParallelQuery<T>> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<IEnumerable<T>> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
-        /// <param name="enumerable">A collection to be delimited.</param>
+        /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>(this ImmutableArray<ImmutableArray<T>> enumerable, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<ParallelQuery<T>> source, [CanBeNull] string delimiter = "|")
         {
-            return enumerable.Select(x => x.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+        }
+
+        /// <summary>
+        /// Appends the elements of the enumerable collection by a delimiter.
+        /// </summary>
+        /// <param name="source">A collection to be delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [CanBeNull]
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<IEnumerable<T>> source, [CanBeNull] string delimiter = "|")
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+        }
+
+        /// <summary>
+        /// Appends the elements of the enumerable collection by a delimiter.
+        /// </summary>
+        /// <param name="source">A collection to be delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [CanBeNull]
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<ParallelQuery<T>> source, [CanBeNull] string delimiter = "|")
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
+        }
+
+        /// <summary>
+        /// Appends the elements of the enumerable collection by a delimiter.
+        /// </summary>
+        /// <param name="source">A collection to be delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [CanBeNull]
+        public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IImmutableList<IImmutableList<T>> source, [CanBeNull] string delimiter = "|")
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return source.Select(x => x?.ToDelimited(delimiter)).ToDelimited(Environment.NewLine);
         }
 
         /// <summary>
         /// Appends the elements of the document by a delimiter.
         /// </summary>
-        /// <param name="document">An XDocument to be transformed into a delimited string.</param>
+        /// <param name="source">An XDocument to be transformed into a delimited string.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull] this XDocument document, [CanBeNull] string delimiter = "|")
+        public static string ToDelimited([NotNull] this XDocument source, [CanBeNull] string delimiter = "|")
         {
-            if (document.Root == null || !document.Root.HasElements)
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Root == null || !source.Root.HasElements)
             {
                 return null;
             }
 
-            ImmutableArray<XElement> elements = document.Root.Elements().ToImmutableArray();
+            ImmutableArray<XElement> elements = source.Root.Elements().ToImmutableArray();
 
             string headers =
                 elements.First()
