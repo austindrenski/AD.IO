@@ -160,28 +160,26 @@ namespace AD.IO
 
             source = source as T[] ?? source.ToArray();
 
-            Func<T, IEnumerable<object>> selector;
+            object example = source.FirstOrDefault();
 
-            if (typeof(T).FullName.Contains("ValueTuple"))
+            if (example?.GetType().FullName?.Contains("ValueTuple") ?? false)
             {
-                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x)?.ToString());
+                return
+                    source.Select(x => example.GetType().GetFields().Select(y => y.GetValue(x)?.ToString()))
+                          .Select(x => x.ToDelimited(delimiter))
+                          .ToDelimited(Environment.NewLine);
             }
-            else
-            {
-                PropertyInfo[] properties =
-                    typeof(T) == typeof(object)
-                        ? source.FirstOrDefault()?
-                                .GetType()
-                                .GetProperties()
-                          ?? new PropertyInfo[0]
-                        : typeof(T).GetProperties();
-
-                selector = x => properties.Select(y => y.GetValue(x)?.ToString());
-            }
+            PropertyInfo[] properties =
+                typeof(T) == typeof(object)
+                    ? source.FirstOrDefault()?
+                            .GetType()
+                            .GetProperties()
+                      ?? new PropertyInfo[0]
+                    : typeof(T).GetProperties();
 
             return
-                source.Select(selector)
-                      .Select(x => x?.ToDelimited(delimiter))
+                source.Select(x => properties.Select(y => y.GetValue(x)?.ToString()))
+                      .Select(x => x.ToDelimited(delimiter))
                       .ToDelimited(Environment.NewLine);
         }
 
@@ -205,28 +203,26 @@ namespace AD.IO
                 return source.Select(x => x?.ToString()).ToDelimited(delimiter);
             }
 
-            Func<T, IEnumerable<object>> selector;
+            object example = source.FirstOrDefault();
 
-            if (typeof(T).FullName.Contains("ValueTuple"))
+            if (example?.GetType().FullName?.Contains("ValueTuple") ?? false)
             {
-                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x)?.ToString());
+                return
+                    source.Select(x => example.GetType().GetFields().Select(y => y.GetValue(x)?.ToString()))
+                          .Select(x => x.ToDelimited(delimiter))
+                          .ToDelimited(Environment.NewLine);
             }
-            else
-            {
-                PropertyInfo[] properties =
-                    typeof(T) == typeof(object)
-                        ? source.FirstOrDefault()?
-                                .GetType()
-                                .GetProperties()
-                          ?? new PropertyInfo[0]
-                        : typeof(T).GetProperties();
-
-                selector = x => properties.Select(y => y.GetValue(x)?.ToString());
-            }
+            PropertyInfo[] properties =
+                typeof(T) == typeof(object)
+                    ? source.FirstOrDefault()?
+                            .GetType()
+                            .GetProperties()
+                      ?? new PropertyInfo[0]
+                    : typeof(T).GetProperties();
 
             return
-                source.Select(selector)
-                      .Select(x => x?.ToDelimited(delimiter))
+                source.Select(x => properties.Select(y => y.GetValue(x)?.ToString()))
+                      .Select(x => x.ToDelimited(delimiter))
                       .ToDelimited(Environment.NewLine);
         }
 
