@@ -164,7 +164,7 @@ namespace AD.IO
 
             if (typeof(T).FullName.Contains("ValueTuple"))
             {
-                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x));
+                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x)?.ToString());
             }
             else
             {
@@ -176,12 +176,12 @@ namespace AD.IO
                           ?? new PropertyInfo[0]
                         : typeof(T).GetProperties();
 
-                selector = x => properties.Select(y => y.GetValue(x));
+                selector = x => properties.Select(y => y.GetValue(x)?.ToString());
             }
 
             return
                 source.Select(selector)
-                      .Select(x => x?.ToString().ToDelimited(delimiter))
+                      .Select(x => x?.ToDelimited(delimiter))
                       .ToDelimited(Environment.NewLine);
         }
 
@@ -209,7 +209,7 @@ namespace AD.IO
 
             if (typeof(T).FullName.Contains("ValueTuple"))
             {
-                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x));
+                selector = x => typeof(T).GetFields().Select(y => y.GetValue(x)?.ToString());
             }
             else
             {
@@ -221,12 +221,12 @@ namespace AD.IO
                           ?? new PropertyInfo[0]
                         : typeof(T).GetProperties();
 
-                selector = x => properties.Select(y => y.GetValue(x));
+                selector = x => properties.Select(y => y.GetValue(x)?.ToString());
             }
 
             return
                 source.Select(selector)
-                      .Select(x => x?.ToString().ToDelimited(delimiter))
+                      .Select(x => x?.ToDelimited(delimiter))
                       .ToDelimited(Environment.NewLine);
         }
 
