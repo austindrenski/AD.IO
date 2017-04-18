@@ -146,6 +146,31 @@ namespace AD.IO
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
+        public static string ToDelimitedString<T>([NotNull] this T source, [CanBeNull] string delimiter = "|")
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (typeof(T).IsPrimitive)
+            {
+                return source.ToString();
+            }
+
+            PropertyInfo[] properties = typeof(T).GetProperties();
+
+            return string.Join(delimiter, properties.Select(x => x.GetValue(source)?.ToString()));
+        }
+
+        /// <summary>
+        /// Appends the elements of the enumerable collection by a delimiter.
+        /// </summary>
+        /// <param name="source">A collection to be delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [CanBeNull]
         public static string ToDelimited<T>([NotNull][ItemCanBeNull] this IEnumerable<T> source, [CanBeNull] string delimiter = "|")
         {
             if (source is null)

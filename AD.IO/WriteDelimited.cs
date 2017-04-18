@@ -29,7 +29,10 @@ namespace AD.IO
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    writer.Write(elements.ToDelimited(delimiter));
+                    foreach (T record in elements)
+                    {
+                        writer.WriteLine(record.ToDelimitedString(delimiter));
+                    }
                 }
             }
         }
