@@ -186,6 +186,42 @@ namespace AD.IO.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+        ///&lt;w:footnotes xmlns:w=&quot;http://schemas.openxmlformats.org/wordprocessingml/2006/main&quot;&gt;
+        ///  &lt;w:footnote w:type=&quot;separator&quot; w:id=&quot;-1&quot;&gt;
+        ///    &lt;w:p&gt;
+        ///      &lt;w:pPr&gt;
+        ///        &lt;w:spacing w:after=&quot;0&quot; w:line=&quot;240&quot; w:lineRule=&quot;auto&quot;/&gt;
+        ///      &lt;/w:pPr&gt;
+        ///      &lt;w:r&gt;
+        ///        &lt;w:separator/&gt;
+        ///      &lt;/w:r&gt;
+        ///    &lt;/w:p&gt;
+        ///  &lt;/w:footnote&gt;
+        ///  &lt;w:footnote w:type=&quot;continuationSeparator&quot; w:id=&quot;0&quot;&gt;
+        ///    &lt;w:p&gt;
+        ///      &lt;w:pPr&gt;
+        ///        &lt;w:spacing w:after=&quot;0&quot; w:line=&quot;240&quot; w:lineRule= [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string footnotes {
+            get {
+                return ResourceManager.GetString("footnotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+        ///&lt;Relationships xmlns=&quot;http://schemas.openxmlformats.org/package/2006/relationships&quot;&gt;
+        ///  
+        ///&lt;/Relationships&gt;.
+        /// </summary>
+        internal static string footnotes_xml_rels {
+            get {
+                return ResourceManager.GetString("footnotes_xml_rels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
         ///&lt;w:hdr xmlns:w=&quot;http://schemas.openxmlformats.org/wordprocessingml/2006/main&quot;&gt;
         ///  &lt;w:p&gt;
         ///    &lt;w:pPr&gt;

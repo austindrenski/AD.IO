@@ -46,3 +46,4 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.pdb
 C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.ValueTuple.dll
+C:\Source\Repos\AD.IO\AD.IO\bin\Release\System.ValueTuple.dll

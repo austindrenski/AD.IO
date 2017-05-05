@@ -182,6 +182,18 @@ namespace AD.IO
                 {
                     writer.Write(XElement.Parse(Resources.styles));
                 }
+                
+                archive.CreateEntry("word/footnotes.xml");
+                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/footnotes.xml").Open()))
+                {
+                    writer.Write(XElement.Parse(Resources.footnotes));
+                }
+
+                archive.CreateEntry("word/_rels/footnotes.xml.rels");
+                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/footnotes.xml.rels").Open()))
+                {
+                    writer.Write(XElement.Parse(Resources.footnotes_xml_rels));
+                }
             }
             return new DocxFilePath(toPath);
         }

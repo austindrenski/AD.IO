@@ -112,6 +112,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\footnotes.xml" />
+    <Content Include="Templates\footnotes.xml.rels.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(ProjectDir)..\nuget.exe" pack "$(ProjectDir)$(ProjectFileName)" -Properties Configuration=Release -OutputDirectory "$(ProjectDir).."</PostBuildEvent>
