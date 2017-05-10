@@ -4,12 +4,18 @@
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageLicenseUrl>https://github.com/austindrenski/AD.TariffSets/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/austindrenski/AD.TariffSets</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/austindrenski/AD.IO/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/austindrenski/AD.IO</PackageProjectUrl>
     <Copyright>Copyright (c) 2017 Austin Drenski</Copyright>
-    <Description>Constructs tariff sets for economic analysis.</Description>
-    <RepositoryUrl>https://github.com/austindrenski/AD.TariffSets</RepositoryUrl>
-    <PackageTags>tariff data economic analysis</PackageTags>
+    <Description>C# extension library for input/output operations and data management.</Description>
+    <RepositoryUrl>https://github.com/austindrenski/AD.IO</RepositoryUrl>
+    <PackageTags>read-data read-xml read-csv read-delimited file data xml csv</PackageTags>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.6\AD.IO.Standard.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
