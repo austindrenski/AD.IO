@@ -30,12 +30,15 @@ C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.Properties.Resources.resources
 C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csproj.GenerateResource.Cache
 C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.dll
 C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.pdb
+C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
+C:\Source\Repos\AD.IO\AD.IO\bin\Release\System.ValueTuple.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.IO.XML
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.IO.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.IO.pdb
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.Collections.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\JetBrains.Annotations.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.Collections.Immutable.dll
+C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.ValueTuple.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\AD.Collections.xml
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\JetBrains.Annotations.xml
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.Collections.Immutable.xml
@@ -43,7 +46,3 @@ C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.Properties.Re
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csproj.GenerateResource.Cache
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.dll
 C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.pdb
-C:\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
-C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\obj\Release\AD.IO.csprojResolveAssemblyReference.cache
-C:\Users\austin.drenski\Source\Repos\AD.IO\AD.IO\bin\Release\System.ValueTuple.dll
-C:\Source\Repos\AD.IO\AD.IO\bin\Release\System.ValueTuple.dll
