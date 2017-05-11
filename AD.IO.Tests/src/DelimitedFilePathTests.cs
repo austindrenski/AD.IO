@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 #pragma warning disable 219
 
 namespace AD.IO.Tests
@@ -49,7 +50,7 @@ namespace AD.IO.Tests
 
             // Act
             // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = new DelimitedFilePath(path, '|');
+            DelimitedFilePath filePath = new DelimitedFilePath(path);
 
             // Assert
             // Expected exception: FileNotFoundException
@@ -64,7 +65,7 @@ namespace AD.IO.Tests
             File.Move(path, test);
 
             // Act
-            DelimitedFilePath filePath = new DelimitedFilePath(test, '|');
+            DelimitedFilePath filePath = new DelimitedFilePath(test);
 
             // Assert
             Assert.IsTrue(filePath.ToString() == test);
@@ -130,7 +131,7 @@ namespace AD.IO.Tests
 
             // Act 
             // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = new DelimitedFilePath(path, '|');
+            DelimitedFilePath filePath = new DelimitedFilePath(path);
         }
         
         [TestMethod]
@@ -142,7 +143,7 @@ namespace AD.IO.Tests
 
             // Act 
             // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = new DelimitedFilePath(path, '|');
+            DelimitedFilePath filePath = new DelimitedFilePath(path);
         }
 
         [TestMethod]

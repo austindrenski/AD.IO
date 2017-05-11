@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Extension methods to import files as XML nodes.

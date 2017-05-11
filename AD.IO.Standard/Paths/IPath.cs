@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Defines common functionality for system paths.

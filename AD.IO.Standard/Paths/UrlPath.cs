@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Represents a URL. Exceptions are thrown if the URL is invalid.

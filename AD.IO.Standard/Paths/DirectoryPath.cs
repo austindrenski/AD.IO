@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Path to a directory on the system. An exception is thrown if the directory does not exist.

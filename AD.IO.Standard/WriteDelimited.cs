@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Extension methods to write an <see cref="IEnumerable{XElement}"/> to a delimited file.

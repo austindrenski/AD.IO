@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Extension methods to split delimited strings into enumerable collections.

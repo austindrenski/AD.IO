@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Extensions methods to download zip files from a <see cref="UrlPath"/>.

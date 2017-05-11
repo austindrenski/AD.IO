@@ -16,7 +16,7 @@ namespace AD.IO.Tests
             const string delimited = "a,b,c,d,e,\"f\"";
 
             // Act
-            IEnumerable<string> result = delimited.SplitDelimitedLine(',') ?? new string[0];
+            IEnumerable<string> result = delimited.SplitDelimitedLine(',');
 
             // Assert
             Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
@@ -29,7 +29,7 @@ namespace AD.IO.Tests
             const string delimited = "a,b,c,d,e,\"f,g\"";
 
             // Act
-            IEnumerable<string> result = delimited.SplitDelimitedLine(',') ?? new string[0];
+            IEnumerable<string> result = delimited.SplitDelimitedLine(',');
 
             // Assert
             Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
@@ -42,7 +42,7 @@ namespace AD.IO.Tests
             const string delimited = "a,b,c,d,e,\"f,g\",\r\na,b,c,d,e|,\"f|g\"";
 
             // Act
-            IEnumerable<string> result = delimited.SplitDelimitedLine(',') ?? new string[0];
+            IEnumerable<string> result = delimited.SplitDelimitedLine(',');
 
             // Assert
             Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }.SequenceEqual(result));
@@ -55,7 +55,7 @@ namespace AD.IO.Tests
             const string delimited = "a|b|c|d|e|\"f|g\"|\r\na|b|c|d|e,|\"f,g\"";
 
             // Act
-            IEnumerable<string> result = delimited.SplitDelimitedLine('|') ?? new string[0];
+            IEnumerable<string> result = delimited.SplitDelimitedLine('|');
 
             // Assert
             Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f|g", "a", "b", "c", "d", "e,", "f,g" }.SequenceEqual(result));
@@ -68,7 +68,7 @@ namespace AD.IO.Tests
             const string delimited = "a|b|c|d|e|\"f\"";
 
             // Act
-            IEnumerable<string> result = delimited.SplitDelimitedLine('|') ?? new string[0];
+            IEnumerable<string> result = delimited.SplitDelimitedLine('|');
 
             // Assert
             Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
@@ -81,7 +81,7 @@ namespace AD.IO.Tests
             const string delimited = "a|b|c|d|e|\"f,g\"";
 
             // Act
-            IEnumerable<string> result = delimited.SplitDelimitedLine('|') ?? new string[0];
+            IEnumerable<string> result = delimited.SplitDelimitedLine('|');
 
             // Assert
             Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
@@ -100,7 +100,7 @@ namespace AD.IO.Tests
 
             // Act
             IEnumerable<IEnumerable<string>> strings = delimited.SplitDelimitedLine(',');
-            string[][] result = strings as string[][] ?? strings?.Select(x => x.ToArray()).ToArray();
+            string[][] result = strings as string[][] ?? strings.Select(x => x?.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
@@ -119,7 +119,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string[][] result = delimited.SplitDelimitedLine(',')?.Select(x => x.ToArray()).ToArray();
+            string[][] result = delimited.SplitDelimitedLine(',').Select(x => x?.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
@@ -139,7 +139,7 @@ namespace AD.IO.Tests
 
             // Act
             IEnumerable<IEnumerable<string>> strings = delimited.AsParallel().SplitDelimitedLine(',');
-            string[][] result = strings?.Select(x => x.ToArray()).ToArray();
+            string[][] result = strings.Select(x => x?.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
@@ -158,7 +158,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string[][] result = delimited.AsParallel().SplitDelimitedLine(',')?.Select(x => x.ToArray()).ToArray();
+            string[][] result = delimited.AsParallel().SplitDelimitedLine(',').Select(x => x.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
@@ -177,7 +177,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string[][] result = delimited.SplitDelimitedLine('|')?.Select(x => x.ToArray()).ToArray();
+            string[][] result = delimited.SplitDelimitedLine('|').Select(x => x?.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
@@ -196,7 +196,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string[][] result = delimited.SplitDelimitedLine('|')?.Select(x => x.ToArray()).ToArray();
+            string[][] result = delimited.SplitDelimitedLine('|').Select(x => x?.ToArray()).ToArray();
 
             // Assert
             Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));

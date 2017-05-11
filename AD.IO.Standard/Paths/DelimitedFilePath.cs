@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Path to a delimited file on the system. An exception is thrown if the file does not exist, or if it is not a delimited file.

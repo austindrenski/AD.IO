@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Path to an HTML file on the system. An exception is thrown if the file does not exist, or if it is not an HTML file.

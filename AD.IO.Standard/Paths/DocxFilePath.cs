@@ -5,10 +5,10 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
-using AD.IO.Standard.Properties;
+using AD.IO.Properties;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Path to a Microsoft Word file on the system. An exception is thrown if the file does not exist.

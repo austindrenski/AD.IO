@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Extension methods to save XML content into the <see cref="ZipArchive"/> of a <see cref="DocxFilePath"/>.

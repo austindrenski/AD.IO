@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace AD.IO.Standard
+namespace AD.IO
 {
     /// <summary>
     /// Extension methods to extract entries from a <see cref="ZipFilePath"/>.
