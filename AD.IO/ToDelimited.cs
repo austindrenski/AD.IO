@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using JetBrains.Annotations;
-using System.Reflection;
 
 namespace AD.IO
 {
@@ -153,12 +153,12 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (typeof(T).IsPrimitive)
+            if (typeof(T).GetTypeInfo().IsPrimitive)
             {
                 return source.ToString();
             }
 
-            PropertyInfo[] properties = typeof(T).GetProperties();
+            PropertyInfo[] properties = typeof(T).GetTypeInfo().GetProperties();
 
             return string.Join(delimiter, properties.Select(x => x.GetValue(source)?.ToString()));
         }
@@ -178,7 +178,7 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (typeof(T).IsPrimitive)
+            if (typeof(T).GetTypeInfo().IsPrimitive)
             {
                 return source.Select(x => $"{x}").ToDelimited(delimiter);
             }
@@ -190,7 +190,7 @@ namespace AD.IO
             if (example?.GetType().FullName?.Contains("ValueTuple") ?? false)
             {
                 return
-                    source.Select(x => example.GetType().GetFields().Select(y => y.GetValue(x)?.ToString()))
+                    source.Select(x => example.GetType().GetTypeInfo().GetFields().Select(y => y.GetValue(x)?.ToString()))
                           .Select(x => x.ToDelimited(delimiter))
                           .ToDelimited(Environment.NewLine);
             }
@@ -198,9 +198,10 @@ namespace AD.IO
                 typeof(T) == typeof(object)
                     ? source.FirstOrDefault()?
                             .GetType()
+                            .GetTypeInfo()
                             .GetProperties()
                       ?? new PropertyInfo[0]
-                    : typeof(T).GetProperties();
+                    : typeof(T).GetTypeInfo().GetProperties();
 
             return
                 source.Select(x => properties.Select(y => y.GetValue(x)?.ToString()))
@@ -223,7 +224,7 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (typeof(T).IsPrimitive)
+            if (typeof(T).GetTypeInfo().IsPrimitive)
             {
                 return source.Select(x => x?.ToString()).ToDelimited(delimiter);
             }
@@ -233,7 +234,7 @@ namespace AD.IO
             if (example?.GetType().FullName?.Contains("ValueTuple") ?? false)
             {
                 return
-                    source.Select(x => example.GetType().GetFields().Select(y => y.GetValue(x)?.ToString()))
+                    source.Select(x => example.GetType().GetTypeInfo().GetFields().Select(y => y.GetValue(x)?.ToString()))
                           .Select(x => x.ToDelimited(delimiter))
                           .ToDelimited(Environment.NewLine);
             }
@@ -241,9 +242,10 @@ namespace AD.IO
                 typeof(T) == typeof(object)
                     ? source.FirstOrDefault()?
                             .GetType()
+                            .GetTypeInfo()
                             .GetProperties()
                       ?? new PropertyInfo[0]
-                    : typeof(T).GetProperties();
+                    : typeof(T).GetTypeInfo().GetProperties();
 
             return
                 source.Select(x => properties.Select(y => y.GetValue(x)?.ToString()))

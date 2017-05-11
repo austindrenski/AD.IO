@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
-using AD.Collections;
 
 namespace AD.IO
 {
@@ -28,7 +27,8 @@ namespace AD.IO
                     .Skip(1)
                     .SplitDelimitedLine(',')
                     .Select(x => x?.Select(double.Parse))
-                    .ToJaggedArray()
+                    .Select(x => x.ToArray())
+                    .ToArray()
                     ?? 
                     new double[0][];
             

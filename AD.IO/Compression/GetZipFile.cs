@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 using JetBrains.Annotations;
 
 namespace AD.IO
@@ -23,21 +23,20 @@ namespace AD.IO
             {
                 return;
             }
-            HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(urlPath.UriPath);
-            webRequest.Method = "GET";
-            webRequest.Timeout = 3600000;
-            using (WebResponse webResponse = webRequest.GetResponseAsync().Result)
+            HttpClient client = new HttpClient
             {
-                using (Stream stream = webResponse.GetResponseStream())
+                Timeout = new TimeSpan(1, 0, 0)
+            };
+            using (Stream stream = client.GetStreamAsync(urlPath.UriPath).Result)
+            {
+                if (stream is null)
                 {
-                    if (stream == null)
-                    {
-                        throw new NullReferenceException("WebResponse returned a null stream to GetZipFile(UrlPath path)");
-                    }
-                    using (FileStream fileStream = new FileStream(zipFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                    {
-                        stream.CopyTo(fileStream);
-                    }
+                    throw new NullReferenceException("HttpClient returned a null stream to GetZipFile(UrlPath path)");
+                }
+
+                using (FileStream fileStream = new FileStream(zipFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    stream.CopyTo(fileStream);
                 }
             }
         }

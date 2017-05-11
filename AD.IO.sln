@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.IO", "AD.IO.Standard\AD.IO.csproj", "{B434C890-8862-4D71-8F1E-A13A7E375298}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.IO", "AD.IO\AD.IO.csproj", "{B434C890-8862-4D71-8F1E-A13A7E375298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

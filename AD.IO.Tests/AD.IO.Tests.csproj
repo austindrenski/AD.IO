@@ -74,7 +74,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AD.IO.Standard\AD.IO.csproj">
+    <ProjectReference Include="..\AD.IO\AD.IO.csproj">
       <Project>{b434c890-8862-4d71-8f1e-a13a7e375298}</Project>
       <Name>AD.IO</Name>
     </ProjectReference>

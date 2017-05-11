@@ -8,10 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Reflection;
+
 namespace AD.IO.Properties {
-    using System;
-    
-    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,7 +21,7 @@ namespace AD.IO.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +35,10 @@ namespace AD.IO.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AD.IO.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AD.IO.Standard.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +50,7 @@ namespace AD.IO.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -68,7 +67,7 @@ namespace AD.IO.Properties {
         ///  &lt;Default Extension=&quot;xlsx&quot; ContentType=&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;/&gt;
         ///  &lt;Default Extension=&quot;xml&quot; ContentType [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string _Content_Types_ {
+        public static string _Content_Types_ {
             get {
                 return ResourceManager.GetString("_Content_Types_", resourceCulture);
             }
@@ -88,7 +87,7 @@ namespace AD.IO.Properties {
         ///  &lt;Lines&gt;0&lt;/Lines&gt;
         ///  &lt;Paragraphs&gt;0&lt;/Paragraphs&gt; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string app {
+        public static string app {
             get {
                 return ResourceManager.GetString("app", resourceCulture);
             }
@@ -104,7 +103,7 @@ namespace AD.IO.Properties {
         ///  &lt;cp:lastModifiedBy&gt;508 Programming Application&lt;/cp:lastModifiedBy&gt;
         ///  &lt;cp:revision&gt;0&lt;/cp:r [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string core {
+        public static string core {
             get {
                 return ResourceManager.GetString("core", resourceCulture);
             }
@@ -117,7 +116,7 @@ namespace AD.IO.Properties {
         ///  &lt;/w:body&gt;
         ///&lt;/w:document&gt;.
         /// </summary>
-        internal static string document {
+        public static string document {
             get {
                 return ResourceManager.GetString("document", resourceCulture);
             }
@@ -130,7 +129,7 @@ namespace AD.IO.Properties {
         ///  &lt;Relationship Id=&quot;rId2&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings&quot; Target=&quot;settings.xml&quot;/&gt;
         ///  &lt;Relationship Id=&quot;rId3&quot; Type=&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/the [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string document_xml_rels {
+        public static string document_xml_rels {
             get {
                 return ResourceManager.GetString("document_xml_rels", resourceCulture);
             }
@@ -154,7 +153,7 @@ namespace AD.IO.Properties {
         ///  &lt;/w:p&gt;
         ///&lt;/w:ftr&gt;.
         /// </summary>
-        internal static string footer1 {
+        public static string footer1 {
             get {
                 return ResourceManager.GetString("footer1", resourceCulture);
             }
@@ -178,7 +177,7 @@ namespace AD.IO.Properties {
         ///  &lt;/w:p&gt;
         ///&lt;/w:ftr&gt;.
         /// </summary>
-        internal static string footer2 {
+        public static string footer2 {
             get {
                 return ResourceManager.GetString("footer2", resourceCulture);
             }
@@ -202,7 +201,7 @@ namespace AD.IO.Properties {
         ///      &lt;w:pPr&gt;
         ///        &lt;w:spacing w:after=&quot;0&quot; w:line=&quot;240&quot; w:lineRule= [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string footnotes {
+        public static string footnotes {
             get {
                 return ResourceManager.GetString("footnotes", resourceCulture);
             }
@@ -214,7 +213,7 @@ namespace AD.IO.Properties {
         ///  
         ///&lt;/Relationships&gt;.
         /// </summary>
-        internal static string footnotes_xml_rels {
+        public static string footnotes_xml_rels {
             get {
                 return ResourceManager.GetString("footnotes_xml_rels", resourceCulture);
             }
@@ -240,7 +239,7 @@ namespace AD.IO.Properties {
         ///    &lt;/w:r&gt;
         ///    &lt;w:fldSimple w:instr=&quot; STYLEREF   [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string header1 {
+        public static string header1 {
             get {
                 return ResourceManager.GetString("header1", resourceCulture);
             }
@@ -260,7 +259,7 @@ namespace AD.IO.Properties {
         ///  &lt;/w:p&gt;
         ///&lt;/w:hdr&gt;.
         /// </summary>
-        internal static string header2 {
+        public static string header2 {
             get {
                 return ResourceManager.GetString("header2", resourceCulture);
             }
@@ -273,7 +272,7 @@ namespace AD.IO.Properties {
         ///  &lt;Relationship Id=&quot;rId2&quot; Type=&quot;http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties&quot; Target=&quot;docProps/core.xml&quot;/&gt;
         ///  &lt;Relationship Id=&quot;rId3&quot; Type=&quot;http://schemas.openxmlformats.org/officeDo [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string rels {
+        public static string rels {
             get {
                 return ResourceManager.GetString("rels", resourceCulture);
             }
@@ -289,7 +288,7 @@ namespace AD.IO.Properties {
         ///            xmlns:w10=&quot;urn:schemas-microsoft-com:office:word&quot; 
         ///            x [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string settings {
+        public static string settings {
             get {
                 return ResourceManager.GetString("settings", resourceCulture);
             }
@@ -307,7 +306,7 @@ namespace AD.IO.Properties {
         ///      &lt;w:rPr&gt;
         ///        &lt;w:rFonts w:asciiTheme=&quot;minor [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string styles {
+        public static string styles {
             get {
                 return ResourceManager.GetString("styles", resourceCulture);
             }
@@ -332,7 +331,7 @@ namespace AD.IO.Properties {
         ///      &lt;/a:lt2&gt;
         ///       [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string theme1 {
+        public static string theme1 {
             get {
                 return ResourceManager.GetString("theme1", resourceCulture);
             }

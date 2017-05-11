@@ -97,10 +97,10 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Implicitly casts a <see cref="HtmlFilePath"/> as a <see cref="FilePath"/>.
+        /// Implicitly casts a <see cref="HtmlFilePath"/> as a <see cref="FileNotFoundException"/>.
         /// </summary>
-        /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
+        /// <exception cref="FilePath"/>
         public static explicit operator FilePath(HtmlFilePath htmlFilePath)
         {
             return new FilePath(htmlFilePath);
