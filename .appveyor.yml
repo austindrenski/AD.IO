@@ -1,5 +1,5 @@
 before_build:
-  - cmd: nuget restore AD.IO\AD.IO.sln
+  - cmd: nuget restore AD.IO.sln
 
 configuration: 
   - Release
