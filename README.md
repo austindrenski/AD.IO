@@ -2,6 +2,8 @@
 
 C# extension library for input/output operations and data management.
 
+![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/austindrenski/AD.IO?svg=true)
+
 ## Install from NuGet:
 
 ```Powershell 
