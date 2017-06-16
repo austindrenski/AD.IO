@@ -1,0 +1,11 @@
+before_build:
+  - cmd: nuget restore AD.IO\AD.IO.sln
+
+configuration: 
+  - Release
+
+image: 
+  - Visual Studio 2017
+
+platform: 
+  - Any CPU
