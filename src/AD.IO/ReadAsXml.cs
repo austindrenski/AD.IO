@@ -86,6 +86,65 @@ namespace AD.IO
         }
 
         /// <summary>
+        /// Opens a <see cref="FileStream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
+        /// </summary>
+        /// <param name="fileStream">
+        /// The file stream of the .docx file to be opened.
+        /// </param>
+        /// <param name="fileName">
+        /// The file name to store as an attribute on the root node.
+        /// </param>
+        /// <param name="entryPath">
+        /// The entry path within the zip archive to read as XML.
+        /// </param>
+        /// <returns>
+        /// An <see cref="XElement"/> representing the document root of the Microsoft Word document.
+        /// </returns>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
+        /// <exception cref="FileNotFoundException"/>
+        /// <exception cref="InvalidDataException"/>
+        /// <exception cref="IOException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="PathTooLongException"/>
+        /// <exception cref="UnauthorizedAccessException"/>
+        [Pure]
+        [CanBeNull]
+        public static XElement ReadAsXml([NotNull] this FileStream fileStream, [NotNull] string fileName, [NotNull] string entryPath = "word/document.xml")
+        {
+            if (fileStream is null)
+            {
+                throw new ArgumentNullException(nameof(fileStream));
+            }
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            XElement element;
+            using (ZipArchive file = new ZipArchive(fileStream, ZipArchiveMode.Read))
+            {
+                ZipArchiveEntry entry = file.GetEntry(entryPath);
+                if (entry is null)
+                {
+                    return null;
+                }
+                using (Stream stream = entry.Open())
+                {
+                    element = XElement.Load(stream);
+                }
+            }
+            element.SetAttributeValue("fileName", fileName);
+            return element;
+        }
+
+        /// <summary>
         /// Opens a Microsoft Word document (.docx) as an <see cref="XElement"/>.
         /// </summary>
         /// <param name="filePath">The file path of the .docx file to be opened. The file name is stored as an attribure of the root element.</param>
@@ -114,24 +173,10 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            XElement element;
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                using (ZipArchive file = new ZipArchive(fileStream, ZipArchiveMode.Read))
-                {
-                    ZipArchiveEntry entry = file.GetEntry(entryPath);
-                    if (entry is null)
-                    {
-                        return null;
-                    }
-                    using (Stream stream = entry.Open())
-                    {
-                        element = XElement.Load(stream);
-                    }
-                }
+                return fileStream.ReadAsXml(filePath.Name, entryPath);
             }
-            element.SetAttributeValue("fileName", filePath.Name);
-            return element;
         }
 
         /// <summary>
@@ -152,7 +197,7 @@ namespace AD.IO
         [Pure]
         [NotNull]
         [ItemCanBeNull]
-        public static IEnumerable<XElement> ReadAsXml([NotNull][ItemNotNull] this IEnumerable<DocxFilePath> filePaths)
+        public static IEnumerable<XElement> ReadAsXml([NotNull] [ItemNotNull] this IEnumerable<DocxFilePath> filePaths)
         {
             if (filePaths is null)
             {
@@ -181,7 +226,7 @@ namespace AD.IO
         [Pure]
         [NotNull]
         [ItemCanBeNull]
-        public static ParallelQuery<XElement> ReadAsXml([NotNull][ItemNotNull] this ParallelQuery<DocxFilePath> filePaths)
+        public static ParallelQuery<XElement> ReadAsXml([NotNull] [ItemNotNull] this ParallelQuery<DocxFilePath> filePaths)
         {
             if (filePaths is null)
             {
