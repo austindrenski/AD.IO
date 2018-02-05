@@ -17,28 +17,34 @@ namespace AD.IO
         /// <summary>
         /// The full file path.
         /// </summary>
+        [NotNull]
         private readonly string _path;
 
         /// <inheritdoc />
         /// <summary>
         /// The file path extension.
         /// </summary>
+        [NotNull]
         public string Extension { get; }
 
         /// <inheritdoc />
         /// <summary>
         /// The file name.
         /// </summary>
+        [NotNull]
         public string Name { get; }
 
         /// <summary>
         /// The items from the first row of the file.
         /// </summary>
+        [NotNull]
+        [ItemNotNull]
         public IEnumerable<string> Headers { get; }
 
         /// <summary>
         /// The the first row of the file.
         /// </summary>
+        [CanBeNull]
         public string HeaderRow { get; }
 
         /// <summary>
@@ -53,30 +59,52 @@ namespace AD.IO
         /// <param name="delimiter">The character that delimits the file.</param>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
-        public DelimitedFilePath(string delimitedFilePath, char delimiter = '|')
+        public DelimitedFilePath([NotNull] string delimitedFilePath, char delimiter = '|')
         {
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
             if (!File.Exists(delimitedFilePath))
             {
                 throw new FileNotFoundException();
             }
+
             _path = delimitedFilePath;
-            Extension = Path.GetExtension(delimitedFilePath);
-            Name = Path.GetFileNameWithoutExtension(delimitedFilePath);
-            HeaderRow = File.ReadLines(delimitedFilePath).FirstOrDefault();
-            Headers = HeaderRow?.SplitDelimitedLine(delimiter);
+
             Delimiter = delimiter;
+
+            Name = Path.GetFileNameWithoutExtension(delimitedFilePath);
+
+            Extension = Path.GetExtension(delimitedFilePath);
+
+            using (FileStream fileStream = new FileStream(delimitedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    HeaderRow = reader.ReadLine();
+                }
+            }
+
+            Headers = HeaderRow?.SplitDelimitedLine(delimiter) ?? Enumerable.Empty<string>();
         }
 
         /// <summary>
         /// Creates a delimited file along the path if one does not exist.
         /// </summary>
         /// <exception cref="ArgumentException"/>
-        public static DelimitedFilePath Create(string delimitedFilePath, char delimiter)
+        [NotNull]
+        public static DelimitedFilePath Create([NotNull] string delimitedFilePath, char delimiter)
         {
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
             if (!File.Exists(delimitedFilePath))
             {
                 File.Create(delimitedFilePath).Dispose();
             }
+
             return new DelimitedFilePath(delimitedFilePath, delimiter);
         }
 
@@ -84,8 +112,14 @@ namespace AD.IO
         /// Creates a delimited file along the path if one does not exist.
         /// </summary>
         /// <exception cref="ArgumentException"/>
-        public static DelimitedFilePath Create(string path)
+        [NotNull]
+        public static DelimitedFilePath Create([NotNull] string path)
         {
+            if (path is null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
             return Create(path, '|');
         }
 
@@ -93,8 +127,14 @@ namespace AD.IO
         /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
-        IPath IPath.Create(string path)
+        [NotNull]
+        IPath IPath.Create([NotNull] string path)
         {
+            if (path is null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
             return Create(path);
         }
 
@@ -102,6 +142,7 @@ namespace AD.IO
         /// Returns the delimited file path.
         /// </summary>
         // ReSharper disable once InheritdocConsiderUsage
+        [NotNull]
         public override string ToString()
         {
             return _path;
@@ -110,8 +151,14 @@ namespace AD.IO
         /// <summary>
         /// Implicitly casts a DelimitedFilePath as its internal delimited file path string.
         /// </summary>
-        public static implicit operator string(DelimitedFilePath delimitedFilePath)
+        [NotNull]
+        public static implicit operator string([NotNull] DelimitedFilePath delimitedFilePath)
         {
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
+
             return delimitedFilePath._path;
         }
 
@@ -120,8 +167,14 @@ namespace AD.IO
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
-        public static implicit operator DelimitedFilePath(string delimitedFilePath)
+        [NotNull]
+        public static implicit operator DelimitedFilePath([NotNull] string delimitedFilePath)
         {
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
+
             return new DelimitedFilePath(delimitedFilePath);
         }
 
@@ -130,8 +183,14 @@ namespace AD.IO
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
-        public static explicit operator FilePath(DelimitedFilePath delimitedFilePath)
+        [NotNull]
+        public static explicit operator FilePath([NotNull] DelimitedFilePath delimitedFilePath)
         {
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
+
             return new FilePath(delimitedFilePath);
         }
 
@@ -140,17 +199,25 @@ namespace AD.IO
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="ArgumentException"/>
-        public static explicit operator UrlPath(DelimitedFilePath delimitedFilePath)
+        [NotNull]
+        public static explicit operator UrlPath([NotNull] DelimitedFilePath delimitedFilePath)
         {
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
+
             Uri uri = new Uri(delimitedFilePath);
             return new UrlPath(uri.AbsoluteUri);
         }
 
+        [NotNull]
         IEnumerator<char> IEnumerable<char>.GetEnumerator()
         {
             return _path.AsEnumerable().GetEnumerator();
         }
 
+        [NotNull]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _path.AsEnumerable().GetEnumerator();

@@ -24,10 +24,10 @@ namespace AD.IO.Tests
             DelimitedFilePath dataFile = DelimitedFilePath.Create(name, ',');
 
             // Act
-            IDictionary<string, double[]> data = dataFile.ReadData();
+            IDictionary<string, string[]> data = dataFile.ReadData();
 
             // Assert
-            Assert.IsTrue(data["ElasticityOfSubstitution"].All(x => x > 0));
+            Assert.IsTrue(data["ElasticityOfSubstitution"].All(x => double.Parse(x) > 0.0));
         }
     }
 }

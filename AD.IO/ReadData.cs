@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
@@ -12,40 +13,50 @@ namespace AD.IO
     public static class ReadDataExtensions
     {
         /// <summary>
-        /// Read the delimited file as a dictionary of columns whose values are doubles.
+        /// Read the delimited file as a dictionary of column vectors stored by header string.
         /// </summary>
-        /// <param name="delimitedFilePath">The file to read.</param>
-        /// <returns>An IDictionary where each column from the delimited file is stored as a key entry.</returns>
-        public static IDictionary<string, double[]> ReadData(this DelimitedFilePath delimitedFilePath)
+        /// <param name="delimitedFilePath">
+        /// The file to read.
+        /// </param>
+        /// <returns>
+        /// An <see cref="IDictionary{TKey, TValue}"/> where each column from the delimited file is stored as a key entry.
+        /// </returns>
+        [NotNull]
+        public static IDictionary<string, string[]> ReadData([NotNull] this DelimitedFilePath delimitedFilePath)
         {
-            IDictionary<string, double[]> data = new Dictionary<string, double[]>();
+            if (delimitedFilePath is null)
+            {
+                throw new ArgumentNullException(nameof(delimitedFilePath));
+            }
 
-            string[] headers = delimitedFilePath.Headers as string[] ?? delimitedFilePath.Headers.ToArray();
+            string[] headers =
+                delimitedFilePath.Headers as string[] ?? delimitedFilePath.Headers.ToArray();
 
-            double[][] lines = 
+            IDictionary<string, string[]> dictionary = new Dictionary<string, string[]>(headers.Length);
+            
+            string[][] lines = 
                 File.ReadLines(delimitedFilePath)
                     .Skip(1)
-                    .SplitDelimitedLine(',')
-                    .Select(x => x?.Select(double.Parse))
+                    .SplitDelimitedLine(delimitedFilePath.Delimiter)
                     .Select(x => x.ToArray())
                     .ToArray()
                     ?? 
-                    new double[0][];
+                    new string[0][];
             
-            foreach (string header in delimitedFilePath.Headers)
+            foreach (string header in headers)
             {
-                data.Add(header, new double[lines.Length]);
+                dictionary.Add(header, new string[lines.Length]);
             }
 
             for (int i = 0; i < lines.Length; i++)
             {
                 for (int j = 0; j < headers.Length; j++)
                 {
-                    data[headers[j]][i] = lines[i][j];
+                    dictionary[headers[j]][i] = lines[i][j];
                 }
             }
             
-            return data;    
+            return dictionary;    
         }
     }
 }
