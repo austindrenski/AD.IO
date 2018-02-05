@@ -14,7 +14,7 @@ namespace AD.IO.Tests
         public void ReadAsXmlTest0()
         {
             // Arrange
-            string path = Path.Combine(Path.GetTempPath(), "test.csv");
+            string path = Path.Combine(Path.GetTempPath(), "test_read_as_xml.csv");
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -32,7 +32,7 @@ namespace AD.IO.Tests
         public void ReadAsXmlTest1()
         {
             // Arrange
-            string path = Path.Combine(Path.GetTempPath(), "test.docx");
+            string path = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -50,7 +50,7 @@ namespace AD.IO.Tests
         public void ReadAsXmlTest2()
         {
             // Arrange
-            string path0 = Path.Combine(Path.GetTempPath(), "test.docx");
+            string path0 = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
             string path1 = Path.Combine(Path.GetTempPath(), "test2.docx");
             if (File.Exists(path0))
             {
@@ -75,7 +75,7 @@ namespace AD.IO.Tests
         public void ReadAsXmlTest3()
         {
             // Arrange
-            string path0 = Path.Combine(Path.GetTempPath(), "test.docx");
+            string path0 = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
             string path1 = Path.Combine(Path.GetTempPath(), "test2.docx");
             if (File.Exists(path0))
             {

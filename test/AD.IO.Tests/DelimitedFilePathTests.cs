@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -86,6 +85,10 @@ namespace AD.IO.Tests
         {
             // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
             // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
