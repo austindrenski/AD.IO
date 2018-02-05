@@ -86,10 +86,10 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Opens a <see cref="FileStream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
+        /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
         /// </summary>
-        /// <param name="fileStream">
-        /// The file stream of the .docx file to be opened.
+        /// <param name="stream">
+        /// The stream of the .docx file to be opened.
         /// </param>
         /// <param name="fileName">
         /// The file name to store as an attribute on the root node.
@@ -112,11 +112,11 @@ namespace AD.IO
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
         [CanBeNull]
-        public static XElement ReadAsXml([NotNull] this FileStream fileStream, [NotNull] string fileName, [NotNull] string entryPath = "word/document.xml")
+        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string fileName, [NotNull] string entryPath = "word/document.xml")
         {
-            if (fileStream is null)
+            if (stream is null)
             {
-                throw new ArgumentNullException(nameof(fileStream));
+                throw new ArgumentNullException(nameof(stream));
             }
             if (fileName is null)
             {
@@ -128,16 +128,16 @@ namespace AD.IO
             }
 
             XElement element;
-            using (ZipArchive file = new ZipArchive(fileStream, ZipArchiveMode.Read))
+            using (ZipArchive file = new ZipArchive(stream, ZipArchiveMode.Read))
             {
                 ZipArchiveEntry entry = file.GetEntry(entryPath);
                 if (entry is null)
                 {
                     return null;
                 }
-                using (Stream stream = entry.Open())
+                using (Stream entryStream = entry.Open())
                 {
-                    element = XElement.Load(stream);
+                    element = XElement.Load(entryStream);
                 }
             }
             element.SetAttributeValue("fileName", fileName);
