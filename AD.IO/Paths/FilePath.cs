@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <inheritdoc />
     /// <summary>
     /// Path to a file on the system. An exception is thrown if the file does not exist.
     /// </summary>
@@ -18,11 +19,13 @@ namespace AD.IO
         /// </summary>
         private readonly string _path;
 
+        /// <inheritdoc />
         /// <summary>
         /// The file path extension.
         /// </summary>
         public string Extension { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// The file name.
         /// </summary>
@@ -56,6 +59,7 @@ namespace AD.IO
             return new FilePath(filePath);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
@@ -67,6 +71,7 @@ namespace AD.IO
         /// <summary>
         /// Returns the file path.
         /// </summary>
+        // ReSharper disable once InheritdocConsiderUsage
         public override string ToString()
         {
             return _path;

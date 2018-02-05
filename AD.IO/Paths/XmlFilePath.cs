@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <inheritdoc />
     /// <summary>
     /// Path to an XML file on the system. An exception is thrown if the file does not exist, or if it is not an XML file.
     /// </summary>
@@ -18,11 +19,13 @@ namespace AD.IO
         /// </summary>
         private readonly string _path;
 
+        /// <inheritdoc />
         /// <summary>
         /// The file path extension.
         /// </summary>
         public string Extension { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// The file name.
         /// </summary>
@@ -61,7 +64,8 @@ namespace AD.IO
             }
             return new XmlFilePath(xmlFilePath);
         }
-        
+
+        /// <inheritdoc />
         /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
@@ -73,6 +77,7 @@ namespace AD.IO
         /// <summary>
         /// Returns the XML file path.
         /// </summary>
+        // ReSharper disable once InheritdocConsiderUsage
         public override string ToString()
         {
             return _path;

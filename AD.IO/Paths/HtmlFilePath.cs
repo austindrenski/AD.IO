@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <inheritdoc />
     /// <summary>
     /// Path to an HTML file on the system. An exception is thrown if the file does not exist, or if it is not an HTML file.
     /// </summary>
@@ -18,11 +19,13 @@ namespace AD.IO
         /// </summary>
         private readonly string _path;
 
+        /// <inheritdoc />
         /// <summary>
         /// The file path extension.
         /// </summary>
         public string Extension { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// The file name.
         /// </summary>
@@ -62,6 +65,7 @@ namespace AD.IO
             return new HtmlFilePath(htmlFilePath);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Explicit <see cref="IPath"/> implementation.
         /// </summary>
@@ -73,6 +77,7 @@ namespace AD.IO
         /// <summary>
         /// Returns the internal HTML file path string.
         /// </summary>
+        // ReSharper disable once InheritdocConsiderUsage
         public override string ToString()
         {
             return _path;

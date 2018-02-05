@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -44,7 +45,7 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Appends the strings of the enumerable collection by a delimiter. 
+        /// Appends the strings of the enumerable collection by a delimiter.
         /// Strings containing the delimiter are enclosed in double quotation marks.
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
@@ -58,13 +59,13 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            
+
             IEnumerable<string> safeEnumerable = source.Select(x => MakeSafeString(x, delimiter));
             return string.Join(delimiter, safeEnumerable);
         }
 
         /// <summary>
-        /// Appends the strings of the enumerable collection by a delimiter. 
+        /// Appends the strings of the enumerable collection by a delimiter.
         /// Strings containing the delimiter are enclosed in double quotation marks.
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
@@ -97,8 +98,8 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return source.HasElements 
-                ? source.Elements().Select(x => x.Value).ToDelimited(delimiter) 
+            return source.HasElements
+                ? source.Elements().Select(x => x.Value).ToDelimited(delimiter)
                 : source.Value;
         }
 
@@ -217,6 +218,7 @@ namespace AD.IO
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static string ToDelimited<T>([NotNull][ItemCanBeNull] this ParallelQuery<T> source, [CanBeNull] string delimiter = "|")
         {
             if (source is null)

@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <inheritdoc />
     /// <summary>
     /// Defines common functionality for system paths.
     /// </summary>

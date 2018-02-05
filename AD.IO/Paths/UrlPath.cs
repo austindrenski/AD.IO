@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <inheritdoc />
     /// <summary>
     /// Represents a URL. Exceptions are thrown if the URL is invalid.
     /// </summary>
@@ -23,11 +24,13 @@ namespace AD.IO
         /// </summary>
         public Uri UriPath { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// The file path extension.
         /// </summary>
         public string Extension { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// The file name.
         /// </summary>
@@ -59,6 +62,7 @@ namespace AD.IO
             return new UrlPath(urlPath);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
@@ -70,6 +74,7 @@ namespace AD.IO
         /// <summary>
         /// Returns the url path.
         /// </summary>
+        // ReSharper disable once InheritdocConsiderUsage
         public override string ToString()
         {
             return _path;

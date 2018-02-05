@@ -5,16 +5,4 @@
 bin/
 obj/
 packages/
-*.DotSettings
-*.DotSettings.user
-*.exe
-*.nupkg
-*.suo
-*.ps1
-*.psm1
-*.pubxml
-*.user
-*.vspscc
-*.vssscc
-*.sqlite
-*.dg
+.idea/

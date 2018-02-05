@@ -10,6 +10,7 @@ using JetBrains.Annotations;
 
 namespace AD.IO
 {
+    /// <inheritdoc />
     /// <summary>
     /// Path to a Microsoft Word file on the system. An exception is thrown if the file does not exist.
     /// </summary>
@@ -22,12 +23,14 @@ namespace AD.IO
         [NotNull]
         private readonly string _path;
 
+        /// <inheritdoc />
         /// <summary>
         /// The file extension.
         /// </summary>
         [NotNull]
         public string Extension { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// The file name.
         /// </summary>
@@ -182,7 +185,7 @@ namespace AD.IO
                 {
                     writer.Write(XElement.Parse(Resources.styles));
                 }
-                
+
                 archive.CreateEntry("word/footnotes.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/footnotes.xml").Open()))
                 {
@@ -201,11 +204,12 @@ namespace AD.IO
         /// <summary>
         /// Returns the file path.
         /// </summary>
+        // ReSharper disable once InheritdocConsiderUsage
         public override string ToString()
         {
             return _path;
         }
-        
+
         IEnumerator<char> IEnumerable<char>.GetEnumerator()
         {
             return _path.AsEnumerable().GetEnumerator();
