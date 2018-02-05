@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AD.IO.Tests
 {
     [TestClass]
     public class ReadDataTests
     {
-        [TestMethod]
+        [Theory]
         public void ReadDataTest0()
         {
             // Arrange

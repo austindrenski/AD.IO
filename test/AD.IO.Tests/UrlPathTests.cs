@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AD.IO.Tests
 {
     [TestClass]
     public class UrlPathTests
     {
-        [TestMethod]
+        [Theory]
         public void UrlPathTest0()
         {
             // Arrange
@@ -25,7 +24,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(url.UriPath.AbsoluteUri == uri.AbsoluteUri);
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest1()
         {
             // Arrange
@@ -38,8 +37,8 @@ namespace AD.IO.Tests
             // Assert
             Assert.IsTrue(url.Name == null);
         }
-        
-        [TestMethod]
+
+        [Theory]
         public void UrlPathTest2()
         {
             // Arrange
@@ -53,7 +52,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(url.Extension == null);
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest3()
         {
             // Arrange
@@ -67,7 +66,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(uri.AbsoluteUri, urlPath.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(UriFormatException))]
         public void UrlPathTest4()
         {
@@ -78,8 +77,8 @@ namespace AD.IO.Tests
             // ReSharper disable once UnusedVariable
             UrlPath urlPath = UrlPath.Create(path);
         }
-        
-        [TestMethod]
+
+        [Theory]
         public void UrlPathTest5()
         {
             // Arrange
@@ -94,10 +93,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(uri.AbsoluteUri, urlPath.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest6()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = new Uri(Path.GetTempFileName()).AbsoluteUri;
 
             // Act
@@ -107,10 +106,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(string.Join(null, charPath).Equals(urlPath.ToString()));
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest7()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = new Uri(Path.GetTempFileName()).AbsoluteUri;
             IEnumerable enumerable = urlPath.AsEnumerable();
 
@@ -121,10 +120,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(test);
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest8()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = new Uri(Path.GetTempFileName()).AbsoluteUri;
 
             // Act
@@ -134,10 +133,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(test != null);
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest9()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = new Uri(Path.GetTempFileName()).AbsoluteUri;
 
             // Act
@@ -147,10 +146,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         public void UrlPathTest10()
         {
-            // Arrange 
+            // Arrange
             string path = Path.GetTempFileName();
             string zip = path.Replace(".tmp", ".zip");
             File.Move(path, zip);
@@ -163,11 +162,11 @@ namespace AD.IO.Tests
             Assert.AreEqual(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void UrlPathTest11()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = "https://www.google.com";
 
             // Act
@@ -175,11 +174,11 @@ namespace AD.IO.Tests
             FilePath test = (FilePath)urlPath;
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void UrlPathTest12()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = "https://www.google.com";
 
             // Act

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 #pragma warning disable 219
 
 namespace AD.IO.Tests
@@ -11,7 +11,7 @@ namespace AD.IO.Tests
     [TestClass]
     public class DocxFilePathTests
     {
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest0()
         {
             // Arrange
@@ -26,7 +26,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(zip.Name, Path.GetFileName(test).Replace(".zip", null));
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest1()
         {
             // Arrange
@@ -41,7 +41,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(zip.Extension, Path.GetExtension(test));
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void DocxFilePathTest2()
         {
@@ -57,7 +57,7 @@ namespace AD.IO.Tests
             ZipFilePath zip = new ZipFilePath(path);
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void DocxFilePathTest3()
         {
@@ -69,7 +69,7 @@ namespace AD.IO.Tests
             ZipFilePath zip = path;
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest4()
         {
             // Arrange
@@ -84,7 +84,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(zip.Extension, Path.GetExtension(test));
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void DocxFilePathTest5()
         {
@@ -97,7 +97,7 @@ namespace AD.IO.Tests
             ZipFilePath zip = (ZipFilePath)iPath.Create(path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest6()
         {
             // Arrange
@@ -111,10 +111,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(zip.Extension, Path.GetExtension(test));
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest7()
         {
-            // Arrange 
+            // Arrange
             ZipFilePath zip = ZipFilePath.Create(Path.GetTempFileName().Replace(".tmp", ".zip"));
 
             // Act
@@ -124,10 +124,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(string.Join(null, charPath).Equals(zip.ToString()));
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest8()
         {
-            // Arrange 
+            // Arrange
             ZipFilePath zip = ZipFilePath.Create(Path.GetTempFileName().Replace(".tmp", ".zip"));
             IEnumerable enumerable = zip.AsEnumerable();
 
@@ -138,10 +138,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(test);
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest9()
         {
-            // Arrange 
+            // Arrange
             ZipFilePath zip = ZipFilePath.Create(Path.GetTempFileName().Replace(".tmp", ".zip"));
 
             // Act
@@ -151,10 +151,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(test == zip);
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest10()
         {
-            // Arrange 
+            // Arrange
             UrlPath urlPath = new Uri(Path.GetTempFileName()).AbsoluteUri;
 
             // Act
@@ -164,10 +164,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest11()
         {
-            // Arrange 
+            // Arrange
             string path = Path.GetTempFileName();
             string zip = path.Replace(".tmp", ".zip");
             File.Move(path, zip);
@@ -180,7 +180,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest12()
         {
             // Arrange
@@ -195,10 +195,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(zip, test.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest13()
         {
-            // Arrange 
+            // Arrange
             ZipFilePath zip = ZipFilePath.Create(Path.GetTempFileName().Replace(".tmp", ".zip"));
 
             // Act
@@ -208,10 +208,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(zip.ToString().Replace('\\', '/'), test.UriPath.AbsolutePath);
         }
 
-        [TestMethod]
+        [Theory]
         public void DocxFilePathTest14()
         {
-            // Arrange 
+            // Arrange
             ZipFilePath zip = ZipFilePath.Create(Path.GetTempFileName().Replace(".tmp", ".zip"));
 
             // Act

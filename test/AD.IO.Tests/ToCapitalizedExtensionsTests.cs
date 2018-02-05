@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using JetBrains.Annotations;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AD.IO.Tests
 {
     [TestClass]
     public class ToCapitalizedExtensionsTests
     {
-        [TestMethod]
+        [Theory]
         public void ToCapitalizeFirstTest()
         {
             // Arrange

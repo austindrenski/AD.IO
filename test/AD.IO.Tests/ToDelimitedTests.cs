@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AD.IO.Tests
 {
     [TestClass]
     public class ToDelimitedExtensionsTests
     {
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest00()
         {
             // Arrange
@@ -27,7 +26,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(result, "aa|bb\r\naa|bb\r\naa|bb");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest0()
         {
             // Arrange
@@ -40,7 +39,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(result, "a|b|c");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest1()
         {
             // Arrange
@@ -58,7 +57,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(result, "A|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest2()
         {
             // Arrange
@@ -76,20 +75,20 @@ namespace AD.IO.Tests
             Assert.IsTrue("A|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0".All(x => result.Contains(x)));
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest3()
         {
             // Arrange
             IEnumerable<int> test = new int[] { 0, 1, 2 };
 
             // Act
-            string result = test.ToDelimited(); 
+            string result = test.ToDelimited();
 
             // Assert
             Assert.AreEqual(result, "0|1|2");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest4()
         {
             // Arrange
@@ -102,7 +101,7 @@ namespace AD.IO.Tests
             Assert.IsTrue("0|1|2".All(x => result.Contains(x)));
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest5()
         {
             // Arrange
@@ -121,7 +120,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(result, "a|b|c|HTS10|z|zz\r\nA|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest6()
         {
             // Arrange
@@ -140,7 +139,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(result, "a&b&c&HTS10&z&zz\r\nA&B&C&0123456789&&0\r\nD&E&F&0123456789&&0\r\nG&H&I&0123456789&&0");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest7()
         {
             // Arrange
@@ -158,7 +157,7 @@ namespace AD.IO.Tests
             Assert.AreEqual(result, "a|b|c\r\nd|e|f\r\ng|h|i");
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest8()
         {
             // Arrange
@@ -176,7 +175,7 @@ namespace AD.IO.Tests
             Assert.IsTrue("a|b|c\r\nd|e|f\r\ng|h|i".All(x => result.Contains(x)));
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest9()
         {
             // Arrange
@@ -193,8 +192,8 @@ namespace AD.IO.Tests
             // Assert
             Assert.AreEqual(result, "0|1|2\r\n3|4|5\r\n6|7|8");
         }
-        
-        [TestMethod]
+
+        [Theory]
         public void ToDelimitedTest10()
         {
             // Arrange
@@ -212,7 +211,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(result.All(x => "0|1|2\r\n3|4|5\r\n6|7|8".Contains(x)));
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void ToDelimitedTest11()
         {
@@ -224,7 +223,7 @@ namespace AD.IO.Tests
             string result = document.ToDelimited();
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void ToDelimitedTest12()
         {
@@ -236,7 +235,7 @@ namespace AD.IO.Tests
             string result = document.ToDelimited();
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest13()
         {
             // Arrange
@@ -249,7 +248,7 @@ namespace AD.IO.Tests
             Assert.IsTrue("a|b|\"c|c\"|".All(x => result.Contains(x)));
         }
 
-        [TestMethod]
+        [Theory]
         public void ToDelimitedTest14()
         {
             // Arrange

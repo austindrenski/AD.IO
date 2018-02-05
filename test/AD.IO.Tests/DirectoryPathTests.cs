@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 #pragma warning disable 219
 
 namespace AD.IO.Tests
@@ -10,7 +10,7 @@ namespace AD.IO.Tests
     [TestClass]
     public class DirectoryPathTests
     {
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest0()
         {
             // Arrange
@@ -24,7 +24,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(result == path);
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void DirectoryPathTest1()
         {
@@ -39,7 +39,7 @@ namespace AD.IO.Tests
             // Expected exception: DirectoryNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void DirectoryPathTest2()
         {
@@ -53,7 +53,7 @@ namespace AD.IO.Tests
             // Expected exception: DirectoryNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest3()
         {
             // Arrange
@@ -66,7 +66,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(directoryPath == path);
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void DirectoryPathTest4()
         {
@@ -81,7 +81,7 @@ namespace AD.IO.Tests
             // Expected exception: DirectoryNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest5()
         {
             // Arrange
@@ -94,10 +94,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(directoryPath.ToString() == path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest6()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "testdirectory");
             if (Directory.Exists(path))
             {
@@ -112,10 +112,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(directoryPath.ToString() == path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest7()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "testdirectory");
             DirectoryPath directoryPath = path;
 
@@ -126,10 +126,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(extension == null);
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest8()
         {
-            // Arrange 
+            // Arrange
             DirectoryPath directoryPath = Path.GetTempPath();
 
             // Act
@@ -138,11 +138,11 @@ namespace AD.IO.Tests
             // Assert
             Assert.IsTrue(name != null);
         }
-        
-        [TestMethod]
+
+        [Theory]
         public void DirectoryPathTest9()
         {
-            // Arrange 
+            // Arrange
             DirectoryPath directoryPath = new DirectoryPath(Path.GetTempPath());
             IPath path = directoryPath;
 
@@ -153,10 +153,10 @@ namespace AD.IO.Tests
             Assert.AreEqual(test.ToString(), directoryPath.ToString());
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest10()
         {
-            // Arrange 
+            // Arrange
             DirectoryPath directoryPath = Path.GetTempPath();
 
             // Act
@@ -166,10 +166,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(string.Join(null, charPath).Equals(directoryPath.ToString()));
         }
 
-        [TestMethod]
+        [Theory]
         public void DirectoryPathTest11()
         {
-            // Arrange 
+            // Arrange
             DirectoryPath directoryPath = Path.GetTempPath();
             IEnumerable enumerable = directoryPath.AsEnumerable();
 

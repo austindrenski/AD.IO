@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 #pragma warning disable 219
 
 namespace AD.IO.Tests
@@ -10,7 +10,7 @@ namespace AD.IO.Tests
     [TestClass]
     public class FilePathTests
     {
-        [TestMethod]
+        [Theory]
         public void FilePathTest0()
         {
             // Arrange
@@ -23,7 +23,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(filePath == path);
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void FilePathTest1()
         {
@@ -38,7 +38,7 @@ namespace AD.IO.Tests
             // Expected exception: FileNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void FilePathTest2()
         {
@@ -52,7 +52,7 @@ namespace AD.IO.Tests
             // Expected exception: FileNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest3()
         {
             // Arrange
@@ -65,7 +65,7 @@ namespace AD.IO.Tests
             Assert.IsTrue(filePath == path);
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void FilePathTest4()
         {
@@ -80,7 +80,7 @@ namespace AD.IO.Tests
             // Expected exception: FileNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest5()
         {
             // Arrange
@@ -93,23 +93,23 @@ namespace AD.IO.Tests
             Assert.IsTrue(filePath.ToString() == path);
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest6()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "testdirectory", ".txt");
 
-            // Act 
+            // Act
             FilePath filePath = FilePath.Create(path);
 
             // Assert
             Assert.IsTrue(filePath.ToString() == path);
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest7()
         {
-            // Arrange 
+            // Arrange
             string path = Path.GetTempFileName();
             FilePath filePath = path;
 
@@ -120,10 +120,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(extension == ".tmp");
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest8()
         {
-            // Arrange 
+            // Arrange
             string fileName = Path.GetTempFileName();
             FilePath filePath = fileName;
 
@@ -134,10 +134,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest9()
         {
-            // Arrange 
+            // Arrange
             FilePath filePath = new FilePath(Path.GetTempFileName());
             IPath path = filePath;
             string name = Path.GetTempFileName().Replace(".tmp", "0.tmp");
@@ -149,10 +149,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(test.ToString().Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest10()
         {
-            // Arrange 
+            // Arrange
             FilePath filePath = Path.GetTempFileName();
 
             // Act
@@ -162,10 +162,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(string.Join(null, charPath).Equals(filePath.ToString()));
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest11()
         {
-            // Arrange 
+            // Arrange
             FilePath filePath = Path.GetTempFileName();
             IEnumerable enumerable = filePath.AsEnumerable();
 
@@ -176,10 +176,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(test);
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest12()
         {
-            // Arrange 
+            // Arrange
             string tmp = Path.GetTempFileName();
             string name = tmp.Replace(".tmp", ".docx");
             File.Move(tmp, name);
@@ -191,11 +191,11 @@ namespace AD.IO.Tests
             // Assert
             Assert.IsTrue(result.Name == filePath.Name);
         }
-        
-        [TestMethod]
+
+        [Theory]
         public void FilePathTest13()
         {
-            // Arrange 
+            // Arrange
             string tmp = Path.GetTempFileName();
             string name = tmp.Replace(".tmp", ".zip");
             File.Move(tmp, name);
@@ -208,10 +208,10 @@ namespace AD.IO.Tests
             Assert.IsTrue(result.Name == filePath.Name);
         }
 
-        [TestMethod]
+        [Theory]
         public void FilePathTest14()
         {
-            // Arrange 
+            // Arrange
             FilePath filePath = Path.GetTempFileName();
 
             // Act

@@ -3,31 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 219
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class DelimitedFilePathTests
     {
-        [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException))]
+        [Theory]
         public void DelimitedFilePathTest0()
         {
             // Arrange
             string path = Path.GetTempPath();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = path;
-
-            // Assert
-            // Expected exception: FileNotFoundException
+            Assert.Throws<FileNotFoundException>(() => (DelimitedFilePath) path);
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void DelimitedFilePathTest1()
         {
@@ -41,7 +33,7 @@ namespace AD.IO.Tests
             // Expected exception: FileNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(FileNotFoundException))]
         public void DelimitedFilePathTest2()
         {
@@ -56,7 +48,7 @@ namespace AD.IO.Tests
             // Expected exception: FileNotFoundException
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest3()
         {
             // Arrange
@@ -71,88 +63,88 @@ namespace AD.IO.Tests
             Assert.IsTrue(filePath.ToString() == test);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest4()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "testdirectory", ".csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
             Assert.IsTrue(filePath.ToString() == path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest5()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
             Assert.AreEqual(filePath.Extension, ".csv");
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest6()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
             Assert.AreEqual(filePath.Name, "test");
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void DelimitedFilePathTest7()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.txt");
 
-            // Act 
+            // Act
             // ReSharper disable once UnusedVariable
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
         }
 
-        [TestMethod]
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void DelimitedFilePathTest8()
         {
-            // Arrange 
+            // Arrange
             string path = Path.GetTempFileName();
 
-            // Act 
+            // Act
             // ReSharper disable once UnusedVariable
             DelimitedFilePath filePath = new DelimitedFilePath(path);
         }
-        
-        [TestMethod]
+
+        [Theory]
         [ExpectedException(typeof(ArgumentException))]
         public void DelimitedFilePathTest9()
         {
-            // Arrange 
+            // Arrange
             string path = Path.GetTempFileName().Replace(".temp", ".txt");
 
-            // Act 
+            // Act
             // ReSharper disable once UnusedVariable
             DelimitedFilePath filePath = new DelimitedFilePath(path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest10()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
             IEnumerable<char> charPath = filePath.Select(x => x);
 
@@ -160,13 +152,13 @@ namespace AD.IO.Tests
             Assert.IsTrue(string.Join(null, charPath).Equals(filePath.ToString()));
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest11()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
             IEnumerable enumerable = filePath.AsEnumerable();
             bool test = enumerable.GetEnumerator().MoveNext();
@@ -175,64 +167,64 @@ namespace AD.IO.Tests
             Assert.IsTrue(test);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest12()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
             Assert.AreEqual(filePath.ToString(), path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest13()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
 
-            // Act 
+            // Act
             DelimitedFilePath filePath = path;
 
             // Assert
             Assert.AreEqual(filePath.ToString(), path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest14()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
             DelimitedFilePath delimitedPath = path;
 
-            // Act 
+            // Act
             FilePath filePath = (FilePath) delimitedPath;
 
             // Assert
             Assert.AreEqual(filePath.ToString(), path);
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest15()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
             DelimitedFilePath delimitedPath = path;
 
-            // Act 
+            // Act
             UrlPath urlPath = (UrlPath)delimitedPath;
 
             // Assert
             Assert.IsTrue(urlPath != "");
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest17()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
             if (File.Exists(path))
             {
@@ -245,22 +237,22 @@ namespace AD.IO.Tests
             }
             DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
 
-            // Act 
+            // Act
             IEnumerable<string> headers = delimitedPath.Headers;
 
             // Assert
             Assert.IsTrue(headers.SequenceEqual(new string[] { "a", "b", "c" }));
         }
 
-        [TestMethod]
+        [Theory]
         public void DelimitedFilePathTest18()
         {
-            // Arrange 
+            // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.csv");
             DelimitedFilePath delimitedPath = new DelimitedFilePath(path, ',');
             IPath iPath = delimitedPath;
 
-            // Act 
+            // Act
             DelimitedFilePath test = (DelimitedFilePath)iPath.Create(path);
 
             // Assert
