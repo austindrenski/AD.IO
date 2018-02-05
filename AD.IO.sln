@@ -1,9 +1,8 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.IO.Tests", "AD.IO.Tests\AD.IO.Tests.csproj", "{F67BE91C-B33D-4492-9705-AD3F8395A696}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.IO.Tests", "test\AD.IO.Tests\AD.IO.Tests.csproj", "{F67BE91C-B33D-4492-9705-AD3F8395A696}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D5F037E-1B9B-4DC4-A4F4-AC1D7BC4D63B}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.IO", "AD.IO\AD.IO.csproj", "{B434C890-8862-4D71-8F1E-A13A7E375298}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AD.IO", "src\AD.IO\AD.IO.csproj", "{B434C890-8862-4D71-8F1E-A13A7E375298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

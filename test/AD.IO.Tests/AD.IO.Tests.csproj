@@ -57,21 +57,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="src\DelimitedFilePathTests.cs" />
-    <Compile Include="src\DirectoryPathTests.cs" />
-    <Compile Include="src\DocxFilePathTests.cs" />
-    <Compile Include="src\FilePathTests.cs" />
-    <Compile Include="src\GetZipFileTests.cs" />
-    <Compile Include="src\ReadAsXmlTests.cs" />
-    <Compile Include="src\ReadDataTests.cs" />
-    <Compile Include="src\SplitDelimitedTests.cs" />
-    <Compile Include="src\ToDelimitedTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\UrlPathTests.cs" />
-    <Compile Include="src\ZipFilePathTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="DelimitedFilePathTests.cs" />
+    <Compile Include="DirectoryPathTests.cs" />
+    <Compile Include="DocxFilePathTests.cs" />
+    <Compile Include="FilePathTests.cs" />
+    <Compile Include="GetZipFileTests.cs" />
+    <Compile Include="ReadAsXmlTests.cs" />
+    <Compile Include="ReadDataTests.cs" />
+    <Compile Include="SplitDelimitedTests.cs" />
+    <Compile Include="ToCapitalizedExtensionsTests.cs" />
+    <Compile Include="ToDelimitedTests.cs" />
+    <Compile Include="UrlPathTests.cs" />
+    <Compile Include="ZipFilePathTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AD.IO\AD.IO.csproj">
