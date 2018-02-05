@@ -141,9 +141,8 @@ namespace AD.IO
         /// <summary>
         /// Returns the delimited file path.
         /// </summary>
+        [NotNull]
         // ReSharper disable once InheritdocConsiderUsage
-        [NotNull]
-        [NotNull]
         public override string ToString()
         {
             return _path;
