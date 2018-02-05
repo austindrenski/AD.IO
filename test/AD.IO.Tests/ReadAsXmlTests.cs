@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class ReadAsXmlTests
     {
         [Theory]
-        [ExpectedException(typeof(ArgumentException))]
         public void ReadAsXmlTest0()
         {
             // Arrange
@@ -22,8 +21,7 @@ namespace AD.IO.Tests
             DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
 
             // Act
-            // ReSharper disable once UnusedVariable
-            IEnumerable<XElement> element = delimitedPath.ReadAsXml();
+            Assert.Throws<ArgumentException>(() => delimitedPath.ReadAsXml());
         }
 
         [Theory]
@@ -37,7 +35,7 @@ namespace AD.IO.Tests
             XElement element = docx.ReadAsXml();
 
             // Assert
-            Assert.IsTrue(element != null);
+            Assert.True(element != null);
         }
 
         [Theory]
@@ -54,7 +52,7 @@ namespace AD.IO.Tests
             IEnumerable<XElement> elements = files.ReadAsXml();
 
             // Assert
-            Assert.IsTrue(elements.All(x => x != null));
+            Assert.True(elements.All(x => x != null));
         }
 
         [Theory]
@@ -71,7 +69,7 @@ namespace AD.IO.Tests
             IEnumerable<XElement> elements = files.AsParallel().ReadAsXml();
 
             // Assert
-            Assert.IsTrue(elements.All(x => x != null));
+            Assert.True(elements.All(x => x != null));
         }
     }
 }

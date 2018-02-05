@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-#pragma warning disable 219
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class FilePathTests
     {
         [Theory]
@@ -20,36 +18,27 @@ namespace AD.IO.Tests
             FilePath filePath = path;
 
             // Assert
-            Assert.IsTrue(filePath == path);
+            Assert.True(filePath == path);
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void FilePathTest1()
         {
             // Arrange
             string path = Path.GetTempPath();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            FilePath filePath = path;
-
-            // Assert
-            // Expected exception: FileNotFoundException
+            Assert.Throws<FileNotFoundException>(() => (FilePath) path);
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void FilePathTest2()
         {
             // Arrange
             const string path = "";
 
             // Act
-            FilePath filePath = path;
-
-            // Assert
-            // Expected exception: FileNotFoundException
+            Assert.Throws<FileNotFoundException>(() => (FilePath) path);
         }
 
         [Theory]
@@ -62,22 +51,17 @@ namespace AD.IO.Tests
             FilePath filePath = new FilePath(path);
 
             // Assert
-            Assert.IsTrue(filePath == path);
+            Assert.True(filePath == path);
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void FilePathTest4()
         {
             // Arrange
             string path = Path.GetTempPath();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            FilePath filePath = new FilePath(path);
-
-            // Assert
-            // Expected exception: FileNotFoundException
+            Assert.Throws<FileNotFoundException>(() => new FilePath(path));
         }
 
         [Theory]
@@ -90,7 +74,7 @@ namespace AD.IO.Tests
             FilePath filePath = new FilePath(path);
 
             // Assert
-            Assert.IsTrue(filePath.ToString() == path);
+            Assert.True(filePath.ToString() == path);
         }
 
         [Theory]
@@ -103,7 +87,7 @@ namespace AD.IO.Tests
             FilePath filePath = FilePath.Create(path);
 
             // Assert
-            Assert.IsTrue(filePath.ToString() == path);
+            Assert.True(filePath.ToString() == path);
         }
 
         [Theory]
@@ -117,7 +101,7 @@ namespace AD.IO.Tests
             string extension = filePath.Extension;
 
             // Assert
-            Assert.IsTrue(extension == ".tmp");
+            Assert.True(extension == ".tmp");
         }
 
         [Theory]
@@ -131,7 +115,7 @@ namespace AD.IO.Tests
             string name = filePath.Name;
 
             // Assert
-            Assert.IsTrue(name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+            Assert.True(name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
         [Theory]
@@ -146,7 +130,7 @@ namespace AD.IO.Tests
             IPath test = path.Create(name);
 
             // Assert
-            Assert.IsTrue(test.ToString().Equals(name, System.StringComparison.OrdinalIgnoreCase));
+            Assert.True(test.ToString().Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
         [Theory]
@@ -159,7 +143,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = filePath.Select(x => x);
 
             // Assert
-            Assert.IsTrue(string.Join(null, charPath).Equals(filePath.ToString()));
+            Assert.True(string.Join(null, charPath).Equals(filePath.ToString()));
         }
 
         [Theory]
@@ -173,7 +157,7 @@ namespace AD.IO.Tests
             bool test = enumerable.GetEnumerator().MoveNext();
 
             // Assert
-            Assert.IsTrue(test);
+            Assert.True(test);
         }
 
         [Theory]
@@ -189,7 +173,7 @@ namespace AD.IO.Tests
             DocxFilePath result = filePath;
 
             // Assert
-            Assert.IsTrue(result.Name == filePath.Name);
+            Assert.True(result.Name == filePath.Name);
         }
 
         [Theory]
@@ -205,7 +189,7 @@ namespace AD.IO.Tests
             ZipFilePath result = (ZipFilePath) filePath;
 
             // Assert
-            Assert.IsTrue(result.Name == filePath.Name);
+            Assert.True(result.Name == filePath.Name);
         }
 
         [Theory]
@@ -215,10 +199,10 @@ namespace AD.IO.Tests
             FilePath filePath = Path.GetTempFileName();
 
             // Act
-            UrlPath result = (UrlPath)filePath;
+            UrlPath result = (UrlPath) filePath;
 
             // Assert
-            Assert.IsTrue(result != "");
+            Assert.True(result != "");
         }
     }
 }

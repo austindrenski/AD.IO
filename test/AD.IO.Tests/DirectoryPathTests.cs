@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-#pragma warning disable 219
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class DirectoryPathTests
     {
         [Theory]
@@ -21,36 +19,27 @@ namespace AD.IO.Tests
             string result = directoryPath;
 
             // Assert
-            Assert.IsTrue(result == path);
+            Assert.True(result == path);
         }
 
         [Theory]
-        [ExpectedException(typeof(DirectoryNotFoundException))]
         public void DirectoryPathTest1()
         {
             // Arrange
             string path = Path.GetTempFileName();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DirectoryPath directoryPath = path;
-
-            // Assert
-            // Expected exception: DirectoryNotFoundException
+            Assert.Throws<DirectoryNotFoundException>(() => (DirectoryPath) path);
         }
 
         [Theory]
-        [ExpectedException(typeof(DirectoryNotFoundException))]
         public void DirectoryPathTest2()
         {
             // Arrange
             const string path = "";
 
             // Act
-            DirectoryPath directoryPath = path;
-
-            // Assert
-            // Expected exception: DirectoryNotFoundException
+            Assert.Throws<DirectoryNotFoundException>(() => (DirectoryPath) path);
         }
 
         [Theory]
@@ -63,22 +52,17 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = new DirectoryPath(path);
 
             // Assert
-            Assert.IsTrue(directoryPath == path);
+            Assert.True(directoryPath == path);
         }
 
         [Theory]
-        [ExpectedException(typeof(DirectoryNotFoundException))]
         public void DirectoryPathTest4()
         {
             // Arrange
             string path = Path.GetTempFileName();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DirectoryPath directoryPath = new DirectoryPath(path);
-
-            // Assert
-            // Expected exception: DirectoryNotFoundException
+            Assert.Throws<DirectoryNotFoundException>(() => new DirectoryPath(path));
         }
 
         [Theory]
@@ -91,7 +75,7 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = new DirectoryPath(path);
 
             // Assert
-            Assert.IsTrue(directoryPath.ToString() == path);
+            Assert.True(directoryPath.ToString() == path);
         }
 
         [Theory]
@@ -109,7 +93,7 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = DirectoryPath.Create(path);
 
             // Assert
-            Assert.IsTrue(directoryPath.ToString() == path);
+            Assert.True(directoryPath.ToString() == path);
         }
 
         [Theory]
@@ -123,7 +107,7 @@ namespace AD.IO.Tests
             string extension = directoryPath.Extension;
 
             // Assert
-            Assert.IsTrue(extension == null);
+            Assert.True(extension == null);
         }
 
         [Theory]
@@ -136,7 +120,7 @@ namespace AD.IO.Tests
             string name = directoryPath.Name;
 
             // Assert
-            Assert.IsTrue(name != null);
+            Assert.True(name != null);
         }
 
         [Theory]
@@ -150,7 +134,7 @@ namespace AD.IO.Tests
             IPath test = path.Create(Path.GetTempPath());
 
             // Assert
-            Assert.AreEqual(test.ToString(), directoryPath.ToString());
+            Assert.Equal(test.ToString(), directoryPath.ToString());
         }
 
         [Theory]
@@ -163,7 +147,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = directoryPath.Select(x => x);
 
             // Assert
-            Assert.IsTrue(string.Join(null, charPath).Equals(directoryPath.ToString()));
+            Assert.True(string.Join(null, charPath).Equals(directoryPath.ToString()));
         }
 
         [Theory]
@@ -177,7 +161,7 @@ namespace AD.IO.Tests
             bool test = enumerable.GetEnumerator().MoveNext();
 
             // Assert
-            Assert.IsTrue(test);
+            Assert.True(test);
         }
     }
 }

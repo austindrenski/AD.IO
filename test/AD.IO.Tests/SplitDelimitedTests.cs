@@ -2,10 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class SplitDelimitedExtensionsTests
     {
         [Theory]
@@ -18,7 +18,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = delimited.SplitDelimitedLine(',');
 
             // Assert
-            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
+            Assert.True(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = delimited.SplitDelimitedLine(',');
 
             // Assert
-            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
+            Assert.True(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
         }
 
         [Theory]
@@ -44,7 +44,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = delimited.SplitDelimitedLine(',');
 
             // Assert
-            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }.SequenceEqual(result));
+            Assert.True(new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }.SequenceEqual(result));
         }
 
         [Theory]
@@ -57,7 +57,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = delimited.SplitDelimitedLine('|');
 
             // Assert
-            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f|g", "a", "b", "c", "d", "e,", "f,g" }.SequenceEqual(result));
+            Assert.True(new string[] { "a", "b", "c", "d", "e", "f|g", "a", "b", "c", "d", "e,", "f,g" }.SequenceEqual(result));
         }
 
         [Theory]
@@ -70,7 +70,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = delimited.SplitDelimitedLine('|');
 
             // Assert
-            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
+            Assert.True(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
         }
 
         [Theory]
@@ -83,7 +83,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = delimited.SplitDelimitedLine('|');
 
             // Assert
-            Assert.IsTrue(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
+            Assert.True(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
         }
 
         [Theory]
@@ -102,8 +102,8 @@ namespace AD.IO.Tests
             string[][] result = strings as string[][] ?? strings.Select(x => x?.ToArray()).ToArray();
 
             // Assert
-            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
-            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+            Assert.True(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
         [Theory]
@@ -121,8 +121,8 @@ namespace AD.IO.Tests
             string[][] result = delimited.SplitDelimitedLine(',').Select(x => x?.ToArray()).ToArray();
 
             // Assert
-            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
-            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+            Assert.True(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
         [Theory]
@@ -141,8 +141,8 @@ namespace AD.IO.Tests
             string[][] result = strings.Select(x => x?.ToArray()).ToArray();
 
             // Assert
-            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
-            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+            Assert.True(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
         [Theory]
@@ -160,8 +160,8 @@ namespace AD.IO.Tests
             string[][] result = delimited.AsParallel().SplitDelimitedLine(',').Select(x => x.ToArray()).ToArray();
 
             // Assert
-            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
-            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+            Assert.True(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
         [Theory]
@@ -179,8 +179,8 @@ namespace AD.IO.Tests
             string[][] result = delimited.SplitDelimitedLine('|').Select(x => x?.ToArray()).ToArray();
 
             // Assert
-            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
-            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+            Assert.True(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
         [Theory]
@@ -198,8 +198,8 @@ namespace AD.IO.Tests
             string[][] result = delimited.SplitDelimitedLine('|').Select(x => x?.ToArray()).ToArray();
 
             // Assert
-            Assert.IsTrue(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
-            Assert.IsTrue(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
+            Assert.True(expected[0].SequenceEqual(result[0]) || expected[0].SequenceEqual(result[1]));
+            Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
         [Theory]
@@ -220,7 +220,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = elements.Elements().Select(x => x?.Value).OrderBy(x => x);
 
             // Assert
-            Assert.IsTrue(result.SequenceEqual(expected));
+            Assert.True(result.SequenceEqual(expected));
         }
 
         [Theory]
@@ -241,7 +241,7 @@ namespace AD.IO.Tests
             IEnumerable<string> result = elements.Elements().Select(x => x?.Value).OrderBy(x => x);
 
             // Assert
-            Assert.IsTrue(result.SequenceEqual(expected));
+            Assert.True(result.SequenceEqual(expected));
         }
     }
 }

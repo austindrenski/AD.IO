@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class UrlPathTests
     {
         [Theory]
@@ -21,7 +21,7 @@ namespace AD.IO.Tests
             UrlPath url = (UrlPath) filePath;
 
             // Assert
-            Assert.IsTrue(url.UriPath.AbsoluteUri == uri.AbsoluteUri);
+            Assert.True(url.UriPath.AbsoluteUri == uri.AbsoluteUri);
         }
 
         [Theory]
@@ -32,10 +32,10 @@ namespace AD.IO.Tests
             FilePath filePath = path;
 
             // Act
-            UrlPath url = (UrlPath)filePath;
+            UrlPath url = (UrlPath) filePath;
 
             // Assert
-            Assert.IsTrue(url.Name == null);
+            Assert.True(url.Name == null);
         }
 
         [Theory]
@@ -46,10 +46,10 @@ namespace AD.IO.Tests
             FilePath filePath = path;
 
             // Act
-            UrlPath url = (UrlPath)filePath;
+            UrlPath url = (UrlPath) filePath;
 
             // Assert
-            Assert.IsTrue(url.Extension == null);
+            Assert.True(url.Extension == null);
         }
 
         [Theory]
@@ -63,19 +63,17 @@ namespace AD.IO.Tests
             UrlPath urlPath = UrlPath.Create(uri.AbsoluteUri);
 
             // Assert
-            Assert.AreEqual(uri.AbsoluteUri, urlPath.ToString());
+            Assert.Equal(uri.AbsoluteUri, urlPath.ToString());
         }
 
         [Theory]
-        [ExpectedException(typeof(UriFormatException))]
         public void UrlPathTest4()
         {
             // Arrange
             const string path = "./&?><";
 
             // Act
-            // ReSharper disable once UnusedVariable
-            UrlPath urlPath = UrlPath.Create(path);
+            Assert.Throws<UriFormatException>(() => UrlPath.Create(path));
         }
 
         [Theory]
@@ -90,7 +88,7 @@ namespace AD.IO.Tests
             UrlPath urlPath = (UrlPath) url.Create(uri.AbsoluteUri);
 
             // Assert
-            Assert.AreEqual(uri.AbsoluteUri, urlPath.ToString());
+            Assert.Equal(uri.AbsoluteUri, urlPath.ToString());
         }
 
         [Theory]
@@ -103,7 +101,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = urlPath.Select(x => x);
 
             // Assert
-            Assert.IsTrue(string.Join(null, charPath).Equals(urlPath.ToString()));
+            Assert.True(string.Join(null, charPath).Equals(urlPath.ToString()));
         }
 
         [Theory]
@@ -117,7 +115,7 @@ namespace AD.IO.Tests
             bool test = enumerable.GetEnumerator().MoveNext();
 
             // Assert
-            Assert.IsTrue(test);
+            Assert.True(test);
         }
 
         [Theory]
@@ -130,7 +128,7 @@ namespace AD.IO.Tests
             Uri test = urlPath;
 
             // Assert
-            Assert.IsTrue(test != null);
+            Assert.True(test != null);
         }
 
         [Theory]
@@ -140,10 +138,10 @@ namespace AD.IO.Tests
             UrlPath urlPath = new Uri(Path.GetTempFileName()).AbsoluteUri;
 
             // Act
-            FilePath test = (FilePath)urlPath;
+            FilePath test = (FilePath) urlPath;
 
             // Assert
-            Assert.AreEqual(urlPath.UriPath.AbsolutePath, test.ToString());
+            Assert.Equal(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
         [Theory]
@@ -156,34 +154,30 @@ namespace AD.IO.Tests
             UrlPath urlPath = new Uri(zip).AbsoluteUri;
 
             // Act
-            ZipFilePath test = (ZipFilePath)urlPath;
+            ZipFilePath test = (ZipFilePath) urlPath;
 
             // Assert
-            Assert.AreEqual(urlPath.UriPath.AbsolutePath, test.ToString());
+            Assert.Equal(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void UrlPathTest11()
         {
             // Arrange
             UrlPath urlPath = "https://www.google.com";
 
             // Act
-            // ReSharper disable once UnusedVariable
-            FilePath test = (FilePath)urlPath;
+            Assert.Throws<FileNotFoundException>(() => (FilePath) urlPath);
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void UrlPathTest12()
         {
             // Arrange
             UrlPath urlPath = "https://www.google.com";
 
             // Act
-            // ReSharper disable once UnusedVariable
-            ZipFilePath test = (ZipFilePath)urlPath;
+            Assert.Throws<FileNotFoundException>(() => (ZipFilePath) urlPath);
         }
     }
 }

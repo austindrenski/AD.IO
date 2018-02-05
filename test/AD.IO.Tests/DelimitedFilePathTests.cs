@@ -20,32 +20,23 @@ namespace AD.IO.Tests
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void DelimitedFilePathTest1()
         {
             // Arrange
             const string path = "";
 
             // Act
-            DelimitedFilePath filePath = path;
-
-            // Assert
-            // Expected exception: FileNotFoundException
+            Assert.Throws<FileNotFoundException>(() => (DelimitedFilePath) path);
         }
 
         [Theory]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void DelimitedFilePathTest2()
         {
             // Arrange
             string path = Path.GetTempPath();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = new DelimitedFilePath(path);
-
-            // Assert
-            // Expected exception: FileNotFoundException
+            Assert.Throws<FileNotFoundException>(() => (DelimitedFilePath) path);
         }
 
         [Theory]
@@ -60,7 +51,7 @@ namespace AD.IO.Tests
             DelimitedFilePath filePath = new DelimitedFilePath(test);
 
             // Assert
-            Assert.IsTrue(filePath.ToString() == test);
+            Assert.True(filePath.ToString() == test);
         }
 
         [Theory]
@@ -73,7 +64,7 @@ namespace AD.IO.Tests
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
-            Assert.IsTrue(filePath.ToString() == path);
+            Assert.True(filePath.ToString() == path);
         }
 
         [Theory]
@@ -86,7 +77,7 @@ namespace AD.IO.Tests
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
-            Assert.AreEqual(filePath.Extension, ".csv");
+            Assert.Equal(filePath.Extension, ".csv");
         }
 
         [Theory]
@@ -99,43 +90,37 @@ namespace AD.IO.Tests
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
-            Assert.AreEqual(filePath.Name, "test");
+            Assert.Equal(filePath.Name, "test");
         }
 
         [Theory]
-        [ExpectedException(typeof(ArgumentException))]
         public void DelimitedFilePathTest7()
         {
             // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.txt");
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
+            Assert.Throws<ArgumentException>(() => DelimitedFilePath.Create(path, '|'));
         }
 
         [Theory]
-        [ExpectedException(typeof(ArgumentException))]
         public void DelimitedFilePathTest8()
         {
             // Arrange
             string path = Path.GetTempFileName();
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = new DelimitedFilePath(path);
+            Assert.Throws<ArgumentException>(() => new DelimitedFilePath(path));
         }
 
         [Theory]
-        [ExpectedException(typeof(ArgumentException))]
         public void DelimitedFilePathTest9()
         {
             // Arrange
             string path = Path.GetTempFileName().Replace(".temp", ".txt");
 
             // Act
-            // ReSharper disable once UnusedVariable
-            DelimitedFilePath filePath = new DelimitedFilePath(path);
+            Assert.Throws<ArgumentException>(() => new DelimitedFilePath(path));
         }
 
         [Theory]
@@ -149,7 +134,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = filePath.Select(x => x);
 
             // Assert
-            Assert.IsTrue(string.Join(null, charPath).Equals(filePath.ToString()));
+            Assert.True(string.Join(null, charPath).Equals(filePath.ToString()));
         }
 
         [Theory]
@@ -164,7 +149,7 @@ namespace AD.IO.Tests
             bool test = enumerable.GetEnumerator().MoveNext();
 
             // Assert
-            Assert.IsTrue(test);
+            Assert.True(test);
         }
 
         [Theory]
@@ -177,7 +162,7 @@ namespace AD.IO.Tests
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
 
             // Assert
-            Assert.AreEqual(filePath.ToString(), path);
+            Assert.Equal(filePath.ToString(), path);
         }
 
         [Theory]
@@ -190,7 +175,7 @@ namespace AD.IO.Tests
             DelimitedFilePath filePath = path;
 
             // Assert
-            Assert.AreEqual(filePath.ToString(), path);
+            Assert.Equal(filePath.ToString(), path);
         }
 
         [Theory]
@@ -204,7 +189,7 @@ namespace AD.IO.Tests
             FilePath filePath = (FilePath) delimitedPath;
 
             // Assert
-            Assert.AreEqual(filePath.ToString(), path);
+            Assert.Equal(filePath.ToString(), path);
         }
 
         [Theory]
@@ -215,10 +200,10 @@ namespace AD.IO.Tests
             DelimitedFilePath delimitedPath = path;
 
             // Act
-            UrlPath urlPath = (UrlPath)delimitedPath;
+            UrlPath urlPath = (UrlPath) delimitedPath;
 
             // Assert
-            Assert.IsTrue(urlPath != "");
+            Assert.True(urlPath != "");
         }
 
         [Theory]
@@ -241,7 +226,7 @@ namespace AD.IO.Tests
             IEnumerable<string> headers = delimitedPath.Headers;
 
             // Assert
-            Assert.IsTrue(headers.SequenceEqual(new string[] { "a", "b", "c" }));
+            Assert.True(headers.SequenceEqual(new string[] { "a", "b", "c" }));
         }
 
         [Theory]
@@ -253,10 +238,10 @@ namespace AD.IO.Tests
             IPath iPath = delimitedPath;
 
             // Act
-            DelimitedFilePath test = (DelimitedFilePath)iPath.Create(path);
+            DelimitedFilePath test = (DelimitedFilePath) iPath.Create(path);
 
             // Assert
-            Assert.AreEqual(test.ToString(), delimitedPath.ToString());
+            Assert.Equal(test.ToString(), delimitedPath.ToString());
         }
     }
 }

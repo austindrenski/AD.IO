@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using JetBrains.Annotations;
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class ToCapitalizedExtensionsTests
     {
         [Theory]
@@ -17,7 +17,7 @@ namespace AD.IO.Tests
             string result = test.ToCapitalizeFirst();
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.Equal(expected, result);
         }
     }
 }

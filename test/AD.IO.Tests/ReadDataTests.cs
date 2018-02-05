@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xunit;
 
 namespace AD.IO.Tests
 {
-    [TestClass]
     public class ReadDataTests
     {
         [Theory]
@@ -26,7 +26,7 @@ namespace AD.IO.Tests
             IDictionary<string, string[]> data = dataFile.ReadData();
 
             // Assert
-            Assert.IsTrue(data["ElasticityOfSubstitution"].All(x => double.Parse(x) > 0.0));
+            Assert.True(data["ElasticityOfSubstitution"].All(x => double.Parse(x) > 0.0));
         }
     }
 }
