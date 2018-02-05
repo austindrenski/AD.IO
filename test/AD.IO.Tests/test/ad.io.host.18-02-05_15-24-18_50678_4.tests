@@ -1,0 +1,226 @@
+TpTrace Information: 0 : 15456, 1, 2018/02/05, 15:24:18.869, 1698153683568, testhost.dll, DefaultEngineInvoker: Monitoring parent process with id: '3856'
+TpTrace Information: 0 : 15456, 1, 2018/02/05, 15:24:18.884, 1698153709587, testhost.dll, DefaultEngineInvoker: Initialize communication on endpoint address: '127.0.0.1:51105'
+TpTrace Information: 0 : 15456, 1, 2018/02/05, 15:24:18.895, 1698153732719, testhost.dll, Trying to connect to server on socket : 127.0.0.1:51105 
+TpTrace Information: 0 : 15456, 1, 2018/02/05, 15:24:18.925, 1698153798376, testhost.dll, DefaultEngineInvoker: Start Request Processing.
+TpTrace Information: 0 : 15456, 4, 2018/02/05, 15:24:18.926, 1698153800142, testhost.dll, Connected to the server successfully 
+TpTrace Information: 0 : 15456, 4, 2018/02/05, 15:24:18.953, 1698153859095, testhost.dll, Using the buffer size of 16384 bytes
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:19.239, 1698154476137, testhost.dll, TestRequestHandler.ProcessRequests: received message: (ProtocolVersion) -> 2
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:19.310, 1698154629303, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestExecution.Initialize) -> [
+  "C:\\source\\repos\\ad.io\\test\\AD.IO.Tests\\bin\\Debug\\netcoreapp2.0\\xunit.runner.visualstudio.dotnetcore.testadapter.dll"
+]
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:19.311, 1698154630102, testhost.dll, Discovery Session Initialize.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.338, 1698154689619, testhost.dll, TestExecutorService: Loading the extensions
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:19.343, 1698154698792, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestExecution.StartWithSources) -> {
+  "AdapterSourceMap": {
+    "_none_": [
+      "C:\\source\\repos\\ad.io\\test\\AD.IO.Tests\\bin\\Debug\\netcoreapp2.0\\AD.IO.Tests.dll"
+    ]
+  },
+  "RunSettings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><RunSettings><RunConfiguration><ResultsDirectory>C:\\source\\repos\\ad.io\\test\\AD.IO.Tests\\TestResults</ResultsDirectory><TargetPlatform>X86</TargetPlatform><TargetFrameworkVersion>.NETCoreApp,Version=v2.0</TargetFrameworkVersion><TestAdaptersPaths>C:\\Program Files\\dotnet\\sdk\\2.0.3\\Extensions</TestAdaptersPaths></RunConfiguration></RunSettings>",
+  "TestExecutionContext": {
+    "FrequencyOfRunStatsChangeEvent": 10,
+    "RunStatsChangeEventTimeout": "00:00:01.5000000",
+    "InIsolation": false,
+    "KeepAlive": false,
+    "AreTestCaseLevelEventsRequired": false,
+    "IsDebug": false,
+    "TestCaseFilter": null
+  }
+}
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:19.343, 1698154700525, testhost.dll, Execution started.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.367, 1698154751043, testhost.dll, TestPluginCache: Discovering the extensions using extension path.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.376, 1698154770319, testhost.dll, AssemblyResolver: xunit.runner.visualstudio.dotnetcore.testadapter: Resolving assembly.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.379, 1698154776768, testhost.dll, AssemblyResolver: xunit.runner.visualstudio.dotnetcore.testadapter: Resolved assembly. 
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.381, 1698154782351, testhost.dll, AssemblyResolver: xunit.runner.utility.netstandard15: Resolving assembly.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.383, 1698154785741, testhost.dll, AssemblyResolver: xunit.runner.utility.netstandard15: Resolved assembly. 
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.394, 1698154809410, testhost.dll, TestPluginCache: Discovered the extensions using extension path ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.396, 1698154814011, testhost.dll, TestPluginCache: Discoverers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.396, 1698154814702, testhost.dll, TestPluginCache: Executors are 'executor://xunit/VsTestRunner2'.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.397, 1698154815234, testhost.dll, TestPluginCache: Setting providers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.397, 1698154815850, testhost.dll, TestPluginCache: Loggers are ''.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.410, 1698154843719, testhost.dll, TestPluginManager.CreateTestExtension: Attempting to load test extension: Xunit.Runner.VisualStudio.TestAdapter.VsTestRunner
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.410, 1698154844521, testhost.dll, TestExecutorExtensionManager: Loading executor Xunit.Runner.VisualStudio.TestAdapter.VsTestRunner
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.410, 1698154844998, testhost.dll, TestExecutorService: Loaded the executors
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.413, 1698154851347, testhost.dll, TestPluginCache: Discovering the extensions using extension path.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.414, 1698154852386, testhost.dll, TestPluginCache: Discovered the extensions using extension path ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.414, 1698154852866, testhost.dll, TestPluginCache: Discoverers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.414, 1698154853281, testhost.dll, TestPluginCache: Executors are 'executor://xunit/VsTestRunner2'.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.414, 1698154853781, testhost.dll, TestPluginCache: Setting providers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.415, 1698154854209, testhost.dll, TestPluginCache: Loggers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.416, 1698154858154, testhost.dll, TestExecutorService: Loaded the settings providers
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.417, 1698154858667, testhost.dll, TestExecutorService: Loaded the extensions
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:19.465, 1698154963371, testhost.dll, TestDiscoveryManager: Discovering tests from sources C:\source\repos\ad.io\test\AD.IO.Tests\bin\Debug\netcoreapp2.0\AD.IO.Tests.dll
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.469, 1698154972351, testhost.dll, TestPluginCache: Discovering the extensions using extension path.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.472, 1698154978876, testhost.dll, TestPluginCache: Discovered the extensions using extension path ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.473, 1698154979467, testhost.dll, TestPluginCache: Discoverers are 'Xunit.Runner.VisualStudio.TestAdapter.VsTestRunner, xunit.runner.visualstudio.dotnetcore.testadapter, Version=2.2.0.1274, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c'.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.473, 1698154979981, testhost.dll, TestPluginCache: Executors are 'executor://xunit/VsTestRunner2'.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.473, 1698154980448, testhost.dll, TestPluginCache: Setting providers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.473, 1698154980926, testhost.dll, TestPluginCache: Loggers are ''.
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:19.481, 1698154998034, testhost.dll, BaseRunTests.RunTestInternalWithExecutors: Running tests for executor://xunit/VsTestRunner2
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.013, 1698156144089, testhost.dll, AssemblyResolver: xunit.runner.reporters.netstandard15: Resolving assembly.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.014, 1698156146280, testhost.dll, AssemblyResolver: xunit.runner.reporters.netstandard15: Resolved assembly. 
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.015, 1698156149300, testhost.dll, AssemblyResolver: xunit.runner.utility.netstandard15: Resolving assembly.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.016, 1698156149885, testhost.dll, AssemblyResolver: xunit.runner.utility.netstandard15: Resolved from cache.
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.112, 1698156357651, testhost.dll, [xUnit.net 00:00:00.6256304]   Discovering: AD.IO.Tests
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.303, 1698156769472, testhost.dll, [xUnit.net 00:00:00.8185149]   Discovered:  AD.IO.Tests
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:20.419, 1698157019031, testhost.dll, [xUnit.net 00:00:00.9342895]   Starting:    AD.IO.Tests
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:20.713, 1698157654499, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:20.928, 1698158118461, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.930, 1698158121514, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.941, 1698158145913, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.SplitDelimitedExtensionsTests.SplitDelimitedPipeLinesTest1  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.942, 1698158147491, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.943, 1698158149290, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.943, 1698158150786, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest13  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.948, 1698158160322, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.UrlPathTests.UrlPathTest10  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:20.949, 1698158162777, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:20.955, 1698158174984, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.956, 1698158176886, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.957, 1698158179181, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.957, 1698158180226, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest0  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.958, 1698158181318, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DelimitedFilePathTests.DelimitedFilePathTest6  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:20.959, 1698158184427, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:20.983, 1698158235060, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.984, 1698158237417, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.984, 1698158238267, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DelimitedFilePathTests.DelimitedFilePathTest15  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.985, 1698158239850, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.986, 1698158241805, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.UrlPathTests.UrlPathTest7  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.987, 1698158244201, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest3  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:20.988, 1698158245889, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:20.991, 1698158252282, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.991, 1698158253952, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.992, 1698158255364, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DelimitedFilePathTests.DelimitedFilePathTest3  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.993, 1698158258537, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.994, 1698158260046, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.995, 1698158261622, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.996, 1698158264352, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.UrlPathTests.UrlPathTest0  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:20.997, 1698158266803, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.SplitDelimitedExtensionsTests.SplitDelimitedPipeFileToXDocumentTest0  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:20.999, 1698158270210, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.001, 1698158275393, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.002, 1698158277695, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.003, 1698158278475, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.UrlPathTests.UrlPathTest5  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.003, 1698158279326, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.004, 1698158280396, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DelimitedFilePathTests.DelimitedFilePathTest17  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.004, 1698158282091, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest1  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.006, 1698158285996, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.017, 1698158308927, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.018, 1698158310848, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.018, 1698158311689, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DelimitedFilePathTests.DelimitedFilePathTest14  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.019, 1698158312864, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.020, 1698158316078, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.UrlPathTests.UrlPathTest1  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.021, 1698158318082, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.022, 1698158320646, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.SplitDelimitedExtensionsTests.SplitDelimitedCommaLinesTest2  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.023, 1698158322792, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.027, 1698158331222, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.031, 1698158339922, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.032, 1698158340931, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest8  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.032, 1698158341833, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.033, 1698158343092, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DirectoryPathTests.DirectoryPathTest1  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.033, 1698158344814, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.SplitDelimitedExtensionsTests.SplitDelimitedCommaLinesTest3  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.034, 1698158346434, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest12  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.035, 1698158348068, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.039, 1698158355892, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.040, 1698158359284, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.041, 1698158360161, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DirectoryPathTests.DirectoryPathTest11  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.041, 1698158361147, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.042, 1698158362234, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.SplitDelimitedExtensionsTests.SplitDelimitedPipeLinesTest0  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.042, 1698158363631, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest13  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.043, 1698158365094, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest4  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.044, 1698158366716, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.047, 1698158374226, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.048, 1698158376962, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.049, 1698158377788, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest11  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.049, 1698158378941, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.050, 1698158380056, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DirectoryPathTests.DirectoryPathTest10  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.054, 1698158388111, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.SplitDelimitedExtensionsTests.SplitDelimitedCommaFileToXDocumentTest0  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.056, 1698158393705, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest6  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.057, 1698158395945, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.060, 1698158402452, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.061, 1698158403808, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.061, 1698158404637, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DirectoryPathTests.DirectoryPathTest4  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.062, 1698158405537, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.062, 1698158406728, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.063, 1698158409015, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.064, 1698158410086, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest0  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.064, 1698158411484, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.066, 1698158414704, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest5  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.066, 1698158415988, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest10  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.068, 1698158420126, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.070, 1698158424305, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.071, 1698158425582, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.071, 1698158426761, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest10  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.072, 1698158427840, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.073, 1698158429058, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest0  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.073, 1698158430541, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest14  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.075, 1698158433341, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest9  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.076, 1698158435666, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.078, 1698158440758, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.079, 1698158442010, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.079, 1698158443412, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest6  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.080, 1698158446003, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest4  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.081, 1698158447176, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest14  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.081, 1698158448349, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.084, 1698158453718, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.085, 1698158455063, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.085, 1698158456048, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest12  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.086, 1698158457050, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.086, 1698158458165, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest4  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.087, 1698158459319, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest9  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.087, 1698158460471, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest1  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.088, 1698158461896, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.090, 1698158465806, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.090, 1698158466987, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.090, 1698158467795, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest7  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.091, 1698158468620, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.091, 1698158469720, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ZipFilePathTests.ZipFilePathTest11  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.092, 1698158470945, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest2  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.093, 1698158472351, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest12  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.093, 1698158473537, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.122, 1698158536440, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.123, 1698158537290, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.123, 1698158537774, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest6  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.123, 1698158538370, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.124, 1698158539361, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.124, 1698158540319, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest14  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.125, 1698158541444, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest9  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.125, 1698158543020, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.128, 1698158547683, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.128, 1698158548894, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.128, 1698158549580, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest7  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.129, 1698158550377, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.129, 1698158551327, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.130, 1698158552183, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.130, 1698158552842, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest6  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.130, 1698158553495, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.131, 1698158554337, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.131, 1698158555053, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.DocxFilePathTests.DocxFilePathTest3  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.131, 1698158555804, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.132, 1698158556766, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ReadAsXmlTests.ReadAsXmlTest0  Passed' in inProgress list.
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.132, 1698158558199, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.134, 1698158561841, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.135, 1698158562789, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.135, 1698158563536, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.FilePathTests.FilePathTest3  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.135, 1698158564667, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.136, 1698158565645, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.136, 1698158566540, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.137, 1698158567342, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.137, 1698158568129, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.137, 1698158568774, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ToDelimitedExtensionsTests.ToDelimitedTest8  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.138, 1698158569436, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.138, 1698158570327, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.138, 1698158571177, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.201, 1698158706737, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.202, 1698158707495, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ReadAsXmlTests.ReadAsXmlTest2  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.202, 1698158708103, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.259, 1698158830371, testhost.dll, InProgressTests is null
+TpTrace Information: 0 : 15456, 10, 2018/02/05, 15:24:21.259, 1698158831258, testhost.dll, Sending test run statistics
+TpTrace Verbose: 0 : 15456, 10, 2018/02/05, 15:24:21.261, 1698158835835, testhost.dll, TestRunCache: OnNewTestResult: Notified the onCacheHit callback.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.292, 1698158901388, testhost.dll, InProgressTests is null
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.292, 1698158902269, testhost.dll, TestRunCache: No test found corresponding to testResult 'AD.IO.Tests.ReadAsXmlTests.ReadAsXmlTest1  Passed' in inProgress list.
+TpTrace Warning: 0 : 15456, 10, 2018/02/05, 15:24:21.293, 1698158903395, testhost.dll, InProgressTests is null
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:21.296, 1698158910145, testhost.dll, [xUnit.net 00:00:01.8113158]   Finished:    AD.IO.Tests
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:21.300, 1698158919917, testhost.dll, BaseRunTests.RunTestInternalWithExecutors: Completed running tests for executor://xunit/VsTestRunner2
+TpTrace Information: 0 : 15456, 7, 2018/02/05, 15:24:21.307, 1698158933587, testhost.dll, Sending test run complete
+TpTrace Verbose: 0 : 15456, 7, 2018/02/05, 15:24:21.329, 1698158981870, testhost.dll, BaseRunTests.RunTests: Run is complete.
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:21.372, 1698159074327, testhost.dll, TestRequestHandler.ProcessRequests: received message: (TestSession.Terminate) -> null
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:21.372, 1698159075117, testhost.dll, Session End message received from server. Closing the connection.
+TpTrace Information: 0 : 15456, 6, 2018/02/05, 15:24:21.375, 1698159080897, testhost.dll, Closing the connection !

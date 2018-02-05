@@ -22,43 +22,12 @@
         <DocumentationFile>bin\Release\netstandard2.0\AD.IO.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="Templates\*" CopyToPublishDirectory="Always"/>
-        <None Include="Templates\*" CopyToOutputDirectory="Always"/>
+        <None Include="Templates\*" CopyToPublishDirectory="Always" CopyToOutputDirectory="Always"/>
     </ItemGroup>
-    <!--<ItemGroup>-->
-        <!--<EmbeddedResource Include="Templates\app.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\core.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\document.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\document.xml.rels.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\footnotes.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\footnotes.xml.rels.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\footer1.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\footer2.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\header1.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\header2.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\rels.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\settings.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\styles.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\theme1.xml"/>-->
-        <!--<EmbeddedResource Include="Templates\[Content_Types].xml"/>-->
-    <!--</ItemGroup>-->
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="10.4.0"/>
         <PackageReference Include="System.Collections.Immutable" Version="1.3.0"/>
         <PackageReference Include="System.Linq.Parallel" Version="4.3.0"/>
         <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0"/>
     </ItemGroup>
-    <!--<ItemGroup>-->
-        <!--<Compile Update="Properties\Resources.Designer.cs">-->
-            <!--<DesignTime>True</DesignTime>-->
-            <!--<AutoGen>True</AutoGen>-->
-            <!--<DependentUpon>Resources.resx</DependentUpon>-->
-        <!--</Compile>-->
-    <!--</ItemGroup>-->
-    <!--<ItemGroup>-->
-        <!--<EmbeddedResource Update="Properties\Resources.resx">-->
-            <!--<Generator>PublicResXFileCodeGenerator</Generator>-->
-            <!--<LastGenOutput>Resources.Designer.cs</LastGenOutput>-->
-        <!--</EmbeddedResource>-->
-    <!--</ItemGroup>-->
 </Project>
