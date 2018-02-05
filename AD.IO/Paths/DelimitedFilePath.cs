@@ -143,6 +143,7 @@ namespace AD.IO
         /// </summary>
         // ReSharper disable once InheritdocConsiderUsage
         [NotNull]
+        [NotNull]
         public override string ToString()
         {
             return _path;
