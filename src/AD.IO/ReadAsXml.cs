@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using AD.IO.Paths;
 using JetBrains.Annotations;
 
 namespace AD.IO
@@ -112,7 +113,7 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(entryPath));
             }
-            
+
             XElement element;
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -134,7 +135,7 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XElement}"/>. 
+        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XElement}"/>.
         /// </summary>
         /// <param name="filePaths">An enumerable collection of .docx files. The file names are stored as attribures of the root elements.</param>
         /// <returns>An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of one Microsoft Word document.</returns>
@@ -162,7 +163,7 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XElement}"/>. 
+        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XElement}"/>.
         /// </summary>
         /// <param name="filePaths">An enumerable collection of .docx files. The file names are stored as attribures of the root elements.</param>
         /// <returns>An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of a Microsoft Word document.</returns>

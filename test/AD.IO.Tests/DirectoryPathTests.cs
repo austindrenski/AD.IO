@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class DirectoryPathTests
     {
-        [Theory]
+        [Fact]
         public void DirectoryPathTest0()
         {
             // Arrange
@@ -22,7 +23,7 @@ namespace AD.IO.Tests
             Assert.True(result == path);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest1()
         {
             // Arrange
@@ -32,7 +33,7 @@ namespace AD.IO.Tests
             Assert.Throws<DirectoryNotFoundException>(() => (DirectoryPath) path);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest2()
         {
             // Arrange
@@ -42,7 +43,7 @@ namespace AD.IO.Tests
             Assert.Throws<DirectoryNotFoundException>(() => (DirectoryPath) path);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest3()
         {
             // Arrange
@@ -55,7 +56,7 @@ namespace AD.IO.Tests
             Assert.True(directoryPath == path);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest4()
         {
             // Arrange
@@ -65,7 +66,7 @@ namespace AD.IO.Tests
             Assert.Throws<DirectoryNotFoundException>(() => new DirectoryPath(path));
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest5()
         {
             // Arrange
@@ -78,7 +79,7 @@ namespace AD.IO.Tests
             Assert.True(directoryPath.ToString() == path);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest6()
         {
             // Arrange
@@ -96,7 +97,7 @@ namespace AD.IO.Tests
             Assert.True(directoryPath.ToString() == path);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest7()
         {
             // Arrange
@@ -110,7 +111,7 @@ namespace AD.IO.Tests
             Assert.True(extension == null);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest8()
         {
             // Arrange
@@ -123,7 +124,7 @@ namespace AD.IO.Tests
             Assert.True(name != null);
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest9()
         {
             // Arrange
@@ -137,7 +138,7 @@ namespace AD.IO.Tests
             Assert.Equal(test.ToString(), directoryPath.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest10()
         {
             // Arrange
@@ -150,7 +151,7 @@ namespace AD.IO.Tests
             Assert.True(string.Join(null, charPath).Equals(directoryPath.ToString()));
         }
 
-        [Theory]
+        [Fact]
         public void DirectoryPathTest11()
         {
             // Arrange

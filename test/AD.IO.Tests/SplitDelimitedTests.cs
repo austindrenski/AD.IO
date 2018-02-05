@@ -2,13 +2,14 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class SplitDelimitedExtensionsTests
     {
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLineTest0()
         {
             // Arrange
@@ -21,7 +22,7 @@ namespace AD.IO.Tests
             Assert.True(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLineTest1()
         {
             // Arrange
@@ -34,7 +35,7 @@ namespace AD.IO.Tests
             Assert.True(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLineTest2()
         {
             // Arrange
@@ -47,7 +48,7 @@ namespace AD.IO.Tests
             Assert.True(new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }.SequenceEqual(result));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLineTest3()
         {
             // Arrange
@@ -60,7 +61,7 @@ namespace AD.IO.Tests
             Assert.True(new string[] { "a", "b", "c", "d", "e", "f|g", "a", "b", "c", "d", "e,", "f,g" }.SequenceEqual(result));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedPipeLineTest0()
         {
             // Arrange
@@ -73,7 +74,7 @@ namespace AD.IO.Tests
             Assert.True(new string[] { "a", "b", "c", "d", "e", "f" }.SequenceEqual(result));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedPipeLineTest1()
         {
             // Arrange
@@ -86,7 +87,7 @@ namespace AD.IO.Tests
             Assert.True(new string[] { "a", "b", "c", "d", "e", "f,g" }.SequenceEqual(result));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLinesTest0()
         {
             // Arrange
@@ -106,7 +107,7 @@ namespace AD.IO.Tests
             Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLinesTest1()
         {
             // Arrange
@@ -125,7 +126,7 @@ namespace AD.IO.Tests
             Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLinesTest2()
         {
             // Arrange
@@ -145,7 +146,7 @@ namespace AD.IO.Tests
             Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaLinesTest3()
         {
             // Arrange
@@ -164,7 +165,7 @@ namespace AD.IO.Tests
             Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedPipeLinesTest0()
         {
             // Arrange
@@ -183,7 +184,7 @@ namespace AD.IO.Tests
             Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedPipeLinesTest1()
         {
             // Arrange
@@ -202,7 +203,7 @@ namespace AD.IO.Tests
             Assert.True(expected[1].SequenceEqual(result[0]) || expected[1].SequenceEqual(result[1]));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedCommaFileToXDocumentTest0()
         {
             // Arrange
@@ -223,7 +224,7 @@ namespace AD.IO.Tests
             Assert.True(result.SequenceEqual(expected));
         }
 
-        [Theory]
+        [Fact]
         public void SplitDelimitedPipeFileToXDocumentTest0()
         {
             // Arrange

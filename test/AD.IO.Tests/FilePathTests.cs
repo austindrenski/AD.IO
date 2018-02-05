@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class FilePathTests
     {
-        [Theory]
+        [Fact]
         public void FilePathTest0()
         {
             // Arrange
@@ -21,7 +22,7 @@ namespace AD.IO.Tests
             Assert.True(filePath == path);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest1()
         {
             // Arrange
@@ -31,7 +32,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => (FilePath) path);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest2()
         {
             // Arrange
@@ -41,7 +42,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => (FilePath) path);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest3()
         {
             // Arrange
@@ -54,7 +55,7 @@ namespace AD.IO.Tests
             Assert.True(filePath == path);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest4()
         {
             // Arrange
@@ -64,7 +65,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => new FilePath(path));
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest5()
         {
             // Arrange
@@ -77,7 +78,7 @@ namespace AD.IO.Tests
             Assert.True(filePath.ToString() == path);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest6()
         {
             // Arrange
@@ -90,7 +91,7 @@ namespace AD.IO.Tests
             Assert.True(filePath.ToString() == path);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest7()
         {
             // Arrange
@@ -104,7 +105,7 @@ namespace AD.IO.Tests
             Assert.True(extension == ".tmp");
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest8()
         {
             // Arrange
@@ -118,7 +119,7 @@ namespace AD.IO.Tests
             Assert.True(name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest9()
         {
             // Arrange
@@ -133,7 +134,7 @@ namespace AD.IO.Tests
             Assert.True(test.ToString().Equals(name, System.StringComparison.OrdinalIgnoreCase));
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest10()
         {
             // Arrange
@@ -146,7 +147,7 @@ namespace AD.IO.Tests
             Assert.True(string.Join(null, charPath).Equals(filePath.ToString()));
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest11()
         {
             // Arrange
@@ -160,7 +161,7 @@ namespace AD.IO.Tests
             Assert.True(test);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest12()
         {
             // Arrange
@@ -176,7 +177,7 @@ namespace AD.IO.Tests
             Assert.True(result.Name == filePath.Name);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest13()
         {
             // Arrange
@@ -192,7 +193,7 @@ namespace AD.IO.Tests
             Assert.True(result.Name == filePath.Name);
         }
 
-        [Theory]
+        [Fact]
         public void FilePathTest14()
         {
             // Arrange

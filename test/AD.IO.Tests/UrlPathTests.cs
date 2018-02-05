@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class UrlPathTests
     {
-        [Theory]
+        [Fact]
         public void UrlPathTest0()
         {
             // Arrange
@@ -24,7 +25,7 @@ namespace AD.IO.Tests
             Assert.True(url.UriPath.AbsoluteUri == uri.AbsoluteUri);
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest1()
         {
             // Arrange
@@ -38,7 +39,7 @@ namespace AD.IO.Tests
             Assert.True(url.Name == null);
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest2()
         {
             // Arrange
@@ -52,7 +53,7 @@ namespace AD.IO.Tests
             Assert.True(url.Extension == null);
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest3()
         {
             // Arrange
@@ -66,7 +67,7 @@ namespace AD.IO.Tests
             Assert.Equal(uri.AbsoluteUri, urlPath.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest4()
         {
             // Arrange
@@ -76,13 +77,13 @@ namespace AD.IO.Tests
             Assert.Throws<UriFormatException>(() => UrlPath.Create(path));
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest5()
         {
             // Arrange
             string path = Path.GetTempFileName();
             Uri uri = new Uri(path);
-            IPath url = new UrlPath(path);
+            IPath url = new UrlPath(uri.AbsoluteUri);
 
             // Act
             UrlPath urlPath = (UrlPath) url.Create(uri.AbsoluteUri);
@@ -91,7 +92,7 @@ namespace AD.IO.Tests
             Assert.Equal(uri.AbsoluteUri, urlPath.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest6()
         {
             // Arrange
@@ -104,7 +105,7 @@ namespace AD.IO.Tests
             Assert.True(string.Join(null, charPath).Equals(urlPath.ToString()));
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest7()
         {
             // Arrange
@@ -118,7 +119,7 @@ namespace AD.IO.Tests
             Assert.True(test);
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest8()
         {
             // Arrange
@@ -131,7 +132,7 @@ namespace AD.IO.Tests
             Assert.True(test != null);
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest9()
         {
             // Arrange
@@ -144,7 +145,7 @@ namespace AD.IO.Tests
             Assert.Equal(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest10()
         {
             // Arrange
@@ -160,7 +161,7 @@ namespace AD.IO.Tests
             Assert.Equal(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest11()
         {
             // Arrange
@@ -170,7 +171,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => (FilePath) urlPath);
         }
 
-        [Theory]
+        [Fact]
         public void UrlPathTest12()
         {
             // Arrange

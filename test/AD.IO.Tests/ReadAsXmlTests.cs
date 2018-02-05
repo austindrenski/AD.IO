@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class ReadAsXmlTests
     {
-        [Theory]
+        [Fact]
         public void ReadAsXmlTest0()
         {
             // Arrange
@@ -21,29 +22,44 @@ namespace AD.IO.Tests
             DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
 
             // Act
-            Assert.Throws<ArgumentException>(() => delimitedPath.ReadAsXml());
+            IEnumerable<XElement> test = delimitedPath.ReadAsXml();
+
+            // Assert
+            Assert.Empty(test);
         }
 
-        [Theory]
+        [Fact]
         public void ReadAsXmlTest1()
         {
             // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test.docx");
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
             DocxFilePath docx = DocxFilePath.Create(path);
 
             // Act
             XElement element = docx.ReadAsXml();
 
             // Assert
-            Assert.True(element != null);
+            Assert.Equal(docx.Name, (string) element?.Attribute("fileName"));
         }
 
-        [Theory]
+        [Fact]
         public void ReadAsXmlTest2()
         {
             // Arrange
             string path0 = Path.Combine(Path.GetTempPath(), "test.docx");
             string path1 = Path.Combine(Path.GetTempPath(), "test2.docx");
+            if (File.Exists(path0))
+            {
+                File.Delete(path0);
+            }
+            if (File.Exists(path1))
+            {
+                File.Delete(path1);
+            }
             DocxFilePath docx0 = DocxFilePath.Create(path0);
             DocxFilePath docx1 = DocxFilePath.Create(path1);
             DocxFilePath[] files = new DocxFilePath[] { docx0, docx1 };
@@ -55,12 +71,20 @@ namespace AD.IO.Tests
             Assert.True(elements.All(x => x != null));
         }
 
-        [Theory]
+        [Fact]
         public void ReadAsXmlTest3()
         {
             // Arrange
             string path0 = Path.Combine(Path.GetTempPath(), "test.docx");
             string path1 = Path.Combine(Path.GetTempPath(), "test2.docx");
+            if (File.Exists(path0))
+            {
+                File.Delete(path0);
+            }
+            if (File.Exists(path1))
+            {
+                File.Delete(path1);
+            }
             DocxFilePath docx0 = DocxFilePath.Create(path0);
             DocxFilePath docx1 = DocxFilePath.Create(path1);
             DocxFilePath[] files = new DocxFilePath[] { docx0, docx1 };

@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class DocxFilePathTests
     {
-        [Theory]
+        [Fact]
         public void DocxFilePathTest0()
         {
             // Arrange
@@ -24,7 +25,7 @@ namespace AD.IO.Tests
             Assert.Equal(zip.Name, Path.GetFileName(test).Replace(".zip", null));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest1()
         {
             // Arrange
@@ -39,7 +40,7 @@ namespace AD.IO.Tests
             Assert.Equal(zip.Extension, Path.GetExtension(test));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest2()
         {
             // Arrange
@@ -53,7 +54,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => new ZipFilePath(path));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest3()
         {
             // Arrange
@@ -61,10 +62,9 @@ namespace AD.IO.Tests
 
             // Act
             Assert.Throws<ArgumentException>(() => (ZipFilePath) path);
-
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest4()
         {
             // Arrange
@@ -79,18 +79,20 @@ namespace AD.IO.Tests
             Assert.Equal(zip.Extension, Path.GetExtension(test));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest5()
         {
             // Arrange
-            ZipFilePath path = new ZipFilePath(Path.ChangeExtension(Path.GetTempFileName(), ".zip"));
-            IPath iPath = new ZipFilePath(path);
+            string path = Path.GetTempFileName();
+            string zip = path.Replace(".tmp", ".zip");
+            File.Move(path, zip);
+            IPath iPath = new ZipFilePath(zip);
 
             // Act
             Assert.Throws<ArgumentException>(() => (ZipFilePath) iPath.Create(path));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest6()
         {
             // Arrange
@@ -104,7 +106,7 @@ namespace AD.IO.Tests
             Assert.Equal(zip.Extension, Path.GetExtension(test));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest7()
         {
             // Arrange
@@ -117,7 +119,7 @@ namespace AD.IO.Tests
             Assert.True(string.Join(null, charPath).Equals(zip.ToString()));
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest8()
         {
             // Arrange
@@ -131,7 +133,7 @@ namespace AD.IO.Tests
             Assert.True(test);
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest9()
         {
             // Arrange
@@ -144,7 +146,7 @@ namespace AD.IO.Tests
             Assert.True(test == zip);
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest10()
         {
             // Arrange
@@ -157,7 +159,7 @@ namespace AD.IO.Tests
             Assert.Equal(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest11()
         {
             // Arrange
@@ -173,12 +175,13 @@ namespace AD.IO.Tests
             Assert.Equal(urlPath.UriPath.AbsolutePath, test.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest12()
         {
             // Arrange
             string path = Path.GetTempFileName();
             string zip = path.Replace(".tmp", ".zip");
+            File.Move(path, zip);
             IPath iPath = new ZipFilePath(zip);
 
             // Act
@@ -188,7 +191,7 @@ namespace AD.IO.Tests
             Assert.Equal(zip, test.ToString());
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest13()
         {
             // Arrange
@@ -201,7 +204,7 @@ namespace AD.IO.Tests
             Assert.Equal(zip.ToString().Replace('\\', '/'), test.UriPath.AbsolutePath);
         }
 
-        [Theory]
+        [Fact]
         public void DocxFilePathTest14()
         {
             // Arrange

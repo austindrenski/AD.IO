@@ -6,7 +6,7 @@ namespace AD.IO.Tests
 {
     public class ToCapitalizedExtensionsTests
     {
-        [Theory]
+        [Fact]
         public void ToCapitalizeFirstTest()
         {
             // Arrange

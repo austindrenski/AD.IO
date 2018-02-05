@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using AD.IO.Paths;
 using JetBrains.Annotations;
 
-namespace AD.IO
+namespace AD.IO.Compression
 {
     /// <summary>
     /// Extensions methods to download zip files from a <see cref="UrlPath"/>.

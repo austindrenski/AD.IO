@@ -5,10 +5,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
-using AD.IO.Properties;
 using JetBrains.Annotations;
 
-namespace AD.IO
+namespace AD.IO.Paths
 {
     /// <inheritdoc />
     /// <summary>
@@ -18,10 +17,14 @@ namespace AD.IO
     public class DocxFilePath : IPath
     {
         /// <summary>
+        /// The location of the DLL.
+        /// </summary>
+        [NotNull] private static readonly string Location = Path.GetDirectoryName(typeof(DocxFilePath).Assembly.Location);
+
+        /// <summary>
         /// The full file path.
         /// </summary>
-        [NotNull]
-        private readonly string _path;
+        [NotNull] private readonly string _path;
 
         /// <inheritdoc />
         /// <summary>
@@ -122,6 +125,10 @@ namespace AD.IO
             }
 
             string directory = Path.GetTempFileName().Replace(".tmp", null);
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(directory, true);
+            }
             Directory.CreateDirectory(directory);
             if (File.Exists(toPath))
             {
@@ -135,67 +142,67 @@ namespace AD.IO
                 archive.CreateEntry("[Content_Types].xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("[Content_Types].xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources._Content_Types_));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\[Content_types].xml"));
                 }
 
                 archive.CreateEntry("_rels/.rels");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("_rels/.rels").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.rels));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\rels.xml"));
                 }
 
                 archive.CreateEntry("docProps/app.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("docProps/app.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.app));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\app.xml"));
                 }
 
                 archive.CreateEntry("docProps/core.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("docProps/core.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.core));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\core.xml"));
                 }
 
                 archive.CreateEntry("word/_rels/document.xml.rels");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/document.xml.rels").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.document_xml_rels));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\document.xml.rels.xml"));
                 }
 
                 archive.CreateEntry("word/theme/theme1.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/theme/theme1.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.theme1));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\theme1.xml"));
                 }
 
                 archive.CreateEntry("word/document.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/document.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.document));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\document.xml"));
                 }
 
                 archive.CreateEntry("word/settings.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/settings.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.settings));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\settings.xml"));
                 }
 
                 archive.CreateEntry("word/styles.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/styles.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.styles));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\styles.xml"));
                 }
 
                 archive.CreateEntry("word/footnotes.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/footnotes.xml").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.footnotes));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\footnotes.xml"));
                 }
 
                 archive.CreateEntry("word/_rels/footnotes.xml.rels");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/footnotes.xml.rels").Open()))
                 {
-                    writer.Write(XElement.Parse(Resources.footnotes_xml_rels));
+                    writer.Write(XElement.Load($"{Location}\\Templates\\footnotes.xml.rels.xml"));
                 }
             }
             return new DocxFilePath(toPath);

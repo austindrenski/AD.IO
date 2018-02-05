@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class DelimitedFilePathTests
     {
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest0()
         {
             // Arrange
@@ -19,7 +20,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => (DelimitedFilePath) path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest1()
         {
             // Arrange
@@ -29,7 +30,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => (DelimitedFilePath) path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest2()
         {
             // Arrange
@@ -39,7 +40,7 @@ namespace AD.IO.Tests
             Assert.Throws<FileNotFoundException>(() => (DelimitedFilePath) path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest3()
         {
             // Arrange
@@ -54,7 +55,7 @@ namespace AD.IO.Tests
             Assert.True(filePath.ToString() == test);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest4()
         {
             // Arrange
@@ -67,7 +68,7 @@ namespace AD.IO.Tests
             Assert.True(filePath.ToString() == path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest5()
         {
             // Arrange
@@ -80,7 +81,7 @@ namespace AD.IO.Tests
             Assert.Equal(filePath.Extension, ".csv");
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest6()
         {
             // Arrange
@@ -93,37 +94,7 @@ namespace AD.IO.Tests
             Assert.Equal(filePath.Name, "test");
         }
 
-        [Theory]
-        public void DelimitedFilePathTest7()
-        {
-            // Arrange
-            string path = Path.Combine(Path.GetTempPath(), "test.txt");
-
-            // Act
-            Assert.Throws<ArgumentException>(() => DelimitedFilePath.Create(path, '|'));
-        }
-
-        [Theory]
-        public void DelimitedFilePathTest8()
-        {
-            // Arrange
-            string path = Path.GetTempFileName();
-
-            // Act
-            Assert.Throws<ArgumentException>(() => new DelimitedFilePath(path));
-        }
-
-        [Theory]
-        public void DelimitedFilePathTest9()
-        {
-            // Arrange
-            string path = Path.GetTempFileName().Replace(".temp", ".txt");
-
-            // Act
-            Assert.Throws<ArgumentException>(() => new DelimitedFilePath(path));
-        }
-
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest10()
         {
             // Arrange
@@ -137,7 +108,7 @@ namespace AD.IO.Tests
             Assert.True(string.Join(null, charPath).Equals(filePath.ToString()));
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest11()
         {
             // Arrange
@@ -152,7 +123,7 @@ namespace AD.IO.Tests
             Assert.True(test);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest12()
         {
             // Arrange
@@ -165,7 +136,7 @@ namespace AD.IO.Tests
             Assert.Equal(filePath.ToString(), path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest13()
         {
             // Arrange
@@ -178,7 +149,7 @@ namespace AD.IO.Tests
             Assert.Equal(filePath.ToString(), path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest14()
         {
             // Arrange
@@ -192,7 +163,7 @@ namespace AD.IO.Tests
             Assert.Equal(filePath.ToString(), path);
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest15()
         {
             // Arrange
@@ -206,7 +177,7 @@ namespace AD.IO.Tests
             Assert.True(urlPath != "");
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest17()
         {
             // Arrange
@@ -229,7 +200,7 @@ namespace AD.IO.Tests
             Assert.True(headers.SequenceEqual(new string[] { "a", "b", "c" }));
         }
 
-        [Theory]
+        [Fact]
         public void DelimitedFilePathTest18()
         {
             // Arrange

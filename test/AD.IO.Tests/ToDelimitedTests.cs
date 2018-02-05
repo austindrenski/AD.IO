@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Xunit;
@@ -9,15 +7,17 @@ namespace AD.IO.Tests
 {
     public class ToDelimitedExtensionsTests
     {
-        [Theory]
+        [Fact]
         public void ToDelimitedTest00()
         {
             // Arrange
             var test =
-                ImmutableArray.Create(
-                    ImmutableArray.Create(new { a = "aa", b = "bb" }),
-                    ImmutableArray.Create(new { a = "aa", b = "bb" }),
-                    ImmutableArray.Create(new { a = "aa", b = "bb" }));
+                new[]
+                {
+                    new { a = "aa", b = "bb" },
+                    new { a = "aa", b = "bb" },
+                    new { a = "aa", b = "bb" }
+                };
 
             // Act
             string result = test.ToDelimited();
@@ -26,7 +26,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "aa|bb\r\naa|bb\r\naa|bb");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest0()
         {
             // Arrange
@@ -39,7 +39,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "a|b|c");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest1()
         {
             // Arrange
@@ -57,7 +57,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "A|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest2()
         {
             // Arrange
@@ -75,7 +75,7 @@ namespace AD.IO.Tests
             Assert.True("A|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0".All(x => result.Contains(x)));
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest3()
         {
             // Arrange
@@ -88,7 +88,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "0|1|2");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest4()
         {
             // Arrange
@@ -101,7 +101,7 @@ namespace AD.IO.Tests
             Assert.True("0|1|2".All(x => result.Contains(x)));
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest5()
         {
             // Arrange
@@ -120,7 +120,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "a|b|c|HTS10|z|zz\r\nA|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest6()
         {
             // Arrange
@@ -139,7 +139,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "a&b&c&HTS10&z&zz\r\nA&B&C&0123456789&&0\r\nD&E&F&0123456789&&0\r\nG&H&I&0123456789&&0");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest7()
         {
             // Arrange
@@ -157,7 +157,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "a|b|c\r\nd|e|f\r\ng|h|i");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest8()
         {
             // Arrange
@@ -175,7 +175,7 @@ namespace AD.IO.Tests
             Assert.True("a|b|c\r\nd|e|f\r\ng|h|i".All(x => result.Contains(x)));
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest9()
         {
             // Arrange
@@ -193,7 +193,7 @@ namespace AD.IO.Tests
             Assert.Equal(result, "0|1|2\r\n3|4|5\r\n6|7|8");
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest10()
         {
             // Arrange
@@ -211,28 +211,33 @@ namespace AD.IO.Tests
             Assert.True(result.All(x => "0|1|2\r\n3|4|5\r\n6|7|8".Contains(x)));
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest11()
         {
             // Arrange
             XDocument document = new XDocument();
 
             // Act
-            Assert.Throws<ArgumentException>(() => document.ToDelimited());
+            string test = document.ToDelimited();
+
+            // Assert
+            Assert.Null(test);
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest12()
         {
             // Arrange
             XDocument document = new XDocument(new XElement("root"));
 
             // Act
-            // ReSharper disable once UnusedVariable
-            Assert.Throws<ArgumentException>(() => document.ToDelimited());
+            string test = document.ToDelimited();
+
+            // Assert
+            Assert.Null(test);
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest13()
         {
             // Arrange
@@ -245,7 +250,7 @@ namespace AD.IO.Tests
             Assert.True("a|b|\"c|c\"|".All(x => result.Contains(x)));
         }
 
-        [Theory]
+        [Fact]
         public void ToDelimitedTest14()
         {
             // Arrange

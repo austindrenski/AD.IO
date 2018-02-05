@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
+using AD.IO.Paths;
 using JetBrains.Annotations;
 
 namespace AD.IO

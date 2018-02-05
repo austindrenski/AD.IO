@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AD.IO.Paths;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class ReadDataTests
     {
-        [Theory]
+        [Fact]
         public void ReadDataTest0()
         {
             // Arrange

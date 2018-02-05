@@ -5,7 +5,7 @@ namespace AD.IO.Tests
 {
     public class GetZipFileTests
     {
-        [Theory]
+        [Fact]
         public void GetZipFileTest0()
         {
             // Assert
