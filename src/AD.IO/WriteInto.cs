@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using AD.IO.Paths;
 using JetBrains.Annotations;
@@ -13,6 +14,107 @@ namespace AD.IO
     [PublicAPI]
     public static class WriteIntoExtensions
     {
+        /// <summary>
+        /// Saves the <paramref name="fromStream"/> into the <paramref name="toStream"/> at the <paramref name="entryPath"/>.
+        /// </summary>
+        /// <param name="fromStream">The <see cref="XElement"/> that is written.</param>
+        /// <param name="toStream">The file into which the <see cref="XElement"/> is written.</param>
+        /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
+        public static async Task<MemoryStream> WriteInto([NotNull] this Stream fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
+        {
+            if (fromStream is null)
+            {
+                throw new ArgumentNullException(nameof(fromStream));
+            }
+            if (toStream is null)
+            {
+                throw new ArgumentNullException(nameof(toStream));
+            }
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+            if (!fromStream.CanRead)
+            {
+                throw new InvalidOperationException(nameof(fromStream));
+            }
+            if (!toStream.CanWrite)
+            {
+                throw new InvalidOperationException(nameof(toStream));
+            }
+
+            if (fromStream.CanSeek)
+            {
+                fromStream.Seek(0, SeekOrigin.Begin);
+            }
+            if (toStream.CanSeek)
+            {
+                toStream.Seek(0, SeekOrigin.Begin);
+            }
+
+            MemoryStream result = new MemoryStream();
+            await toStream.CopyToAsync(result);
+
+            using (ZipArchive fromArchive = new ZipArchive(fromStream))
+            using (ZipArchive resultArchive = new ZipArchive(result))
+            using (StreamReader reader = new StreamReader(fromArchive.GetEntry(entryPath).Open()))
+            using (StreamWriter writer = new StreamWriter(resultArchive.CreateEntry(entryPath).Open()))
+            {
+                await writer.WriteAsync(await reader.ReadToEndAsync());
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Saves the <paramref name="element"/> into the <paramref name="stream"/> at the <paramref name="entryPath"/>.
+        /// </summary>
+        /// <param name="element">The <see cref="XElement"/> that is written.</param>
+        /// <param name="stream">The file into which the <see cref="XElement"/> is written.</param>
+        /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
+        [Pure]
+        [NotNull]
+        public static async Task<MemoryStream> WriteInto([NotNull] this XElement element, [NotNull] Stream stream, [NotNull] string entryPath)
+        {
+            if (element is null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            if (!stream.CanWrite)
+            {
+                throw new InvalidOperationException(nameof(stream));
+            }
+
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            MemoryStream result = new MemoryStream();
+            await stream.CopyToAsync(result);
+
+            element.DescendantsAndSelf().Attributes("fileName").Remove();
+            using (ZipArchive file = new ZipArchive(result))
+            {
+                file.GetEntry(entryPath)?.Delete();
+                using (StreamWriter writer = new StreamWriter(file.CreateEntry(entryPath).Open()))
+                {
+                    element.Save(writer);
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Saves the <paramref name="element"/> into the <paramref name="toFilePath"/> at the <paramref name="entryPath"/>.
         /// </summary>

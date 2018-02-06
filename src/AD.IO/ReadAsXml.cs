@@ -112,7 +112,7 @@ namespace AD.IO
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
         [CanBeNull]
-        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string fileName, [NotNull] string entryPath = "word/document.xml")
+        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string fileName = "stream_document.xml", [NotNull] string entryPath = "word/document.xml")
         {
             if (stream is null)
             {
@@ -127,6 +127,11 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
             XElement element;
             using (ZipArchive file = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -135,12 +140,14 @@ namespace AD.IO
                 {
                     return null;
                 }
+
                 using (Stream entryStream = entry.Open())
                 {
                     element = XElement.Load(entryStream);
                 }
             }
-            element.SetAttributeValue("fileName", fileName);
+
+            element.SetAttributeValue("fileName", stream is FileStream fs ? fs.Name : fileName);
             return element;
         }
 
@@ -182,6 +189,34 @@ namespace AD.IO
         /// <summary>
         /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XElement}"/>.
         /// </summary>
+        /// <param name="streams">An enumerable collection of .docx files. The file names are stored as attribures of the root elements.</param>
+        /// <returns>An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of one Microsoft Word document.</returns>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
+        /// <exception cref="FileNotFoundException"/>
+        /// <exception cref="InvalidDataException"/>
+        /// <exception cref="IOException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="PathTooLongException"/>
+        /// <exception cref="UnauthorizedAccessException"/>
+        [Pure]
+        [NotNull]
+        [ItemCanBeNull]
+        public static IEnumerable<XElement> ReadAsXml([NotNull] [ItemNotNull] this IEnumerable<Stream> streams)
+        {
+            if (streams is null)
+            {
+                throw new ArgumentNullException(nameof(streams));
+            }
+
+            return streams.Select(x => x.ReadAsXml());
+        }
+
+        /// <summary>
+        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XElement}"/>.
+        /// </summary>
         /// <param name="filePaths">An enumerable collection of .docx files. The file names are stored as attribures of the root elements.</param>
         /// <returns>An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of one Microsoft Word document.</returns>
         /// <exception cref="ArgumentException"/>
@@ -205,6 +240,35 @@ namespace AD.IO
             }
 
             return filePaths.Select(x => x.ReadAsXml());
+        }
+
+        /// <summary>
+        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XElement}"/>.
+        /// </summary>
+        /// <param name="streams">An enumerable collection of .docx files. The file names are stored as attribures of the root elements.</param>
+        /// <returns>An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of a Microsoft Word document.</returns>
+        /// <exception cref="AggregateException"/>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
+        /// <exception cref="FileNotFoundException"/>
+        /// <exception cref="InvalidDataException"/>
+        /// <exception cref="IOException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="PathTooLongException"/>
+        /// <exception cref="UnauthorizedAccessException"/>
+        [Pure]
+        [NotNull]
+        [ItemCanBeNull]
+        public static ParallelQuery<XElement> ReadAsXml([NotNull] [ItemNotNull] this ParallelQuery<Stream> streams)
+        {
+            if (streams is null)
+            {
+                throw new ArgumentNullException(nameof(streams));
+            }
+
+            return streams.Select(x => x.ReadAsXml());
         }
 
         /// <summary>
