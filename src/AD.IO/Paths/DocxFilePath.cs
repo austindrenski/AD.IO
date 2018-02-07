@@ -5,6 +5,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Xml.Linq;
 using AD.IO.Streams;
 using JetBrains.Annotations;
 
@@ -17,10 +19,10 @@ namespace AD.IO.Paths
     [PublicAPI]
     public class DocxFilePath : IPath
     {
-        [NotNull] private static readonly byte[] ContentTypesXml;
+        [NotNull] private static readonly XElement ContentTypesXml;
         [NotNull] private static readonly byte[] AppXml;
         [NotNull] private static readonly byte[] CoreXml;
-        [NotNull] private static readonly byte[] DocumentXml;
+        [NotNull] private static readonly XElement DocumentXml;
         [NotNull] private static readonly byte[] DocumentXmlRels;
         [NotNull] private static readonly byte[] Footer1Xml;
         [NotNull] private static readonly byte[] Footer2Xml;
@@ -56,10 +58,19 @@ namespace AD.IO.Paths
         {
             Assembly assembly = typeof(DocxFilePath).GetTypeInfo().Assembly;
 
-            ContentTypesXml = assembly.GetManifestResourceStream("AD.IO.Templates.[Content_Types].xml").CopyPure().Result.GetBuffer();
+            using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream("AD.IO.Templates.[Content_Types].xml"), Encoding.UTF8))
+            {
+                ContentTypesXml = XElement.Parse(reader.ReadToEnd());
+            }
+
             AppXml = assembly.GetManifestResourceStream("AD.IO.Templates.app.xml").CopyPure().Result.GetBuffer();
             CoreXml = assembly.GetManifestResourceStream("AD.IO.Templates.core.xml").CopyPure().Result.GetBuffer();
-            DocumentXml = assembly.GetManifestResourceStream("AD.IO.Templates.document.xml").CopyPure().Result.GetBuffer();
+
+            using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream("AD.IO.Templates.document.xml"), Encoding.UTF8))
+            {
+                DocumentXml = XElement.Parse(reader.ReadToEnd());
+            }
+
             DocumentXmlRels = assembly.GetManifestResourceStream("AD.IO.Templates.document.xml.rels.xml").CopyPure().Result.GetBuffer();
             Footer1Xml = assembly.GetManifestResourceStream("AD.IO.Templates.footer1.xml").CopyPure().Result.GetBuffer();
             Footer2Xml = assembly.GetManifestResourceStream("AD.IO.Templates.footer2.xml").CopyPure().Result.GetBuffer();
@@ -163,9 +174,9 @@ namespace AD.IO.Paths
 
             using (ZipArchive archive = new ZipArchive(new FileStream(toPath, FileMode.OpenOrCreate), ZipArchiveMode.Update))
             {
-                using (Stream entry = archive.CreateEntry("[Content_Types].xml").Open())
+                using (StreamWriter entry = new StreamWriter(archive.CreateEntry("[Content_Types].xml").Open()))
                 {
-                    entry.Write(ContentTypesXml, 0, ContentTypesXml.Length);
+                    entry.Write(ContentTypesXml);
                 }
 
                 using (Stream entry = archive.CreateEntry("_rels/.rels").Open())
@@ -183,9 +194,9 @@ namespace AD.IO.Paths
                     entry.Write(CoreXml, 0, CoreXml.Length);
                 }
 
-                using (Stream entry = archive.CreateEntry("word/document.xml").Open())
+                using (StreamWriter entry = new StreamWriter(archive.CreateEntry("word/document.xml").Open()))
                 {
-                    entry.Write(DocumentXml, 0, DocumentXml.Length);
+                    entry.Write(DocumentXml);
                 }
 
                 using (Stream entry = archive.CreateEntry("word/_rels/document.xml.rels").Open())
