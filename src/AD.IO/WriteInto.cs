@@ -21,6 +21,58 @@ namespace AD.IO
         /// <param name="fromStream">The <see cref="XElement"/> that is written.</param>
         /// <param name="toStream">The file into which the <see cref="XElement"/> is written.</param>
         /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
+        public static async Task<MemoryStream> WriteInto([NotNull] this Task<Stream> fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
+        {
+            if (fromStream is null)
+            {
+                throw new ArgumentNullException(nameof(fromStream));
+            }
+
+            if (toStream is null)
+            {
+                throw new ArgumentNullException(nameof(toStream));
+            }
+
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            return await WriteInto(await fromStream, toStream, entryPath);
+        }
+
+        /// <summary>
+        /// Saves the <paramref name="fromStream"/> into the <paramref name="toStream"/> at the <paramref name="entryPath"/>.
+        /// </summary>
+        /// <param name="fromStream">The <see cref="XElement"/> that is written.</param>
+        /// <param name="toStream">The file into which the <see cref="XElement"/> is written.</param>
+        /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
+        public static async Task<MemoryStream> WriteInto([NotNull] this Task<Stream> fromStream, [NotNull] Task<Stream> toStream, [NotNull] string entryPath)
+        {
+            if (fromStream is null)
+            {
+                throw new ArgumentNullException(nameof(fromStream));
+            }
+
+            if (toStream is null)
+            {
+                throw new ArgumentNullException(nameof(toStream));
+            }
+
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            return await WriteInto(await fromStream, await toStream, entryPath);
+        }
+
+        /// <summary>
+        /// Saves the <paramref name="fromStream"/> into the <paramref name="toStream"/> at the <paramref name="entryPath"/>.
+        /// </summary>
+        /// <param name="fromStream">The <see cref="XElement"/> that is written.</param>
+        /// <param name="toStream">The file into which the <see cref="XElement"/> is written.</param>
+        /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
         public static async Task<MemoryStream> WriteInto([NotNull] this Stream fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
         {
             if (fromStream is null)
@@ -62,6 +114,34 @@ namespace AD.IO
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Saves the <paramref name="element"/> into the <paramref name="toStream"/> at the <paramref name="entryPath"/>.
+        /// </summary>
+        /// <param name="element">The <see cref="XElement"/> that is written.</param>
+        /// <param name="toStream">The file into which the <see cref="XElement"/> is written.</param>
+        /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
+        [Pure]
+        [NotNull]
+        public static async Task<MemoryStream> WriteInto([NotNull] this XElement element, [NotNull] Task<Stream> toStream, [NotNull] string entryPath)
+        {
+            if (element is null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+
+            if (toStream is null)
+            {
+                throw new ArgumentNullException(nameof(toStream));
+            }
+
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            return await WriteInto(element, await toStream, entryPath);
         }
 
         /// <summary>
