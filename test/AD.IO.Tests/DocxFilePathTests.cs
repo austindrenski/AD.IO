@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AD.IO.Paths;
+using AD.IO.Streams;
 using Xunit;
 
 namespace AD.IO.Tests
@@ -215,6 +216,17 @@ namespace AD.IO.Tests
 
             // Act
             Assert.Equal(zip.ToString(), test.ToString());
+        }
+
+        [Fact]
+        public void DocxFilePathTest15()
+        {
+            using (FileStream stream = new FileStream(DocxFilePath.Create($"{Path.GetTempFileName()}.docx"), FileMode.Open))
+            {
+                byte[] bytes = stream.CopyPure().Result.GetBuffer();
+
+                Assert.NotEmpty(bytes);
+            }
         }
     }
 }

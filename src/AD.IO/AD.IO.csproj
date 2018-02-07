@@ -24,10 +24,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Templates">
+        <EmbeddedResource Include="Templates\*">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        </Folder>
+        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
