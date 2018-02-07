@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -54,7 +53,7 @@ namespace AD.IO
 
             XName record = "record";
 
-            ImmutableArray<XName> headers =
+            XName[] headers =
                 firstRow.Replace(" ", null)
                         .Replace("(", null)
                         .Replace(")", null)
@@ -63,7 +62,7 @@ namespace AD.IO
                         .SplitDelimitedLine(filePath.Delimiter)
                         .Where(x => !string.IsNullOrWhiteSpace(x))
                         .Select(x => (XName) x)
-                        .ToImmutableArray();
+                        .ToArray();
 
             if (!headers.Any())
             {
@@ -118,10 +117,12 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(stream));
             }
+
             if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
+
             if (entryPath is null)
             {
                 throw new ArgumentNullException(nameof(entryPath));
@@ -147,7 +148,7 @@ namespace AD.IO
                 }
             }
 
-            element.SetAttributeValue("fileName", stream is FileStream fs ? fs.Name : fileName);
+            element.SetAttributeValue("fileName", fileName);
             return element;
         }
 
@@ -175,6 +176,7 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(filePath));
             }
+
             if (entryPath is null)
             {
                 throw new ArgumentNullException(nameof(entryPath));

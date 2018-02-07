@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using AD.IO.Paths;
+using AD.IO.Streams;
 using JetBrains.Annotations;
 
 namespace AD.IO
@@ -26,83 +27,70 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(fromStream));
             }
+
             if (toStream is null)
             {
                 throw new ArgumentNullException(nameof(toStream));
             }
+
             if (entryPath is null)
             {
                 throw new ArgumentNullException(nameof(entryPath));
             }
-            if (!fromStream.CanRead)
+
+            if (!fromStream.CanRead || !fromStream.CanSeek)
             {
                 throw new InvalidOperationException(nameof(fromStream));
             }
-            if (!toStream.CanWrite)
-            {
-                throw new InvalidOperationException(nameof(toStream));
-            }
 
-            if (fromStream.CanSeek)
-            {
-                fromStream.Seek(0, SeekOrigin.Begin);
-            }
-            if (toStream.CanSeek)
-            {
-                toStream.Seek(0, SeekOrigin.Begin);
-            }
+            fromStream.Seek(0, SeekOrigin.Begin);
 
-            MemoryStream result = new MemoryStream();
-            await toStream.CopyToAsync(result);
+            MemoryStream result = await toStream.CopyPure();
 
             using (ZipArchive fromArchive = new ZipArchive(fromStream))
-            using (ZipArchive resultArchive = new ZipArchive(result))
-            using (StreamReader reader = new StreamReader(fromArchive.GetEntry(entryPath).Open()))
-            using (StreamWriter writer = new StreamWriter(resultArchive.CreateEntry(entryPath).Open()))
             {
-                await writer.WriteAsync(await reader.ReadToEndAsync());
+                using (ZipArchive resultArchive = new ZipArchive(result))
+                {
+                    using (StreamReader reader = new StreamReader(fromArchive.GetEntry(entryPath).Open()))
+                    {
+                        using (StreamWriter writer = new StreamWriter(resultArchive.CreateEntry(entryPath).Open()))
+                        {
+                            await writer.WriteAsync(await reader.ReadToEndAsync());
+                        }
+                    }
+                }
             }
 
             return result;
         }
 
         /// <summary>
-        /// Saves the <paramref name="element"/> into the <paramref name="stream"/> at the <paramref name="entryPath"/>.
+        /// Saves the <paramref name="element"/> into the <paramref name="toStream"/> at the <paramref name="entryPath"/>.
         /// </summary>
         /// <param name="element">The <see cref="XElement"/> that is written.</param>
-        /// <param name="stream">The file into which the <see cref="XElement"/> is written.</param>
+        /// <param name="toStream">The file into which the <see cref="XElement"/> is written.</param>
         /// <param name="entryPath">The location to which the <see cref="XElement"/> is written.</param>
         [Pure]
         [NotNull]
-        public static async Task<MemoryStream> WriteInto([NotNull] this XElement element, [NotNull] Stream stream, [NotNull] string entryPath)
+        public static async Task<MemoryStream> WriteInto([NotNull] this XElement element, [NotNull] Stream toStream, [NotNull] string entryPath)
         {
             if (element is null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
-            if (stream is null)
+
+            if (toStream is null)
             {
-                throw new ArgumentNullException(nameof(stream));
+                throw new ArgumentNullException(nameof(toStream));
             }
+
             if (entryPath is null)
             {
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            if (!stream.CanWrite)
-            {
-                throw new InvalidOperationException(nameof(stream));
-            }
+            MemoryStream result = await toStream.CopyPure();
 
-            if (stream.CanSeek)
-            {
-                stream.Seek(0, SeekOrigin.Begin);
-            }
-
-            MemoryStream result = new MemoryStream();
-            await stream.CopyToAsync(result);
-
-            element.DescendantsAndSelf().Attributes("fileName").Remove();
             using (ZipArchive file = new ZipArchive(result))
             {
                 file.GetEntry(entryPath)?.Delete();
@@ -127,10 +115,12 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(element));
             }
+
             if (toFilePath is null)
             {
                 throw new ArgumentNullException(nameof(toFilePath));
             }
+
             if (entryPath is null)
             {
                 throw new ArgumentNullException(nameof(entryPath));
@@ -159,10 +149,12 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(fromFilePath));
             }
+
             if (toFilePath is null)
             {
                 throw new ArgumentNullException(nameof(toFilePath));
             }
+
             if (entryPath is null)
             {
                 throw new ArgumentNullException(nameof(entryPath));
@@ -173,6 +165,7 @@ namespace AD.IO
             {
                 fromFile.GetEntry(entryPath).ExtractToFile(temp, true);
             }
+
             using (ZipArchive toFile = ZipFile.Open(toFilePath, ZipArchiveMode.Update))
             {
                 toFile.CreateEntryFromFile(temp, entryPath);
@@ -192,14 +185,17 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(fromFilePath));
             }
+
             if (toFilePath is null)
             {
                 throw new ArgumentNullException(nameof(toFilePath));
             }
+
             if (fromEntryPath is null)
             {
                 throw new ArgumentNullException(nameof(fromEntryPath));
             }
+
             if (toEntryPath is null)
             {
                 throw new ArgumentNullException(nameof(toEntryPath));
@@ -210,6 +206,7 @@ namespace AD.IO
             {
                 fromFile.GetEntry(fromEntryPath).ExtractToFile(temp, true);
             }
+
             using (ZipArchive toFile = ZipFile.Open(toFilePath, ZipArchiveMode.Update))
             {
                 toFile.CreateEntryFromFile(temp, toEntryPath);
@@ -227,6 +224,7 @@ namespace AD.IO
             {
                 throw new ArgumentNullException(nameof(fromFilePath));
             }
+
             if (toFilePath is null)
             {
                 throw new ArgumentNullException(nameof(toFilePath));

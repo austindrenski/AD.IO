@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using JetBrains.Annotations;
-using Xunit;
+﻿using Xunit;
 
 namespace AD.IO.Tests
 {
