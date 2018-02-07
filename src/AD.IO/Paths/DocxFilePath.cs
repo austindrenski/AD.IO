@@ -5,7 +5,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
-using System.Xml.Linq;
 using AD.IO.Streams;
 using JetBrains.Annotations;
 
@@ -162,87 +161,61 @@ namespace AD.IO.Paths
                 throw new ArgumentNullException(nameof(toPath));
             }
 
-            string directory = Path.GetTempFileName().Replace(".tmp", null);
-            if (Directory.Exists(directory))
+            using (ZipArchive archive = new ZipArchive(new FileStream(toPath, FileMode.OpenOrCreate), ZipArchiveMode.Update))
             {
-                Directory.Delete(directory, true);
-            }
-
-            Directory.CreateDirectory(directory);
-            if (File.Exists(toPath))
-            {
-                File.Delete(toPath);
-            }
-
-            ZipFile.CreateFromDirectory(directory, toPath);
-            Directory.Delete(directory);
-
-            using (ZipArchive archive = ZipFile.Open(toPath, ZipArchiveMode.Update))
-            {
-                archive.CreateEntry("[Content_Types].xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("[Content_Types].xml").Open()))
+                using (Stream entry = archive.CreateEntry("[Content_Types].xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(ContentTypesXml)));
+                    entry.Write(ContentTypesXml, 0, ContentTypesXml.Length);
                 }
 
-                archive.CreateEntry("_rels/.rels");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("_rels/.rels").Open()))
+                using (Stream entry = archive.CreateEntry("_rels/.rels").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(RelsXml)));
+                    entry.Write(RelsXml, 0, RelsXml.Length);
                 }
 
-                archive.CreateEntry("docProps/app.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("docProps/app.xml").Open()))
+                using (Stream entry = archive.CreateEntry("docProps/app.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(AppXml)));
+                    entry.Write(AppXml, 0, AppXml.Length);
                 }
 
-                archive.CreateEntry("docProps/core.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("docProps/core.xml").Open()))
+                using (Stream entry = archive.CreateEntry("docProps/core.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(CoreXml)));
+                    entry.Write(CoreXml, 0, CoreXml.Length);
                 }
 
-                archive.CreateEntry("word/_rels/document.xml.rels");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/document.xml.rels").Open()))
+                using (Stream entry = archive.CreateEntry("word/document.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(DocumentXmlRels)));
+                    entry.Write(DocumentXml, 0, DocumentXml.Length);
                 }
 
-                archive.CreateEntry("word/theme/theme1.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/theme/theme1.xml").Open()))
+                using (Stream entry = archive.CreateEntry("word/_rels/document.xml.rels").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(Theme1Xml)));
+                    entry.Write(DocumentXmlRels, 0, DocumentXmlRels.Length);
                 }
 
-                archive.CreateEntry("word/document.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/document.xml").Open()))
+                using (Stream entry = archive.CreateEntry("word/theme/theme1.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(DocumentXml)));
+                    entry.Write(Theme1Xml, 0, Theme1Xml.Length);
                 }
 
-                archive.CreateEntry("word/settings.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/settings.xml").Open()))
+                using (Stream entry = archive.CreateEntry("word/settings.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(SettingsXml)));
+                    entry.Write(SettingsXml, 0, SettingsXml.Length);
                 }
 
-                archive.CreateEntry("word/styles.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/styles.xml").Open()))
+                using (Stream entry = archive.CreateEntry("word/styles.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(StylesXml)));
+                    entry.Write(StylesXml, 0, StylesXml.Length);
                 }
 
-                archive.CreateEntry("word/footnotes.xml");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/footnotes.xml").Open()))
+                using (Stream entry = archive.CreateEntry("word/footnotes.xml").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(FootnotesXml)));
+                    entry.Write(FootnotesXml, 0, FootnotesXml.Length);
                 }
 
-                archive.CreateEntry("word/_rels/footnotes.xml.rels");
-                using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/footnotes.xml.rels").Open()))
+                using (Stream entry = archive.CreateEntry("word/_rels/footnotes.xml.rels").Open())
                 {
-                    writer.Write(XElement.Load(new MemoryStream(FootnotesXmlRels)));
+                    entry.Write(FootnotesXmlRels, 0, FootnotesXmlRels.Length);
                 }
             }
 
