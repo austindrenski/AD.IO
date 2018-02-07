@@ -134,7 +134,7 @@ namespace AD.IO
             }
 
             XElement element;
-            using (ZipArchive file = new ZipArchive(stream, ZipArchiveMode.Read))
+            using (ZipArchive file = new ZipArchive(stream, ZipArchiveMode.Read, true))
             {
                 ZipArchiveEntry entry = file.GetEntry(entryPath);
                 if (entry is null)
