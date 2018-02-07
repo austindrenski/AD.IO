@@ -126,7 +126,6 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            element.DescendantsAndSelf().Attributes("fileName").Remove();
             using (ZipArchive file = ZipFile.Open(toFilePath, ZipArchiveMode.Update))
             {
                 file.GetEntry(entryPath)?.Delete();

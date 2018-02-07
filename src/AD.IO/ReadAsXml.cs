@@ -88,13 +88,10 @@ namespace AD.IO
         /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
         /// </summary>
         /// <param name="stream">
-        ///     The stream of the .docx file to be opened.
+        /// The stream of the .docx file to be opened.
         /// </param>
         /// <param name="entryPath">
-        ///     The entry path within the zip archive to read as XML.
-        /// </param>
-        /// <param name="fileName">
-        ///     The file name to store as an attribute on the root node.
+        /// The entry path within the zip archive to read as XML.
         /// </param>
         /// <returns>
         /// An <see cref="XElement"/> representing the document root of the Microsoft Word document.
@@ -111,7 +108,7 @@ namespace AD.IO
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
         [CanBeNull]
-        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string entryPath = "word/document.xml", [CanBeNull] string fileName = default)
+        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string entryPath = "word/document.xml")
         {
             if (stream is null)
             {
@@ -143,7 +140,57 @@ namespace AD.IO
                 }
             }
 
-            element.SetAttributeValue("fileName", fileName ?? entryPath);
+            return element;
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
+        /// </summary>
+        /// <param name="stream">
+        ///     The stream of the .docx file to be opened.
+        /// </param>
+        /// <param name="entryPath">
+        ///     The entry path within the zip archive to read as XML.
+        /// </param>
+        /// <param name="fileName">
+        ///     The file name to store as an attribute on the root node.
+        /// </param>
+        /// <returns>
+        /// An <see cref="XElement"/> representing the document root of the Microsoft Word document.
+        /// </returns>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="DirectoryNotFoundException"/>
+        /// <exception cref="FileNotFoundException"/>
+        /// <exception cref="InvalidDataException"/>
+        /// <exception cref="IOException"/>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ObjectDisposedException"/>
+        /// <exception cref="PathTooLongException"/>
+        /// <exception cref="UnauthorizedAccessException"/>
+        [Pure]
+        [CanBeNull]
+        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string entryPath, [NotNull] string fileName)
+        {
+            if (stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            if (fileName is null)
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            XElement element = ReadAsXml(stream, entryPath);
+
+            element?.SetAttributeValue("fileName", fileName);
+
             return element;
         }
 
