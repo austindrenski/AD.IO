@@ -88,13 +88,13 @@ namespace AD.IO
         /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
         /// </summary>
         /// <param name="stream">
-        /// The stream of the .docx file to be opened.
-        /// </param>
-        /// <param name="fileName">
-        /// The file name to store as an attribute on the root node.
+        ///     The stream of the .docx file to be opened.
         /// </param>
         /// <param name="entryPath">
-        /// The entry path within the zip archive to read as XML.
+        ///     The entry path within the zip archive to read as XML.
+        /// </param>
+        /// <param name="fileName">
+        ///     The file name to store as an attribute on the root node.
         /// </param>
         /// <returns>
         /// An <see cref="XElement"/> representing the document root of the Microsoft Word document.
@@ -111,16 +111,11 @@ namespace AD.IO
         /// <exception cref="UnauthorizedAccessException"/>
         [Pure]
         [CanBeNull]
-        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string fileName = "stream_document.xml", [NotNull] string entryPath = "word/document.xml")
+        public static XElement ReadAsXml([NotNull] this Stream stream, [NotNull] string entryPath = "word/document.xml", [CanBeNull] string fileName = default)
         {
             if (stream is null)
             {
                 throw new ArgumentNullException(nameof(stream));
-            }
-
-            if (fileName is null)
-            {
-                throw new ArgumentNullException(nameof(fileName));
             }
 
             if (entryPath is null)
@@ -148,7 +143,7 @@ namespace AD.IO
                 }
             }
 
-            element.SetAttributeValue("fileName", fileName);
+            element.SetAttributeValue("fileName", fileName ?? entryPath);
             return element;
         }
 
@@ -184,7 +179,7 @@ namespace AD.IO
 
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                return fileStream.ReadAsXml(filePath.Name, entryPath);
+                return fileStream.ReadAsXml(entryPath, filePath.Name);
             }
         }
 
