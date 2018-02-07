@@ -91,7 +91,7 @@ namespace AD.IO
 
             MemoryStream result = await toStream.CopyPure();
 
-            using (ZipArchive file = new ZipArchive(result))
+            using (ZipArchive file = new ZipArchive(result, ZipArchiveMode.Update, true))
             {
                 file.GetEntry(entryPath)?.Delete();
                 using (StreamWriter writer = new StreamWriter(file.CreateEntry(entryPath).Open()))
