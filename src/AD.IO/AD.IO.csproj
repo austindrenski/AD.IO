@@ -5,6 +5,7 @@
         <AssemblyName>AD.IO</AssemblyName>
         <RootNamespace>AD.IO</RootNamespace>
     </PropertyGroup>
+
     <PropertyGroup>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -14,25 +15,21 @@
         <Description>C# extension library for input/output operations and data management.</Description>
         <RepositoryUrl>https://github.com/austindrenski/AD.IO</RepositoryUrl>
         <PackageTags>read-data read-xml read-csv read-delimited file data xml csv</PackageTags>
-        <AssemblyVersion>1.4.5</AssemblyVersion>
-        <FileVersion>1.4.5</FileVersion>
-        <Version>1.4.5</Version>
+        <AssemblyVersion>1.4.6</AssemblyVersion>
+        <FileVersion>1.4.6</FileVersion>
+        <Version>1.4.6</Version>
         <Authors>Austin Drenski</Authors>
         <Company>Austin Drenski</Company>
         <DocumentationFile>bin\Release\netstandard2.0\AD.IO.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="Templates/*">
-            <IncludeInPackage>true</IncludeInPackage>
+        <Folder Include="Templates">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        </Content>
+        </Folder>
     </ItemGroup>
 
-    <ItemGroup>
-        <!--<None Include="Templates\*" CopyToPublishDirectory="Always" CopyToOutputDirectory="Always"/>-->
-    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="11.1.0"/>
     </ItemGroup>

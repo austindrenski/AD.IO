@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
+using AD.IO.Streams;
 using JetBrains.Annotations;
 
 namespace AD.IO.Paths
@@ -16,10 +18,21 @@ namespace AD.IO.Paths
     [PublicAPI]
     public class DocxFilePath : IPath
     {
-        /// <summary>
-        /// The location of the DLL.
-        /// </summary>
-        [NotNull] private static readonly string Location = Path.GetDirectoryName(typeof(DocxFilePath).Assembly.Location);
+        [NotNull] private static readonly byte[] ContentTypesXml;
+        [NotNull] private static readonly byte[] AppXml;
+        [NotNull] private static readonly byte[] CoreXml;
+        [NotNull] private static readonly byte[] DocumentXml;
+        [NotNull] private static readonly byte[] DocumentXmlRels;
+        [NotNull] private static readonly byte[] Footer1Xml;
+        [NotNull] private static readonly byte[] Footer2Xml;
+        [NotNull] private static readonly byte[] FootnotesXml;
+        [NotNull] private static readonly byte[] FootnotesXmlRels;
+        [NotNull] private static readonly byte[] Header1Xml;
+        [NotNull] private static readonly byte[] Header2Xml;
+        [NotNull] private static readonly byte[] RelsXml;
+        [NotNull] private static readonly byte[] SettingsXml;
+        [NotNull] private static readonly byte[] StylesXml;
+        [NotNull] private static readonly byte[] Theme1Xml;
 
         /// <summary>
         /// The full file path.
@@ -40,6 +53,27 @@ namespace AD.IO.Paths
         [NotNull]
         public string Name { get; }
 
+        static DocxFilePath()
+        {
+            Assembly assembly = typeof(DocxFilePath).GetTypeInfo().Assembly;
+
+            ContentTypesXml = assembly.GetManifestResourceStream("AD.IO.Templates.[Content_Types].xml").CopyPure().Result.GetBuffer();
+            AppXml = assembly.GetManifestResourceStream("AD.IO.Templates.app.xml").CopyPure().Result.GetBuffer();
+            CoreXml = assembly.GetManifestResourceStream("AD.IO.Templates.core.xml").CopyPure().Result.GetBuffer();
+            DocumentXml = assembly.GetManifestResourceStream("AD.IO.Templates.document.xml").CopyPure().Result.GetBuffer();
+            DocumentXmlRels = assembly.GetManifestResourceStream("AD.IO.Templates.document.xml.rels.xml").CopyPure().Result.GetBuffer();
+            Footer1Xml = assembly.GetManifestResourceStream("AD.IO.Templates.footer1.xml").CopyPure().Result.GetBuffer();
+            Footer2Xml = assembly.GetManifestResourceStream("AD.IO.Templates.footer2.xml").CopyPure().Result.GetBuffer();
+            FootnotesXml = assembly.GetManifestResourceStream("AD.IO.Templates.footnotes.xml").CopyPure().Result.GetBuffer();
+            FootnotesXmlRels = assembly.GetManifestResourceStream("AD.IO.Templates.footnotes.xml.rels.xml").CopyPure().Result.GetBuffer();
+            Header1Xml = assembly.GetManifestResourceStream("AD.IO.Templates.header1.xml").CopyPure().Result.GetBuffer();
+            Header2Xml = assembly.GetManifestResourceStream("AD.IO.Templates.header2.xml").CopyPure().Result.GetBuffer();
+            RelsXml = assembly.GetManifestResourceStream("AD.IO.Templates.rels.xml").CopyPure().Result.GetBuffer();
+            SettingsXml = assembly.GetManifestResourceStream("AD.IO.Templates.settings.xml").CopyPure().Result.GetBuffer();
+            StylesXml = assembly.GetManifestResourceStream("AD.IO.Templates.styles.xml").CopyPure().Result.GetBuffer();
+            Theme1Xml = assembly.GetManifestResourceStream("AD.IO.Templates.theme1.xml").CopyPure().Result.GetBuffer();
+        }
+
         /// <summary>
         /// Creates a new <see cref="DocxFilePath"/> to hold the path to a file.
         /// </summary>
@@ -51,14 +85,17 @@ namespace AD.IO.Paths
             {
                 throw new ArgumentNullException(nameof(filePath));
             }
+
             if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException(filePath);
             }
+
             if (Path.GetExtension(filePath) != ".docx")
             {
                 throw new ArgumentException("Path is not a docx file.");
             }
+
             if (filePath.Contains('~'))
             {
                 throw new ArgumentException("File path contains a tilda character. It may be invalid.");
@@ -93,6 +130,7 @@ namespace AD.IO.Paths
             {
                 throw new ArgumentNullException(nameof(filePath));
             }
+
             if (!overwrite)
             {
                 throw new Exception("This method requires approval to overwrite any existing file at the toPath.");
@@ -129,11 +167,13 @@ namespace AD.IO.Paths
             {
                 Directory.Delete(directory, true);
             }
+
             Directory.CreateDirectory(directory);
             if (File.Exists(toPath))
             {
                 File.Delete(toPath);
             }
+
             ZipFile.CreateFromDirectory(directory, toPath);
             Directory.Delete(directory);
 
@@ -142,69 +182,70 @@ namespace AD.IO.Paths
                 archive.CreateEntry("[Content_Types].xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("[Content_Types].xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\[Content_types].xml"));
+                    writer.Write(XElement.Load(new MemoryStream(ContentTypesXml)));
                 }
 
                 archive.CreateEntry("_rels/.rels");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("_rels/.rels").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\rels.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(RelsXml)));
                 }
 
                 archive.CreateEntry("docProps/app.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("docProps/app.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\app.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(AppXml)));
                 }
 
                 archive.CreateEntry("docProps/core.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("docProps/core.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\core.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(CoreXml)));
                 }
 
                 archive.CreateEntry("word/_rels/document.xml.rels");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/document.xml.rels").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\document.xml.rels.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(DocumentXmlRels)));
                 }
 
                 archive.CreateEntry("word/theme/theme1.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/theme/theme1.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\theme1.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(Theme1Xml)));
                 }
 
                 archive.CreateEntry("word/document.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/document.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\document.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(DocumentXml)));
                 }
 
                 archive.CreateEntry("word/settings.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/settings.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\settings.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(SettingsXml)));
                 }
 
                 archive.CreateEntry("word/styles.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/styles.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\styles.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(StylesXml)));
                 }
 
                 archive.CreateEntry("word/footnotes.xml");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/footnotes.xml").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\footnotes.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(FootnotesXml)));
                 }
 
                 archive.CreateEntry("word/_rels/footnotes.xml.rels");
                 using (StreamWriter writer = new StreamWriter(archive.GetEntry("word/_rels/footnotes.xml.rels").Open()))
                 {
-                    writer.Write(XElement.Load($"{Location}\\Templates\\footnotes.xml.rels.xml"));
+                    writer.Write(XElement.Load(new MemoryStream(FootnotesXmlRels)));
                 }
             }
+
             return new DocxFilePath(toPath);
         }
 
