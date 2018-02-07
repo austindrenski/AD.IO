@@ -32,11 +32,8 @@ namespace AD.IO.Tests
         {
             // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-            DocxFilePath docx = DocxFilePath.Create(path);
+
+            DocxFilePath docx = DocxFilePath.Create(path, true);
 
             // Act
             XElement element = docx.ReadAsXml();
@@ -51,16 +48,10 @@ namespace AD.IO.Tests
             // Arrange
             string path0 = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
             string path1 = Path.Combine(Path.GetTempPath(), "test2.docx");
-            if (File.Exists(path0))
-            {
-                File.Delete(path0);
-            }
-            if (File.Exists(path1))
-            {
-                File.Delete(path1);
-            }
-            DocxFilePath docx0 = DocxFilePath.Create(path0);
-            DocxFilePath docx1 = DocxFilePath.Create(path1);
+
+            DocxFilePath docx0 = DocxFilePath.Create(path0, true);
+            DocxFilePath docx1 = DocxFilePath.Create(path1, true);
+
             DocxFilePath[] files = new DocxFilePath[] { docx0, docx1 };
 
             // Act
@@ -76,16 +67,10 @@ namespace AD.IO.Tests
             // Arrange
             string path0 = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
             string path1 = Path.Combine(Path.GetTempPath(), "test2.docx");
-            if (File.Exists(path0))
-            {
-                File.Delete(path0);
-            }
-            if (File.Exists(path1))
-            {
-                File.Delete(path1);
-            }
-            DocxFilePath docx0 = DocxFilePath.Create(path0);
-            DocxFilePath docx1 = DocxFilePath.Create(path1);
+
+            DocxFilePath docx0 = DocxFilePath.Create(path0, true);
+            DocxFilePath docx1 = DocxFilePath.Create(path1, true);
+
             DocxFilePath[] files = new DocxFilePath[] { docx0, docx1 };
 
             // Act

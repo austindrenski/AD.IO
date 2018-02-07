@@ -221,7 +221,7 @@ namespace AD.IO.Tests
         [Fact]
         public void DocxFilePathTest15()
         {
-            using (FileStream stream = new FileStream(DocxFilePath.Create($"{Path.GetTempFileName()}.docx"), FileMode.Open))
+            using (Stream stream = DocxFilePath.Create())
             {
                 byte[] bytes = stream.CopyPure().Result.GetBuffer();
 
