@@ -1,11 +1,9 @@
-before_build:
-  - cmd: nuget restore AD.IO.sln
-
-configuration: 
-  - Release
-
-image: 
+image:
   - Visual Studio 2017
 
-platform: 
+platform:
   - Any CPU
+
+build_script:
+  - pwsh: dotnet build --configuration Release
+  - pwsh: dotnet test test/AD.IO.Tests --configuration Release
