@@ -4,6 +4,15 @@ image:
 platform:
   - Any CPU
 
+branches:
+  only:
+    - master
+    - production
+
+environment:
+  nuget:
+    secure: 5e3WGsmSiPCJIOzvvSEB7guzmGKKwwqXKzapNy5ZlZKTmL6wHvlUIML/d+MvCYeJ
+
 version: 1.4.{build}
 
 dotnet_csproj:
@@ -12,9 +21,10 @@ dotnet_csproj:
   version: '{version}'
   package_version: '{version}'
   assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
 
 build_script:
   - pwsh: dotnet build --configuration Release
   - pwsh: dotnet test test/AD.IO.Tests --configuration Release
+
+on_success:
+  - pwsh: dotnet nuget push src/AD.IO/bin/release/AD.IO.{version}.nupkg --source https://www.nuget.org/api/v2/package --api-key $env:nuget
