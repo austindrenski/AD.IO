@@ -27,4 +27,4 @@ build_script:
   - pwsh: dotnet test test/AD.IO.Tests --configuration Release
 
 on_success:
-  - pwsh: dotnet nuget push src/AD.IO/bin/release/AD.IO.{version}.nupkg --source https://www.nuget.org/api/v2/package --api-key $env:nuget
+  - pwsh: dotnet nuget push src/AD.IO/bin/release/AD.IO.${env:version}.nupkg --source https://www.nuget.org/api/v2/package --api-key ${env:nuget}
