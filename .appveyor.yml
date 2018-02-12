@@ -11,7 +11,7 @@ branches:
 
 environment:
   nuget:
-    secure: 5e3WGsmSiPCJIOzvvSEB7guzmGKKwwqXKzapNy5ZlZKTmL6wHvlUIML/d+MvCYeJ
+    secure: lAOgXBlidUDKDMFlDJInIUO7K9vZc4FHLP715QyBp1gP9KFNQjntN70Jo6gi4+bA
 
 version: 1.4.{build}
 
