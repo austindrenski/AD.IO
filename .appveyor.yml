@@ -4,14 +4,16 @@ image:
 platform:
   - Any CPU
 
+ version: 1.4.{build}-{branch}
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
-  version: '1.4.{version}'
-  package_version: '1.4.{version}'
-  assembly_version: '1.4.{version}'
-  file_version: '1.4.{version}'
-  informational_version: '1.4.{version}'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 
 build_script:
   - pwsh: dotnet build --configuration Release
