@@ -7,9 +7,8 @@ C# extension library for input/output operations and data management.
 ## Install from NuGet:
 
 ```Powershell 
-PM> Install-Package AD.IO
+dotnet add [<PROJECT>] package AD.IO
 ```
-
 ## Documentation
 
 ### [AD.IO.Compression](https://github.com/austindrenski/AD.IO/wiki/AD.IO.Compression)
