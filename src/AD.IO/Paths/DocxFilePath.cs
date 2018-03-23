@@ -320,6 +320,7 @@ namespace AD.IO.Paths
             return memoryStream;
         }
 
+        /// <inheritdoc cref="IPath.ToString"/>
         /// <summary>
         /// Returns the file path.
         /// </summary>
