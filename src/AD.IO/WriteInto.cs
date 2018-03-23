@@ -33,7 +33,7 @@ namespace AD.IO
         /// </returns>
         [NotNull]
         [ItemNotNull]
-        public static async Task<MemoryStream> WriteInto([NotNull] this Task<Stream> fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
+        public static async Task<MemoryStream> WriteIntoAsync([NotNull] this Task<Stream> fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
         {
             if (fromStream is null)
             {
@@ -50,7 +50,7 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            return await WriteInto(await fromStream, toStream, entryPath);
+            return await WriteIntoAsync(await fromStream, toStream, entryPath);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace AD.IO
         /// </returns>
         [NotNull]
         [ItemNotNull]
-        public static async Task<MemoryStream> WriteInto([NotNull] this Task<Stream> fromStream, [NotNull] Task<Stream> toStream, [NotNull] string entryPath)
+        public static async Task<MemoryStream> WriteIntoAsync([NotNull] this Task<Stream> fromStream, [NotNull] Task<Stream> toStream, [NotNull] string entryPath)
         {
             if (fromStream is null)
             {
@@ -87,7 +87,7 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            return await WriteInto(await fromStream, await toStream, entryPath);
+            return await WriteIntoAsync(await fromStream, await toStream, entryPath);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace AD.IO
         /// </returns>
         [NotNull]
         [ItemNotNull]
-        public static async Task<MemoryStream> WriteInto([NotNull] this Stream fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
+        public static async Task<MemoryStream> WriteIntoAsync([NotNull] this Stream fromStream, [NotNull] Stream toStream, [NotNull] string entryPath)
         {
             if (fromStream is null)
             {
@@ -168,7 +168,7 @@ namespace AD.IO
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static async Task<MemoryStream> WriteInto([NotNull] this XElement element, [NotNull] Task<Stream> toStream, [NotNull] string entryPath)
+        public static async Task<MemoryStream> WriteIntoAsync([NotNull] this XElement element, [NotNull] Task<Stream> toStream, [NotNull] string entryPath)
         {
             if (element is null)
             {
@@ -185,7 +185,7 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            return await WriteInto(element, await toStream, entryPath);
+            return await WriteIntoAsync(element, await toStream, entryPath);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace AD.IO
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static async Task<MemoryStream> WriteInto([NotNull] this XElement element, [NotNull] Stream toStream, [NotNull] string entryPath)
+        public static async Task<MemoryStream> WriteIntoAsync([NotNull] this XElement element, [NotNull] Stream toStream, [NotNull] string entryPath)
         {
             if (element is null)
             {

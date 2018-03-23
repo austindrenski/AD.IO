@@ -16,28 +16,28 @@ namespace AD.IO
     /// Extension methods to read XML.
     /// </summary>
     [PublicAPI]
-    public static class ReadAsXmlExtensions
+    public static class ReadXmlExtensions
     {
         /// <summary>
-        /// The empty <see cref="XNode"/> array.
+        /// The empty <see cref="XElement"/> array.
         /// </summary>
-        private static readonly XNode[] Empty = new XNode[0];
+        private static readonly XElement[] Empty = new XElement[0];
 
         /// <summary>
-        /// Parses a delimited file into an <see cref="IEnumerable{XNode}"/>. File must include a header row.
+        /// Parses a delimited file into an <see cref="IEnumerable{XElement}"/>. File must include a header row.
         /// </summary>
         /// <param name="filePath">
         /// The path of the file to be parsed.
         /// </param>
         /// <returns>
-        /// A <see cref="IEnumerable{XNode}"/> representing the delimited data.
+        /// A <see cref="IEnumerable{XElement}"/> representing the delimited data.
         /// </returns>
         /// <exception cref="ArgumentException"/>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static IEnumerable<XNode> ReadAsXml([NotNull] this DelimitedFilePath filePath)
+        public static IEnumerable<XElement> ReadXml([NotNull] this DelimitedFilePath filePath)
         {
             if (filePath is null)
             {
@@ -88,21 +88,67 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XNode"/>.
+        /// Opens a <see cref="ZipArchive"/> to an OpenXML document as an <see cref="XElement"/>.
         /// </summary>
-        /// <param name="stream">
-        /// The stream of the .docx file to be opened.
+        /// <param name="archive">
+        /// The archive to be opened.
         /// </param>
         /// <param name="entryPath">
-        /// The entry path within the zip archive to read as XML.
+        /// The entry path within the archive to read as XML.
+        /// </param>
+        /// <param name="fallback">
+        /// An optional element to return if the entry is not found. If null, an exception is thrown.
         /// </param>
         /// <returns>
-        /// An <see cref="XNode"/> representing the document root of the Microsoft Word document.
+        /// An <see cref="XElement"/> representing the root of the XML document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
-        public static XNode ReadAsXml([NotNull] this Stream stream, [NotNull] string entryPath = "word/document.xml")
+        public static XElement ReadXml([NotNull] this ZipArchive archive, [NotNull] string entryPath = "word/document.xml", [CanBeNull] XElement fallback = default)
+        {
+            if (archive is null)
+            {
+                throw new ArgumentNullException(nameof(archive));
+            }
+
+            if (entryPath is null)
+            {
+                throw new ArgumentNullException(nameof(entryPath));
+            }
+
+            ZipArchiveEntry entry = archive.GetEntry(entryPath);
+
+            if (entry is null)
+            {
+                return fallback ?? throw new ArgumentException($"{entryPath} not found.");
+            }
+
+            using (Stream entryStream = entry.Open())
+            {
+                return XElement.Load(entryStream);
+            }
+        }
+
+        /// <summary>
+        /// Opens a <see cref="Stream"/> to an OpenXML file as an <see cref="XElement"/>.
+        /// </summary>
+        /// <param name="stream">
+        /// The stream of the file to be opened.
+        /// </param>
+        /// <param name="entryPath">
+        /// The entry path within the zip archive to read as XML.
+        /// </param>
+        /// <param name="fallback">
+        /// An optional element to return if the entry is not found. If null, an exception is thrown.
+        /// </param>
+        /// <returns>
+        /// An <see cref="XElement"/> representing the document root.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"/>
+        [Pure]
+        [NotNull]
+        public static XElement ReadXml([NotNull] this Stream stream, [NotNull] string entryPath = "word/document.xml", [CanBeNull] XElement fallback = default)
         {
             if (stream is null)
             {
@@ -114,32 +160,14 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(entryPath));
             }
 
-            if (stream.CanSeek)
+            using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read, true))
             {
-                stream.Seek(0, SeekOrigin.Begin);
+                return archive.ReadXml(entryPath, fallback);
             }
-
-            XNode node;
-            using (ZipArchive file = new ZipArchive(stream, ZipArchiveMode.Read, true))
-            {
-                ZipArchiveEntry entry = file.GetEntry(entryPath);
-
-                if (entry is null)
-                {
-                    return new XText(default(string));
-                }
-
-                using (Stream entryStream = entry.Open())
-                {
-                    node = XElement.Load(entryStream);
-                }
-            }
-
-            return node;
         }
 
         /// <summary>
-        /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XNode"/>.
+        /// Opens a <see cref="Stream"/> to a Microsoft Word document (.docx) as an <see cref="XElement"/>.
         /// </summary>
         /// <param name="stream">
         ///     The stream of the .docx file to be opened.
@@ -151,12 +179,12 @@ namespace AD.IO
         ///     The file name to store as an attribute on the root node.
         /// </param>
         /// <returns>
-        /// An <see cref="XNode"/> representing the document root of the Microsoft Word document.
+        /// An <see cref="XElement"/> representing the document root of the Microsoft Word document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
-        public static XNode ReadAsXml([NotNull] this Stream stream, [NotNull] string entryPath, [NotNull] string fileName)
+        public static XElement ReadXml([NotNull] this Stream stream, [NotNull] string entryPath, [NotNull] string fileName)
         {
             if (stream is null)
             {
@@ -173,18 +201,15 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            XNode node = ReadAsXml(stream, entryPath);
+            XElement element = ReadXml(stream, entryPath);
 
-            if (node is XElement element)
-            {
-                element.SetAttributeValue("fileName", fileName);
-            }
+            element.SetAttributeValue("fileName", fileName);
 
-            return node;
+            return element;
         }
 
         /// <summary>
-        /// Opens a Microsoft Word document (.docx) as an <see cref="XNode"/>.
+        /// Opens a Microsoft Word document (.docx) as an <see cref="XElement"/>.
         /// </summary>
         /// <param name="filePath">
         /// The file path of the .docx file to be opened. The file name is stored as an attribure of the root element.
@@ -193,12 +218,12 @@ namespace AD.IO
         /// >The entry path within the zip archive to read as XML.
         /// </param>
         /// <returns>
-        /// An <see cref="XNode"/> representing the document root of the Microsoft Word document.
+        /// An <see cref="XElement"/> representing the document root of the Microsoft Word document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
-        public static XNode ReadAsXml([NotNull] this DocxFilePath filePath, [NotNull] string entryPath = "word/document.xml")
+        public static XElement ReadXml([NotNull] this DocxFilePath filePath, [NotNull] string entryPath = "word/document.xml")
         {
             if (filePath is null)
             {
@@ -212,100 +237,100 @@ namespace AD.IO
 
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                return fileStream.ReadAsXml(entryPath, filePath.Name);
+                return fileStream.ReadXml(entryPath, filePath.Name);
             }
         }
 
         /// <summary>
-        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XNode}"/>.
+        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XElement}"/>.
         /// </summary>
         /// <param name="streams">
         /// An enumerable collection of .docx files. The file names are stored as attribures of the root elements.
         /// </param>
         /// <returns>
-        /// An <see cref="IEnumerable{XNode}"/> wherein each <see cref="XNode"/> is the document root of one Microsoft Word document.
+        /// An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of one Microsoft Word document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static IEnumerable<XNode> ReadAsXml([NotNull] [ItemNotNull] this IEnumerable<Stream> streams)
+        public static IEnumerable<XElement> ReadXml([NotNull] [ItemNotNull] this IEnumerable<Stream> streams)
         {
             if (streams is null)
             {
                 throw new ArgumentNullException(nameof(streams));
             }
 
-            return streams.Select(x => x.ReadAsXml());
+            return streams.Select(x => x.ReadXml());
         }
 
         /// <summary>
-        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XNode}"/>.
+        /// Opens Microsoft Word documents (.docx) as an <see cref="IEnumerable{XElement}"/>.
         /// </summary>
         /// <param name="filePaths">
         /// An enumerable collection of .docx files. The file names are stored as attribures of the root elements.
         /// </param>
         /// <returns>
-        /// An <see cref="IEnumerable{XNode}"/> wherein each <see cref="XNode"/> is the document root of one Microsoft Word document.
+        /// An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of one Microsoft Word document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static IEnumerable<XNode> ReadAsXml([NotNull] [ItemNotNull] this IEnumerable<DocxFilePath> filePaths)
+        public static IEnumerable<XElement> ReadXml([NotNull] [ItemNotNull] this IEnumerable<DocxFilePath> filePaths)
         {
             if (filePaths is null)
             {
                 throw new ArgumentNullException(nameof(filePaths));
             }
 
-            return filePaths.Select(x => x.ReadAsXml());
+            return filePaths.Select(x => x.ReadXml());
         }
 
         /// <summary>
-        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XNode}"/>.
+        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XElement}"/>.
         /// </summary>
         /// <param name="streams">
         /// An enumerable collection of .docx files. The file names are stored as attribures of the root elements.
         /// </param>
         /// <returns>
-        /// An <see cref="IEnumerable{XNode}"/> wherein each <see cref="XNode"/> is the document root of a Microsoft Word document.
+        /// An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of a Microsoft Word document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static ParallelQuery<XNode> ReadAsXml([NotNull] [ItemNotNull] this ParallelQuery<Stream> streams)
+        public static ParallelQuery<XElement> ReadXml([NotNull] [ItemNotNull] this ParallelQuery<Stream> streams)
         {
             if (streams is null)
             {
                 throw new ArgumentNullException(nameof(streams));
             }
 
-            return streams.Select(x => x.ReadAsXml());
+            return streams.Select(x => x.ReadXml());
         }
 
         /// <summary>
-        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XNode}"/>.
+        /// Opens Microsoft Word documents (.docx) as a <see cref="ParallelQuery{XElement}"/>.
         /// </summary>
         /// <param name="filePaths">
         /// An enumerable collection of .docx files. The file names are stored as attribures of the root elements.
         /// </param>
         /// <returns>
-        /// An <see cref="IEnumerable{XNode}"/> wherein each <see cref="XNode"/> is the document root of a Microsoft Word document.
+        /// An <see cref="IEnumerable{XElement}"/> wherein each <see cref="XElement"/> is the document root of a Microsoft Word document.
         /// </returns>
         /// <exception cref="ArgumentNullException"/>
         [Pure]
         [NotNull]
         [ItemNotNull]
-        public static ParallelQuery<XNode> ReadAsXml([NotNull] [ItemNotNull] this ParallelQuery<DocxFilePath> filePaths)
+        public static ParallelQuery<XElement> ReadXml([NotNull] [ItemNotNull] this ParallelQuery<DocxFilePath> filePaths)
         {
             if (filePaths is null)
             {
                 throw new ArgumentNullException(nameof(filePaths));
             }
 
-            return filePaths.Select(x => x.ReadAsXml());
+            return filePaths.Select(x => x.ReadXml());
         }
     }
 }

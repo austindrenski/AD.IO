@@ -217,7 +217,7 @@ namespace AD.IO.Tests
             IEnumerable<string> expected = new string[] { "a", "b", "c", "d", "e", "f,f", "g", "h", "i", "j", "k", "l,l" }.OrderBy(x => x);
 
             // Act
-            IEnumerable<XNode> nodes = path.ReadAsXml();
+            IEnumerable<XNode> nodes = path.ReadXml();
             IEnumerable<string> result = nodes.Cast<XElement>().Elements().Select(x => x?.Value).OrderBy(x => x);
 
             // Assert
@@ -238,7 +238,7 @@ namespace AD.IO.Tests
             IEnumerable<string> expected = new string[] { "a", "b", "c", "d", "e", "f,f", "g", "h", "i", "j", "k", "l,l" }.OrderBy(x => x);
 
             // Act
-            IEnumerable<XNode> elements = path.ReadAsXml();
+            IEnumerable<XNode> elements = path.ReadXml();
             IEnumerable<string> result = elements.Cast<XElement>().Elements().Select(x => x?.Value).OrderBy(x => x);
 
             // Assert

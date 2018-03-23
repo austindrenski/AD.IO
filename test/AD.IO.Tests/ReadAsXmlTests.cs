@@ -22,7 +22,7 @@ namespace AD.IO.Tests
             DelimitedFilePath delimitedPath = DelimitedFilePath.Create(path, ',');
 
             // Act
-            IEnumerable<XNode> test = delimitedPath.ReadAsXml();
+            IEnumerable<XNode> test = delimitedPath.ReadXml();
 
             // Assert
             Assert.Empty(test);
@@ -37,10 +37,10 @@ namespace AD.IO.Tests
             DocxFilePath docx = DocxFilePath.Create(path, true);
 
             // Act
-            XElement element = docx.ReadAsXml() as XElement;
+            XElement element = docx.ReadXml();
 
             // Assert
-            Assert.Equal(docx.Name, (string) element?.Attribute("fileName"));
+            Assert.Equal(docx.Name, (string) element.Attribute("fileName"));
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace AD.IO.Tests
             DocxFilePath[] files = new DocxFilePath[] { docx0, docx1 };
 
             // Act
-            IEnumerable<XNode> elements = files.ReadAsXml();
+            IEnumerable<XNode> elements = files.ReadXml();
 
             // Assert
             Assert.True(elements.All(x => x is XElement));
@@ -75,7 +75,7 @@ namespace AD.IO.Tests
             DocxFilePath[] files = new DocxFilePath[] { docx0, docx1 };
 
             // Act
-            IEnumerable<XNode> elements = files.AsParallel().ReadAsXml();
+            IEnumerable<XNode> elements = files.AsParallel().ReadXml();
 
             // Assert
             Assert.True(elements.All(x => x is XElement));
