@@ -161,24 +161,28 @@ namespace AD.IO
         }
 
         /// <inheritdoc />
+        [Pure]
         public override string ToString()
         {
             return $"(separator: '{Separator}', open: '{Open}', close: '{Close}')";
         }
 
         /// <inheritdoc />
+        [Pure]
         public bool Equals(Delimiter other)
         {
             return Separator == other.Separator && Open == other.Open && Close == other.Close;
         }
 
         /// <inheritdoc />
+        [Pure]
         public override bool Equals(object obj)
         {
             return obj is Delimiter delimiter && Equals(delimiter);
         }
 
         /// <inheritdoc />
+        [Pure]
         public override int GetHashCode()
         {
             unchecked
@@ -202,6 +206,7 @@ namespace AD.IO
         /// <returns>
         /// True if equal; otherwise false.
         /// </returns>
+        [Pure]
         public static bool operator ==(Delimiter left, Delimiter right)
         {
             return left.Equals(right);
@@ -219,6 +224,7 @@ namespace AD.IO
         /// <returns>
         /// True if equal; otherwise false.
         /// </returns>
+        [Pure]
         public static bool operator !=(Delimiter left, Delimiter right)
         {
             return !left.Equals(right);

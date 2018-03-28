@@ -21,6 +21,7 @@
     <Authors>Austin Drenski</Authors>
     <Company>Austin Drenski</Company>
     <DocumentationFile>bin\Release\netstandard2.0\AD.IO.xml</DocumentationFile>
+    <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\*">
