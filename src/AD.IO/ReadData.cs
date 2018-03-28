@@ -34,16 +34,16 @@ namespace AD.IO
                 delimitedFilePath.Headers as string[] ?? delimitedFilePath.Headers.ToArray();
 
             IDictionary<string, string[]> dictionary = new Dictionary<string, string[]>(headers.Length);
-            
-            string[][] lines = 
+
+            string[][] lines =
                 File.ReadLines(delimitedFilePath)
                     .Skip(1)
-                    .SplitDelimitedLine(delimitedFilePath.Delimiter)
+                    .Select(x => x.SplitDelimitedLine(delimitedFilePath.Delimiter))
                     .Select(x => x.ToArray())
                     .ToArray()
-                    ?? 
+                    ??
                     new string[0][];
-            
+
             foreach (string header in headers)
             {
                 dictionary.Add(header, new string[lines.Length]);
@@ -56,8 +56,8 @@ namespace AD.IO
                     dictionary[headers[j]][i] = lines[i][j];
                 }
             }
-            
-            return dictionary;    
+
+            return dictionary;
         }
     }
 }

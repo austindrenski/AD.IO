@@ -1,19 +1,15 @@
-image:
-  - Visual Studio 2017
+image: Visual Studio 2017
 
-platform:
-  - Any CPU
+version: 1.5.{build}
 
 branches:
   only:
     - master
-    - production
 
 environment:
+  push: https://www.nuget.org/api/v2/package
   nuget:
     secure: lAOgXBlidUDKDMFlDJInIUO7K9vZc4FHLP715QyBp1gP9KFNQjntN70Jo6gi4+bA
-
-version: 1.4.{build}
 
 dotnet_csproj:
   patch: true
@@ -23,8 +19,10 @@ dotnet_csproj:
   assembly_version: '{version}'
 
 build_script:
-  - pwsh: dotnet build --configuration Release
-  - pwsh: dotnet test test/AD.IO.Tests --configuration Release
+  - pwsh: dotnet build -c Release
 
-on_success:
-  - pwsh: dotnet nuget push src/AD.IO/bin/release/AD.IO.${env:appveyor_build_version}.nupkg --source https://www.nuget.org/api/v2/package --api-key ${env:nuget}
+test_script:
+  - pwsh: dotnet test test/AD.IO.Tests -c Release
+
+deploy_script:
+  - pwsh: dotnet nuget push src/AD.IO/bin/release/AD.IO.${env:appveyor_build_version}.nupkg -s ${env:push} -k ${env:nuget}
