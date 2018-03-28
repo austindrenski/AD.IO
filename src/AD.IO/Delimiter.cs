@@ -61,6 +61,11 @@ namespace AD.IO
         /// </param>
         public Delimiter(char separator, char open, char close)
         {
+            if (separator == open || separator == close)
+            {
+                throw new ArgumentException("The separator character cannot be set to the open or close characters.");
+            }
+
             Open = open;
             Close = close;
             Separator = separator;
