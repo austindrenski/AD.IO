@@ -20,7 +20,7 @@ namespace AD.IO.Tests
             string result = directoryPath;
 
             // Assert
-            Assert.True(result == path);
+            Assert.Equal(path, result);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = new DirectoryPath(path);
 
             // Assert
-            Assert.True(directoryPath == path);
+            Assert.Equal(path, directoryPath);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = new DirectoryPath(path);
 
             // Assert
-            Assert.True(directoryPath.ToString() == path);
+            Assert.Equal(path, directoryPath.ToString());
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace AD.IO.Tests
             DirectoryPath directoryPath = DirectoryPath.Create(path);
 
             // Assert
-            Assert.True(directoryPath.ToString() == path);
+            Assert.Equal(path, directoryPath.ToString());
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace AD.IO.Tests
             string extension = directoryPath.Extension;
 
             // Assert
-            Assert.True(extension == null);
+            Assert.Null(extension);
         }
 
         [Fact]
@@ -121,7 +121,7 @@ namespace AD.IO.Tests
             string name = directoryPath.Name;
 
             // Assert
-            Assert.True(name != null);
+            Assert.NotNull(name);
         }
 
         [Fact]
@@ -148,7 +148,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = directoryPath.Select(x => x);
 
             // Assert
-            Assert.True(string.Join(null, charPath).Equals(directoryPath.ToString()));
+            Assert.Equal(string.Join(null, charPath), directoryPath.ToString());
         }
 
         [Fact]

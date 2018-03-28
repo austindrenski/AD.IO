@@ -23,7 +23,7 @@ namespace AD.IO.Tests
             string result = test.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "aa|bb\r\naa|bb\r\naa|bb");
+            Assert.Equal("aa|bb\r\naa|bb\r\naa|bb", result);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace AD.IO.Tests
             string result = test.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "a|b|c");
+            Assert.Equal("a|b|c", result);
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace AD.IO.Tests
             string result = test.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "A|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0");
+            Assert.Equal("A|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0", result);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace AD.IO.Tests
             string result = test.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "0|1|2");
+            Assert.Equal("0|1|2", result);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace AD.IO.Tests
             string result = document.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "a|b|c|HTS10|z|zz\r\nA|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0");
+            Assert.Equal("a|b|c|HTS10|z|zz\r\nA|B|C|0123456789||0\r\nD|E|F|0123456789||0\r\nG|H|I|0123456789||0", result);
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace AD.IO.Tests
             string result = document.ToDelimited("&");
 
             // Assert
-            Assert.Equal(result, "a&b&c&HTS10&z&zz\r\nA&B&C&0123456789&&0\r\nD&E&F&0123456789&&0\r\nG&H&I&0123456789&&0");
+            Assert.Equal("a&b&c&HTS10&z&zz\r\nA&B&C&0123456789&&0\r\nD&E&F&0123456789&&0\r\nG&H&I&0123456789&&0", result);
         }
 
         [Fact]
@@ -154,7 +154,7 @@ namespace AD.IO.Tests
             string result = test.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "a|b|c\r\nd|e|f\r\ng|h|i");
+            Assert.Equal("a|b|c\r\nd|e|f\r\ng|h|i", result);
         }
 
         [Fact]
@@ -190,7 +190,7 @@ namespace AD.IO.Tests
             string result = test.ToDelimited();
 
             // Assert
-            Assert.Equal(result, "0|1|2\r\n3|4|5\r\n6|7|8");
+            Assert.Equal("0|1|2\r\n3|4|5\r\n6|7|8", result);
         }
 
         [Fact]

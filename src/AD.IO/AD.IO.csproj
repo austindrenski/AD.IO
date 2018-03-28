@@ -14,10 +14,10 @@
     <Description>C# extension library for input/output operations and data management.</Description>
     <RepositoryUrl>https://github.com/austindrenski/AD.IO</RepositoryUrl>
     <PackageTags>read-data read-xml read-csv read-delimited file data xml csv</PackageTags>
-    <AssemblyVersion>1.4.12</AssemblyVersion>
-    <FileVersion>1.4.12</FileVersion>
-    <Version>1.4.12</Version>
-    <PackageVersion>1.4.12</PackageVersion>
+    <AssemblyVersion>1.5.0</AssemblyVersion>
+    <FileVersion>1.5.0</FileVersion>
+    <Version>1.5.0</Version>
+    <PackageVersion>1.5.0</PackageVersion>
     <Authors>Austin Drenski</Authors>
     <Company>Austin Drenski</Company>
     <DocumentationFile>bin\Release\netstandard2.0\AD.IO.xml</DocumentationFile>

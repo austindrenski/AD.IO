@@ -116,7 +116,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = zip.Select(x => x);
 
             // Assert
-            Assert.True(string.Join(null, charPath).Equals(zip.ToString()));
+            Assert.Equal(string.Join(null, charPath), zip.ToString());
         }
 
         [Fact]

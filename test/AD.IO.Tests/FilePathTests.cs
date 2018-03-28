@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace AD.IO.Tests
             FilePath filePath = path;
 
             // Assert
-            Assert.True(filePath == path);
+            Assert.Equal(path, filePath);
         }
 
         [Fact]
@@ -52,7 +53,7 @@ namespace AD.IO.Tests
             FilePath filePath = new FilePath(path);
 
             // Assert
-            Assert.True(filePath == path);
+            Assert.Equal(path, filePath);
         }
 
         [Fact]
@@ -75,7 +76,7 @@ namespace AD.IO.Tests
             FilePath filePath = new FilePath(path);
 
             // Assert
-            Assert.True(filePath.ToString() == path);
+            Assert.Equal(path, filePath.ToString());
         }
 
         [Fact]
@@ -88,7 +89,7 @@ namespace AD.IO.Tests
             FilePath filePath = FilePath.Create(path);
 
             // Assert
-            Assert.True(filePath.ToString() == path);
+            Assert.Equal(path, filePath.ToString());
         }
 
         [Fact]
@@ -102,7 +103,7 @@ namespace AD.IO.Tests
             string extension = filePath.Extension;
 
             // Assert
-            Assert.True(extension == ".tmp");
+            Assert.Equal(".tmp", extension);
         }
 
         [Fact]
@@ -116,7 +117,7 @@ namespace AD.IO.Tests
             string name = filePath.Name;
 
             // Assert
-            Assert.True(name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+            Assert.Contains(name, fileName, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -131,7 +132,7 @@ namespace AD.IO.Tests
             IPath test = path.Create(name);
 
             // Assert
-            Assert.True(test.ToString().Equals(name, System.StringComparison.OrdinalIgnoreCase));
+            Assert.Equal(name, test.ToString(), StringComparer.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -144,7 +145,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = filePath.Select(x => x);
 
             // Assert
-            Assert.True(string.Join(null, charPath).Equals(filePath.ToString()));
+            Assert.Equal(string.Join(null, charPath), filePath.ToString());
         }
 
         [Fact]
@@ -174,7 +175,7 @@ namespace AD.IO.Tests
             DocxFilePath result = filePath;
 
             // Assert
-            Assert.True(result.Name == filePath.Name);
+            Assert.Equal(filePath.Name, result.Name);
         }
 
         [Fact]
@@ -190,7 +191,7 @@ namespace AD.IO.Tests
             ZipFilePath result = (ZipFilePath) filePath;
 
             // Assert
-            Assert.True(result.Name == filePath.Name);
+            Assert.Equal(filePath.Name, result.Name);
         }
 
         [Fact]
@@ -203,7 +204,7 @@ namespace AD.IO.Tests
             UrlPath result = (UrlPath) filePath;
 
             // Assert
-            Assert.True(result != "");
+            Assert.NotEqual(string.Empty, result);
         }
     }
 }

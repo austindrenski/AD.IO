@@ -22,7 +22,7 @@ namespace AD.IO.Tests
             UrlPath url = (UrlPath) filePath;
 
             // Assert
-            Assert.True(url.UriPath.AbsoluteUri == uri.AbsoluteUri);
+            Assert.Equal(uri.AbsoluteUri, url.UriPath.AbsoluteUri);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace AD.IO.Tests
             UrlPath url = (UrlPath) filePath;
 
             // Assert
-            Assert.True(url.Name == null);
+            Assert.Null(url.Name);
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = urlPath.Select(x => x);
 
             // Assert
-            Assert.True(string.Join(null, charPath).Equals(urlPath.ToString()));
+            Assert.Equal(string.Join(null, charPath), urlPath.ToString());
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace AD.IO.Tests
             Uri test = urlPath;
 
             // Assert
-            Assert.True(test != null);
+            Assert.NotNull(test);
         }
 
         [Fact]

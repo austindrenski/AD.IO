@@ -51,7 +51,13 @@ namespace AD.IO
         {
             Delimiter delim = new Delimiter(delimiter, '"', '"');
 
-            return delim.Split(line, true).Select(x => removeLineEndings ? x.Value.Replace("\r", null).Replace("\n", null) : x.Value);
+            return
+                delim.Split(line, true)
+                     .Select(
+                         x =>
+                             removeLineEndings
+                                 ? x.Value.Replace("\r", null).Replace("\n", null)
+                                 : x.Value);
         }
     }
 }

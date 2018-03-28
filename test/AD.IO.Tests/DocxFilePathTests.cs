@@ -23,7 +23,7 @@ namespace AD.IO.Tests
             ZipFilePath zip = test;
 
             // Assert
-            Assert.Equal(zip.Name, Path.GetFileName(test).Replace(".zip", null));
+            Assert.Equal(Path.GetFileName(test).Replace(".zip", null), zip.Name);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace AD.IO.Tests
             ZipFilePath zip = test;
 
             // Assert
-            Assert.Equal(zip.Extension, Path.GetExtension(test));
+            Assert.Equal(Path.GetExtension(test), zip.Extension);
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace AD.IO.Tests
             ZipFilePath zip = ZipFilePath.Create(test);
 
             // Assert
-            Assert.Equal(zip.Extension, Path.GetExtension(test));
+            Assert.Equal(Path.GetExtension(test), zip.Extension);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace AD.IO.Tests
             IEnumerable<char> charPath = zip.Select(x => x);
 
             // Assert
-            Assert.True(string.Join(null, charPath).Equals(zip.ToString()));
+            Assert.Equal(string.Join(null, charPath), zip.ToString());
         }
 
         [Fact]
@@ -144,7 +144,7 @@ namespace AD.IO.Tests
             string test = zip.ToString();
 
             // Assert
-            Assert.True(test == zip);
+            Assert.Equal(zip.ToString(), test);
         }
 
         [Fact]

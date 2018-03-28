@@ -271,7 +271,7 @@ namespace AD.IO.Paths
                 return new DocxFilePath(filePath);
             }
 
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Truncate, FileAccess.Write, FileShare.Read))
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read))
             {
                 byte[] buffer = Create().GetBuffer();
                 fileStream.Write(buffer, 0, buffer.Length);

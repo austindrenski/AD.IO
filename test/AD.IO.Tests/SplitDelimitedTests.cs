@@ -12,90 +12,8 @@ namespace AD.IO.Tests
     [PublicAPI]
     public class SplitDelimitedExtensionsTests
     {
-        public static IEnumerable<object[]> TestData0 =>
-            new List<object[]>
-            {
-                new object[]
-                {
-                    Delimiter.Parenthetical,
-                    "a,b,c,d,e,f,g",
-                    new string[] { "a", "b", "c", "d", "e", "f", "g" }
-                },
-                new object[]
-                {
-                    Delimiter.Parenthetical,
-                    "a,b,c,group_1(d,e,f),g",
-                    new string[] { "a", "b", "c", "group_1(d,e,f)", "g" }
-                },
-                new object[]
-                {
-                    Delimiter.Parenthetical,
-                    "a,b,c,group_1(d,e,f),group_2(g)",
-                    new string[] { "a", "b", "c", "group_1(d,e,f)", "group_2(g)" }
-                },
-                new object[]
-                {
-                    Delimiter.Quote,
-                    "a,b,c,d,e,\"f\"",
-                    new string[] { "a", "b", "c", "d", "e", "\"f\"" }
-                },
-                new object[]
-                {
-                    Delimiter.Quote,
-                    "a,b,c,d,e,\"f,g\"",
-                    new string[] { "a", "b", "c", "d", "e", "\"f,g\"" }
-                },
-                new object[]
-                {
-                    Delimiter.Quote,
-                    "a,b,c,d,e,\"f,g\",\r\na,b,c,d,e|,\"f|g\"",
-                    new string[] { "a", "b", "c", "d", "e", "\"f,g\"", "\r\na", "b", "c", "d", "e|", "\"f|g\"" }
-                },
-                new object[]
-                {
-                    Delimiter.Pipe,
-                    "a|b|c|d|e|\"f|g\"|\r\na|b|c|d|e,|\"f,g\"",
-                    new string[] { "a", "b", "c", "d", "e", "\"f|g\"", "\r\na", "b", "c", "d", "e,", "\"f,g\"" }
-                }
-            };
-
-        public static IEnumerable<object[]> TestData1 =>
-            new List<object[]>
-            {
-                new object[]
-                {
-                    ',',
-                    "a,b,c,d,e,f,g",
-                    new string[] { "a", "b", "c", "d", "e", "f", "g" }
-                },
-                new object[]
-                {
-                    ',',
-                    "a,b,c,d,e,\"f\"",
-                    new string[] { "a", "b", "c", "d", "e", "f" }
-                },
-                new object[]
-                {
-                    ',',
-                    "a,b,c,d,e,\"f,g\"",
-                    new string[] { "a", "b", "c", "d", "e", "f,g" }
-                },
-                new object[]
-                {
-                    ',',
-                    "a,b,c,d,e,\"f,g\",\r\na,b,c,d,e|,\"f|g\"",
-                    new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }
-                },
-                new object[]
-                {
-                    '|',
-                    "a|b|c|d|e|\"f|g\"|\r\na|b|c|d|e,|\"f,g\"",
-                    new string[] { "a", "b", "c", "d", "e", "f|g", "a", "b", "c", "d", "e,", "f,g" }
-                }
-            };
-
         [Theory]
-        [MemberData(nameof(TestData0))]
+        [MemberData(nameof(TestDataGenerator.TestData0), MemberType = typeof(TestDataGenerator))]
         public void Test0(Delimiter delimiter, string value, StringValues expected)
         {
             StringValues result = value.Split(delimiter).ToArray();
@@ -104,10 +22,10 @@ namespace AD.IO.Tests
         }
 
         [Theory]
-        [MemberData(nameof(TestData1))]
-        public void Test1(char delimiter, string value, StringValues expected)
+        [MemberData(nameof(TestDataGenerator.TestData1), MemberType = typeof(TestDataGenerator))]
+        public void Test1(Delimiter delimiter, string value, StringValues expected)
         {
-            StringValues result = value.SplitDelimitedLine(delimiter).ToArray();
+            StringValues result = value.SplitDelimitedLine(delimiter.Separator).ToArray();
 
             Assert.Equal(expected, result);
         }
@@ -154,6 +72,85 @@ namespace AD.IO.Tests
 
             // Assert
             Assert.True(result.SequenceEqual(expected));
+        }
+
+        public class TestDataGenerator
+        {
+            public static IEnumerable<object[]> TestData0 =>
+                new List<object[]>
+                {
+                    new object[]
+                    {
+                        Delimiter.Parenthetical,
+                        "a,b,c,d,e,f,g",
+                        new string[] { "a", "b", "c", "d", "e", "f", "g" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Parenthetical,
+                        "a,b,c,group_1(d,e,f),g",
+                        new string[] { "a", "b", "c", "group_1(d,e,f)", "g" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Parenthetical,
+                        "a,b,c,group_1(d,e,f),group_2(g)",
+                        new string[] { "a", "b", "c", "group_1(d,e,f)", "group_2(g)" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,\"f\"",
+                        new string[] { "a", "b", "c", "d", "e", "\"f\"" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,\"f,g\"",
+                        new string[] { "a", "b", "c", "d", "e", "\"f,g\"" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,\"f,g\",\r\na,b,c,d,e|,\"f|g\"",
+                        new string[] { "a", "b", "c", "d", "e", "\"f,g\"", "\r\na", "b", "c", "d", "e|", "\"f|g\"" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Pipe,
+                        "a|b|c|d|e|\"f|g\"|\r\na|b|c|d|e,|\"f,g\"",
+                        new string[] { "a", "b", "c", "d", "e", "\"f|g\"", "\r\na", "b", "c", "d", "e,", "\"f,g\"" }
+                    }
+                };
+
+            public static IEnumerable<object[]> TestData1 =>
+                new List<object[]>
+                {
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,f,g",
+                        new string[] { "a", "b", "c", "d", "e", "f", "g" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,\"f\"",
+                        new string[] { "a", "b", "c", "d", "e", "f" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,\"f,g\"",
+                        new string[] { "a", "b", "c", "d", "e", "f,g" }
+                    },
+                    new object[]
+                    {
+                        Delimiter.Comma,
+                        "a,b,c,d,e,\"f,g\",\r\na,b,c,d,e|,\"f|g\"",
+                        new string[] { "a", "b", "c", "d", "e", "f,g", "a", "b", "c", "d", "e|", "f|g" }
+                    }
+                };
         }
     }
 }

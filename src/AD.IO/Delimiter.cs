@@ -13,6 +13,11 @@ namespace AD.IO
     public readonly struct Delimiter : IEquatable<Delimiter>
     {
         /// <summary>
+        /// A parenthetical delimiter in which strings are split by commas, except where enclosed by quotes.
+        /// </summary>
+        public static readonly Delimiter Comma = new Delimiter(',', '"', '"');
+
+        /// <summary>
         /// A parenthetical delimiter in which strings are split by commas, except where enclosed by parenthese.
         /// </summary>
         public static readonly Delimiter Parenthetical = new Delimiter(',', '(', ')');
@@ -23,9 +28,9 @@ namespace AD.IO
         public static readonly Delimiter Pipe = new Delimiter('|', '"', '"');
 
         /// <summary>
-        /// A parenthetical delimiter in which strings are split by commas, except where enclosed by quotes.
+        /// A parenthetical delimiter in which strings are split by tabs, except where enclosed by quotes.
         /// </summary>
-        public static readonly Delimiter Quote = new Delimiter(',', '"', '"');
+        public static readonly Delimiter Tab = new Delimiter('\t', '"', '"');
 
         /// <summary>
         /// The separator character.
@@ -158,7 +163,7 @@ namespace AD.IO
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"(separator: {Separator}, open: {Open}, close: {Close})";
+            return $"(separator: '{Separator}', open: '{Open}', close: '{Close}')";
         }
 
         /// <inheritdoc />
