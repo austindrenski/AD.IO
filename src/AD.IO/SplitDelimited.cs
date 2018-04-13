@@ -39,11 +39,21 @@ namespace AD.IO
         /// <summary>
         /// Splits a string on the delimiter character. Preserves delimiters embeded in double quotation marks.
         /// </summary>
-        /// <param name="line">The delimited string to be split.</param>
-        /// <param name="delimiter">The character that delimits the string.</param>
-        /// <param name="removeEnclosures">True if quotes should be removed; otherwise false.</param>
-        /// <param name="removeLineEndings">True if line endings should be removed; otherwise false.</param>
-        /// <returns>An enumerable collection of the strings between comma characters.</returns>
+        /// <param name="line">
+        /// The delimited string to be split.
+        /// </param>
+        /// <param name="delimiter">
+        /// The character that delimits the string.
+        /// </param>
+        /// <param name="removeEnclosures">
+        /// True if quotes should be removed; otherwise false.
+        /// </param>
+        /// <param name="removeLineEndings">
+        /// True if line endings should be removed; otherwise false.
+        /// </param>
+        /// <returns>
+        /// An enumerable collection of the strings between comma characters.
+        /// </returns>
         [Pure]
         [NotNull]
         [ItemCanBeNull]
@@ -52,12 +62,9 @@ namespace AD.IO
             Delimiter delim = new Delimiter(delimiter, '"', '"');
 
             return
-                delim.Split(line, true)
-                     .Select(
-                         x =>
-                             removeLineEndings
-                                 ? x.Value.Replace("\r", null).Replace("\n", null)
-                                 : x.Value);
+                delim.Split(line, removeEnclosures)
+                     .Select(x => x.Value)
+                     .Select(x => removeLineEndings ? x.Replace("\r", null).Replace("\n", null) : x);
         }
     }
 }

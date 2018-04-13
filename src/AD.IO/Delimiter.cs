@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Primitives;
 
+// ReSharper disable ImpureMethodCallOnReadonlyValueField
+
 namespace AD.IO
 {
     /// <inheritdoc cref="IEquatable{T}" />
     /// <summary>
     /// Defines a read-only struct that represents delimiter information.
     /// </summary>
+    /// <remarks>
+    /// https://tools.ietf.org/html/rfc4180
+    /// https://tools.ietf.org/html/rfc7111
+    /// </remarks>
     [PublicAPI]
     public readonly struct Delimiter : IEquatable<Delimiter>
     {
@@ -35,17 +41,17 @@ namespace AD.IO
         /// <summary>
         /// The separator character.
         /// </summary>
-        public char Separator { get; }
+        public readonly char Separator;
 
         /// <summary>
         /// The open character.
         /// </summary>
-        public char Open { get; }
+        public readonly char Open;
 
         /// <summary>
         /// The close character.
         /// </summary>
-        public char Close { get; }
+        public readonly char Close;
 
         ///  <summary>
         /// Constructs a <see cref="Delimiter"/>.
@@ -94,10 +100,12 @@ namespace AD.IO
             }
 
             StringSegment remainder = value;
+
             while (remainder != StringSegment.Empty)
             {
                 StringSegment result;
-                (result, remainder) = NextSegment(remainder);
+
+                (result, remainder) = NextSegment(in remainder);
 
                 if (removeEnclosure && result[0] == Open && result[result.Length - 1] == Close)
                 {
@@ -120,13 +128,14 @@ namespace AD.IO
         /// A tuple of the result segment and the remainder.
         /// </returns>
         [Pure]
-        public (StringSegment Result, StringSegment Remainder) NextSegment(StringSegment segment)
+        public (StringSegment Result, StringSegment Remainder) NextSegment(in StringSegment segment)
         {
             for (int i = 0; i < segment.Length; i++)
             {
-                if (segment[i] == Open)
+                // Is the current character an opening character and not escaped?
+                if (segment[i] == Open && i + 1 < segment.Length && segment[i + 1] != Open)
                 {
-                    return GetSubExpression(segment, i);
+                    return GetSubExpression(in segment, i);
                 }
 
                 if (segment[i] == Separator)
@@ -152,12 +161,20 @@ namespace AD.IO
         /// </returns>
         /// <exception cref="ArgumentException"/>
         [Pure]
-        private (StringSegment Result, StringSegment Remainder) GetSubExpression(StringSegment segment, int openIndex)
+        private (StringSegment Result, StringSegment Remainder) GetSubExpression(in StringSegment segment, int openIndex)
         {
             for (int i = openIndex + 1; i < segment.Length; i++)
             {
+                // TODO: working on escaped members.
+                // Is the current character a closing character and not escaped?
+//                if (segment[i] == Close && (i + 1 == segment.Length || segment[i + 1] != Close))
                 if (segment[i] == Close)
                 {
+//                    if ((i - 1 > 0 && segment[i - 1] == Close) ||(i + 1 < segment.Length && segment[i + 1] == Close))
+//                    {
+//                        continue;
+//                    }
+
                     return (segment.Subsegment(0, i + 1), i + 2 < segment.Length ? segment.Subsegment(i + 2) : StringSegment.Empty);
                 }
             }
