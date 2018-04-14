@@ -20,12 +20,23 @@ namespace AD.IO
         /// <param name="filePath">The file to which the content is written.</param>
         /// <param name="delimiter">The character used to delimit values.</param>
         /// <param name="overwrite">True to overwrite an existing file.</param>
-        public static void WriteDelimited<T>(this IEnumerable<T> elements, DelimitedFilePath filePath, string delimiter = "|", bool overwrite = true)
+        public static void WriteDelimited<T>([NotNull] this IEnumerable<T> elements, [NotNull] DelimitedFilePath filePath, char delimiter = '|', bool overwrite = true)
         {
+            if (elements is null)
+            {
+                throw new ArgumentNullException(nameof(elements));
+            }
+
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             if (!overwrite)
             {
                 return;
             }
+
             using (FileStream stream = new FileStream(filePath, FileMode.Truncate))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
@@ -45,12 +56,23 @@ namespace AD.IO
         /// <param name="filePath">The file to which the content is written.</param>
         /// <param name="delimiter">The character used to delimit values.</param>
         /// <param name="overwrite">True to overwrite an existing file.</param>
-        public static void WriteDelimited<T>(this IEnumerable<IEnumerable<T>> elements, DelimitedFilePath filePath, string delimiter = "|", bool overwrite = true)
+        public static void WriteDelimited<T>([NotNull] this IEnumerable<IEnumerable<T>> elements, [NotNull] DelimitedFilePath filePath, char delimiter = '|', bool overwrite = true)
         {
+            if (elements is null)
+            {
+                throw new ArgumentNullException(nameof(elements));
+            }
+
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             if (!overwrite)
             {
                 return;
             }
+
             using (FileStream stream = new FileStream(filePath, FileMode.Truncate))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
@@ -67,12 +89,23 @@ namespace AD.IO
         /// <param name="filePath">The file to which the content is written.</param>
         /// <param name="delimiter">The character used to delimit values.</param>
         /// <param name="overwrite">True to overwrite an existing file.</param>
-        public static void WriteDelimited(this IEnumerable<XElement> elements, DelimitedFilePath filePath, string delimiter = "|", bool overwrite = true)
+        public static void WriteDelimited([NotNull] this IEnumerable<XElement> elements, [NotNull] DelimitedFilePath filePath, char delimiter = '|', bool overwrite = true)
         {
+            if (elements is null)
+            {
+                throw new ArgumentNullException(nameof(elements));
+            }
+
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
             if (!overwrite)
             {
                 return;
             }
+
             using (FileStream stream = new FileStream(filePath, FileMode.Truncate))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
@@ -90,8 +123,23 @@ namespace AD.IO
         /// <param name="completedMessage">The message written to the console upon completion.</param>
         /// <param name="delimiter">The character used to delimit values.</param>
         /// <param name="overwrite">True to overwrite an existing file.</param>
-        public static void WriteDelimited(this IEnumerable<XElement> elements, DelimitedFilePath filePath, string completedMessage, string delimiter = "|", bool overwrite = true)
+        public static void WriteDelimited([NotNull] this IEnumerable<XElement> elements, [NotNull] DelimitedFilePath filePath, [NotNull] string completedMessage, char delimiter = '|', bool overwrite = true)
         {
+            if (elements is null)
+            {
+                throw new ArgumentNullException(nameof(elements));
+            }
+
+            if (filePath is null)
+            {
+                throw new ArgumentNullException(nameof(filePath));
+            }
+
+            if (completedMessage is null)
+            {
+                throw new ArgumentNullException(nameof(completedMessage));
+            }
+
             elements.WriteDelimited(filePath, delimiter, overwrite);
             Console.WriteLine(completedMessage);
         }

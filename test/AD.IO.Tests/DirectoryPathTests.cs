@@ -101,8 +101,7 @@ namespace AD.IO.Tests
         public void DirectoryPathTest7()
         {
             // Arrange
-            string path = Path.Combine(Path.GetTempPath(), "testdirectory");
-            DirectoryPath directoryPath = path;
+            DirectoryPath directoryPath = Path.GetTempPath();
 
             // Act
             string extension = directoryPath.Extension;

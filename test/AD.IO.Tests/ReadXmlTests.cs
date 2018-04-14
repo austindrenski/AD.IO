@@ -7,10 +7,10 @@ using Xunit;
 
 namespace AD.IO.Tests
 {
-    public class ReadAsXmlTests
+    public class ReadXmlTests
     {
         [Fact]
-        public void ReadAsXmlTest0()
+        public void ReadXmlTest0()
         {
             // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test_read_as_xml.csv");
@@ -29,7 +29,7 @@ namespace AD.IO.Tests
         }
 
         [Fact]
-        public void ReadAsXmlTest1()
+        public void ReadXmlTest1()
         {
             // Arrange
             string path = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
@@ -44,7 +44,7 @@ namespace AD.IO.Tests
         }
 
         [Fact]
-        public void ReadAsXmlTest2()
+        public void ReadXmlTest2()
         {
             // Arrange
             string path0 = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
@@ -63,7 +63,7 @@ namespace AD.IO.Tests
         }
 
         [Fact]
-        public void ReadAsXmlTest3()
+        public void ReadXmlTest3()
         {
             // Arrange
             string path0 = Path.Combine(Path.GetTempPath(), "test_read_as_xml.docx");
