@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Primitives;
 
-// ReSharper disable ImpureMethodCallOnReadonlyValueField
-
 namespace AD.IO
 {
     /// <inheritdoc cref="IEquatable{T}" />
@@ -41,17 +39,17 @@ namespace AD.IO
         /// <summary>
         /// The separator character.
         /// </summary>
-        public readonly char Separator;
+        public char Separator { get; }
 
         /// <summary>
         /// The open character.
         /// </summary>
-        public readonly char Open;
+        public char Open { get; }
 
         /// <summary>
         /// The close character.
         /// </summary>
-        public readonly char Close;
+        public char Close { get; }
 
         ///  <summary>
         /// Constructs a <see cref="Delimiter"/>.
