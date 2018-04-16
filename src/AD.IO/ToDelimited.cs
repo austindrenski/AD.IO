@@ -67,6 +67,43 @@ namespace AD.IO
         }
 
         /// <summary>
+        ///
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static string ToDelimitedHeaders<T>([NotNull] this IEnumerable<T> source, char delimiter = '|')
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (typeof(T).Name.StartsWith(nameof(ValueTuple)))
+            {
+                return
+                    typeof(T).GetFields()
+                             .Select(x => MakeSafeString(x.Name, delimiter))
+                             .ToDelimitedString(delimiter);
+            }
+
+            if (source is IEnumerable<XElement> elements)
+            {
+                return
+                    elements.First()
+                            .Elements()
+                            .Select(x => MakeSafeString(x.Name.LocalName, delimiter))
+                            .ToDelimitedString(delimiter);
+            }
+
+            return
+                typeof(T).GetProperties()
+                         .Select(x => MakeSafeString(x.Name, delimiter))
+                         .ToDelimitedString(delimiter);
+        }
+
+        /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
@@ -74,11 +111,11 @@ namespace AD.IO
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimitedString<T>([NotNull] this T source, char delimiter = '|')
+        public static string ToDelimitedString<T>([CanBeNull] this T source, char delimiter = '|')
         {
             if (source == null)
             {
-                throw new ArgumentNullException(nameof(delimiter));
+                return string.Empty;
             }
 
             if (typeof(T).IsPrimitive)
@@ -88,6 +125,10 @@ namespace AD.IO
 
             switch (source)
             {
+                case XElement e:
+                {
+                    return e.ToDelimitedString(delimiter);
+                }
                 case string s:
                 {
                     return MakeSafeString(s, delimiter);
@@ -132,9 +173,10 @@ namespace AD.IO
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return source.HasElements
-                ? source.Elements().Select(x => x.Value).ToDelimitedString(delimiter)
-                : source.Value.ToDelimitedString();
+            return
+                source.HasElements
+                    ? source.Elements().Select(x => x.Value).ToDelimitedString(delimiter)
+                    : source.Value.ToDelimitedString();
         }
 
         /// <summary>
@@ -145,7 +187,7 @@ namespace AD.IO
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimitedString<T>([NotNull] [ItemNotNull] this IEnumerable<T> source, char delimiter = '|')
+        public static string ToDelimitedString<T>([NotNull] [ItemCanBeNull] this IEnumerable<T> source, char delimiter = '|')
         {
             if (source is null)
             {
@@ -156,133 +198,125 @@ namespace AD.IO
         }
 
         /// <summary>
-        /// Appends the strings of the enumerable collection by a delimiter.
-        /// Strings containing the delimiter are enclosed in double quotation marks.
-        /// </summary>
-        /// <param name="source">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimitedString([NotNull] [ItemCanBeNull] this IEnumerable<string> source, char delimiter = '|')
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            return string.Join(delimiter.ToString(), source.Select(x => MakeSafeString(x, delimiter)));
-        }
-
-        /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull] [ItemNotNull] this IEnumerable<T> source, char delimiter = '|')
+        public static string ToDelimited<T>([NotNull] [ItemCanBeNull] this IEnumerable<T> source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
-        }
-
-        /// <summary>
-        /// Appends the strings of the enumerable collection by a delimiter.
-        /// Strings containing the delimiter are enclosed in double quotation marks.
-        /// </summary>
-        /// <param name="source">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimited([NotNull] [ItemCanBeNull] this IEnumerable<string> source, char delimiter = '|')
-        {
-            if (source is null)
+            if (!headers)
             {
-                throw new ArgumentNullException(nameof(source));
+                return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
             }
 
-            return string.Join(Environment.NewLine, source.Select(x => MakeSafeString(x, delimiter)));
+            source = source as T[] ?? source.ToArray();
+
+            return
+                string.Join(
+                    Environment.NewLine,
+                    source.ToDelimitedHeaders(delimiter),
+                    string.Join(
+                        Environment.NewLine,
+                        source.Select(x => x.ToDelimitedString(delimiter))));
         }
 
         /// <summary>
         /// Returns the delimiter delimited values of the children each <see cref="XElement"/> delimited by new lines.
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter and new lines.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull] [ItemNotNull] this IEnumerable<XElement> source, char delimiter = '|')
+        public static string ToDelimited([NotNull] [ItemNotNull] this IEnumerable<XElement> source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
+            if (!headers)
+            {
+                return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
+            }
+
+            source = source as XElement[] ?? source.ToArray();
+
+            return
+                string.Join(
+                    Environment.NewLine,
+                    source.ToDelimitedHeaders(delimiter),
+                    string.Join(
+                        Environment.NewLine,
+                        source.Select(x => x.ToDelimitedString(delimiter))));
         }
 
         /// <summary>
         /// Appends the elements of the enumerable collection by a delimiter.
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited<T>([NotNull] [ItemNotNull] this IEnumerable<IEnumerable<T>> source, char delimiter = '|')
+        public static string ToDelimited<T>([NotNull] [ItemNotNull] this IEnumerable<IEnumerable<T>> source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
-        }
-
-        /// <summary>
-        /// Appends the elements of the enumerable collection by a delimiter.
-        /// </summary>
-        /// <param name="source">A collection to be delimited.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [CanBeNull]
-        public static string ToDelimited([NotNull] [ItemNotNull] this IEnumerable<IEnumerable<string>> source, char delimiter = '|')
-        {
-            if (source is null)
+            if (!headers)
             {
-                throw new ArgumentNullException(nameof(source));
+                return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
             }
 
-            return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
+            source = source as IEnumerable<T>[] ?? source.ToArray();
+
+            return
+                string.Join(
+                    Environment.NewLine,
+                    source.ToDelimitedHeaders(delimiter),
+                    string.Join(
+                        Environment.NewLine,
+                        source.Select(x => x.ToDelimitedString(delimiter))));
         }
 
         /// <summary>
         /// Appends the elements of the document by a delimiter.
         /// </summary>
         /// <param name="source">An XDocument to be transformed into a delimited string.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [CanBeNull]
-        public static string ToDelimited([NotNull] this XDocument source, char delimiter = '|')
+        public static string ToDelimited([NotNull] this XDocument source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (source.Root == null || !source.Root.HasElements)
+            if (source.Root is null || !source.Root.HasElements)
             {
                 return null;
+            }
+
+            if (!headers)
+            {
+                return string.Join(Environment.NewLine, source.Root.Elements().Select(x => x.ToDelimitedString(delimiter)));
             }
 
             XElement[] elements =
@@ -290,16 +324,13 @@ namespace AD.IO
                       .Elements()
                       .ToArray();
 
-            string headers =
-                elements.First()
-                        .Elements()
-                        .Select(x => x.Name.LocalName)
-                        .ToDelimitedString(delimiter);
-
-            string body =
-                string.Join(Environment.NewLine, elements.Select(x => x.ToDelimitedString(delimiter)));
-
-            return string.Join(Environment.NewLine, headers, body);
+            return
+                string.Join(
+                    Environment.NewLine,
+                    elements.ToDelimitedHeaders(delimiter),
+                    string.Join(
+                        Environment.NewLine,
+                        elements.Select(x => x.ToDelimitedString(delimiter))));
         }
     }
 }

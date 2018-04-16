@@ -8,7 +8,7 @@ namespace AD.IO.Tests
     public class ToDelimitedExtensionsTests
     {
         [Fact]
-        public void ToDelimitedTest0()
+        public void ToDelimitedTest00()
         {
             // Arrange
             var test =
@@ -21,6 +21,25 @@ namespace AD.IO.Tests
 
             // Act
             string result = test.ToDelimited();
+
+            // Assert
+            Assert.Equal($"a|b{Environment.NewLine}aa|bb{Environment.NewLine}aa|bb{Environment.NewLine}aa|bb", result);
+        }
+
+        [Fact]
+        public void ToDelimitedTest0()
+        {
+            // Arrange
+            var test =
+                new[]
+                {
+                    new { a = "aa", b = "bb" },
+                    new { a = "aa", b = "bb" },
+                    new { a = "aa", b = "bb" }
+                };
+
+            // Act
+            string result = test.ToDelimited(false);
 
             // Assert
             Assert.Equal($"aa|bb{Environment.NewLine}aa|bb{Environment.NewLine}aa|bb", result);
@@ -46,7 +65,7 @@ namespace AD.IO.Tests
             IEnumerable<string> test = new string[] { "a", "b", "c" };
 
             // Act
-            string result = test.ToDelimited();
+            string result = test.ToDelimited(false);
 
             // Assert
             Assert.Equal($"a{Environment.NewLine}b{Environment.NewLine}c", result);
@@ -82,7 +101,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string result = test.ToDelimited();
+            string result = test.ToDelimited(false);
 
             // Assert
             Assert.Equal($"A|B|C|0123456789||0{Environment.NewLine}D|E|F|0123456789||0{Environment.NewLine}G|H|I|0123456789||0", result);
@@ -108,7 +127,7 @@ namespace AD.IO.Tests
             IEnumerable<int> test = new int[] { 0, 1, 2 };
 
             // Act
-            string result = test.ToDelimited();
+            string result = test.ToDelimited(false);
 
             // Assert
             Assert.Equal($"0{Environment.NewLine}1{Environment.NewLine}2", result);
@@ -126,7 +145,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string result = test.ToDelimited();
+            string result = test.ToDelimited(false);
 
             // Assert
             Assert.Equal($"a|b|c{Environment.NewLine}d|e|f{Environment.NewLine}g|h|i", result);
@@ -144,7 +163,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string result = test.ToDelimited();
+            string result = test.ToDelimited(false);
 
             // Assert
             Assert.Equal($"0|1|2{Environment.NewLine}3|4|5{Environment.NewLine}6|7|8", result);
@@ -212,7 +231,7 @@ namespace AD.IO.Tests
                             new XElement("Field5", 10))));
 
             // Act
-            string test = document.ToDelimited(',');
+            string test = document.ToDelimited(delimiter: ',');
 
             // Assert
             Assert.Equal($"Field1,Field2,Field3,Field4,Field5{Environment.NewLine}1,2,3,4,5{Environment.NewLine}2,4,6,8,10", test);

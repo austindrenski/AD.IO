@@ -54,9 +54,10 @@ namespace AD.IO
         /// </summary>
         /// <param name="elements">The source enumerable.</param>
         /// <param name="filePath">The file to which the content is written.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The character used to delimit values.</param>
         /// <param name="overwrite">True to overwrite an existing file.</param>
-        public static void WriteDelimited<T>([NotNull] this IEnumerable<IEnumerable<T>> elements, [NotNull] DelimitedFilePath filePath, char delimiter = '|', bool overwrite = true)
+        public static void WriteDelimited<T>([NotNull] this IEnumerable<IEnumerable<T>> elements, [NotNull] DelimitedFilePath filePath, bool headers = false, char delimiter = '|', bool overwrite = true)
         {
             if (elements is null)
             {
@@ -77,7 +78,7 @@ namespace AD.IO
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    writer.Write(elements.ToDelimited(delimiter));
+                    writer.Write(elements.ToDelimited(headers, delimiter));
                 }
             }
         }
@@ -87,9 +88,10 @@ namespace AD.IO
         /// </summary>
         /// <param name="elements">The source enumerable.</param>
         /// <param name="filePath">The file to which the content is written.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The character used to delimit values.</param>
         /// <param name="overwrite">True to overwrite an existing file.</param>
-        public static void WriteDelimited([NotNull] this IEnumerable<XElement> elements, [NotNull] DelimitedFilePath filePath, char delimiter = '|', bool overwrite = true)
+        public static void WriteDelimited([NotNull] this IEnumerable<XElement> elements, [NotNull] DelimitedFilePath filePath, bool headers = false, char delimiter = '|', bool overwrite = true)
         {
             if (elements is null)
             {
@@ -110,7 +112,7 @@ namespace AD.IO
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    writer.Write(elements.ToDelimited(delimiter));
+                    writer.Write(elements.ToDelimited(headers, delimiter));
                 }
             }
         }
