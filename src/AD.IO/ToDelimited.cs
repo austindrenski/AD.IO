@@ -106,13 +106,15 @@ namespace AD.IO
             {
                 return
                     typeof(T).GetFields()
-                             .Select(y => y.GetValue(source)?.ToString() ?? string.Empty)
+                             .Select(y => y.GetValue(source))
+                             .Select(x => x?.ToString() ?? string.Empty)
                              .ToDelimitedString(delimiter);
             }
 
             return
                 typeof(T).GetProperties()
-                         .Select(x => x.GetValue(source)?.ToString() ?? string.Empty)
+                         .Select(x => x.GetValue(source))
+                         .Select(x => x?.ToString() ?? string.Empty)
                          .ToDelimitedString(delimiter);
         }
 
