@@ -192,7 +192,7 @@ namespace AD.IO.Tests
             string test = document.ToDelimited();
 
             // Assert
-            Assert.Null(test);
+            Assert.Equal(string.Empty, test);
         }
 
         [Fact]
@@ -207,7 +207,7 @@ namespace AD.IO.Tests
             string test = document.ToDelimited();
 
             // Assert
-            Assert.Null(test);
+            Assert.Equal(string.Empty, test);
         }
 
         [Fact]

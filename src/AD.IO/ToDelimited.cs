@@ -73,6 +73,8 @@ namespace AD.IO
         /// <param name="delimiter"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
+        [Pure]
+        [NotNull]
         public static string ToDelimitedHeaders<T>([NotNull] this IEnumerable<T> source, char delimiter = '|')
         {
             if (source is null)
@@ -110,7 +112,7 @@ namespace AD.IO
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimitedString<T>([CanBeNull] this T source, char delimiter = '|')
         {
             if (source == null)
@@ -165,7 +167,7 @@ namespace AD.IO
         /// <param name="source">The <see cref="XElement"/> from which values are retrieved.</param>
         /// <param name="delimiter">The character to delimit the values of the child elements.</param>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimitedString([NotNull] this XElement source, char delimiter = '|')
         {
             if (source is null)
@@ -186,7 +188,7 @@ namespace AD.IO
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimitedString<T>([NotNull] [ItemCanBeNull] this IEnumerable<T> source, char delimiter = '|')
         {
             if (source is null)
@@ -205,7 +207,7 @@ namespace AD.IO
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimited<T>([NotNull] [ItemCanBeNull] this IEnumerable<T> source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
@@ -237,7 +239,7 @@ namespace AD.IO
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter and new lines.</returns>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimited([NotNull] [ItemNotNull] this IEnumerable<XElement> source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
@@ -269,7 +271,7 @@ namespace AD.IO
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimited<T>([NotNull] [ItemNotNull] this IEnumerable<IEnumerable<T>> source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
@@ -301,7 +303,7 @@ namespace AD.IO
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
-        [CanBeNull]
+        [NotNull]
         public static string ToDelimited([NotNull] this XDocument source, bool headers = true, char delimiter = '|')
         {
             if (source is null)
@@ -311,7 +313,7 @@ namespace AD.IO
 
             if (source.Root is null || !source.Root.HasElements)
             {
-                return null;
+                return string.Empty;
             }
 
             if (!headers)
