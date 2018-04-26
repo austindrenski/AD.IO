@@ -138,11 +138,10 @@ namespace AD.IO.Paths
             return Create(path);
         }
 
+        /// <inheritdoc cref="IPath"/>
         /// <summary>
         /// Returns the delimited file path.
         /// </summary>
-        [NotNull]
-        // ReSharper disable once InheritdocConsiderUsage
         public override string ToString()
         {
             return _path;
@@ -211,13 +210,13 @@ namespace AD.IO.Paths
             return new UrlPath(uri.AbsoluteUri);
         }
 
-        [NotNull]
+        /// <inheritdoc />
         IEnumerator<char> IEnumerable<char>.GetEnumerator()
         {
             return _path.AsEnumerable().GetEnumerator();
         }
 
-        [NotNull]
+        /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _path.AsEnumerable().GetEnumerator();

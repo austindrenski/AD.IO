@@ -40,9 +40,7 @@ namespace AD.IO
                     .Skip(1)
                     .Select(x => x.SplitDelimitedLine(delimitedFilePath.Delimiter))
                     .Select(x => x.ToArray())
-                    .ToArray()
-                    ??
-                    new string[0][];
+                    .ToArray();
 
             foreach (string header in headers)
             {

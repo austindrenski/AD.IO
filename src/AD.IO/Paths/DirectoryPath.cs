@@ -41,9 +41,15 @@ namespace AD.IO.Paths
             {
                 throw new DirectoryNotFoundException();
             }
+
             _path = directoryPath;
             Extension = null;
-            string temp = Path.GetDirectoryName(directoryPath);
+
+            if (!(Path.GetDirectoryName(directoryPath) is string temp))
+            {
+                throw new DirectoryNotFoundException(directoryPath);
+            }
+
             Name = temp.Substring(temp.LastIndexOfAny(new char[] { '/', '\\' }) + 1);
         }
 

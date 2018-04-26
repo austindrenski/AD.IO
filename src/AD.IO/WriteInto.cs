@@ -137,7 +137,7 @@ namespace AD.IO
             {
                 using (ZipArchive resultArchive = new ZipArchive(result, ZipArchiveMode.Update, true))
                 {
-                    using (StreamReader reader = new StreamReader(fromArchive.GetEntry(entryPath).Open()))
+                    using (StreamReader reader = new StreamReader(fromArchive.GetEntry(entryPath)?.Open() ?? throw new FileNotFoundException(entryPath)))
                     {
                         using (StreamWriter writer = new StreamWriter(resultArchive.CreateEntry(entryPath).Open()))
                         {

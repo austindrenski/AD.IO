@@ -320,12 +320,11 @@ namespace AD.IO.Paths
             return memoryStream;
         }
 
-        /// <inheritdoc cref="IPath.ToString"/>
+        /// <inheritdoc cref="IPath"/>
         /// <summary>
         /// Returns the file path.
         /// </summary>
         [Pure]
-        [NotNull]
         public override string ToString()
         {
             return _path;
