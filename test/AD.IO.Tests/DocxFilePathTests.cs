@@ -4,13 +4,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AD.IO.Paths;
-using AD.IO.Streams;
 using Xunit;
 
 namespace AD.IO.Tests
 {
     public class DocxFilePathTests
     {
+        [Fact]
+        public void Create()
+        {
+            DocxFilePath.Create("C:\\Users\\adren\\Desktop\\testdocs\\baseline.docx", true);
+        }
+
         [Fact]
         public void DocxFilePathTest0()
         {
@@ -47,9 +52,7 @@ namespace AD.IO.Tests
             // Arrange
             const string path = "test";
             if (File.Exists(path))
-            {
                 File.Delete(path);
-            }
 
             // Act
             Assert.Throws<FileNotFoundException>(() => new ZipFilePath(path));
@@ -216,17 +219,6 @@ namespace AD.IO.Tests
 
             // Act
             Assert.Equal(zip.ToString(), test.ToString());
-        }
-
-        [Fact]
-        public void DocxFilePathTest15()
-        {
-            using (Stream stream = DocxFilePath.Create())
-            {
-                byte[] bytes = stream.CopyPure().Result.GetBuffer();
-
-                Assert.NotEmpty(bytes);
-            }
         }
     }
 }
