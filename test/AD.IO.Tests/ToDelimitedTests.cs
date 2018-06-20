@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Xunit;
 
@@ -145,7 +146,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string result = test.ToDelimited(false);
+            string result = test.Select(x => x.ToDelimitedString()).ToDelimited(false, '\n');
 
             // Assert
             Assert.Equal($"a|b|c{Environment.NewLine}d|e|f{Environment.NewLine}g|h|i", result);
@@ -163,7 +164,7 @@ namespace AD.IO.Tests
             };
 
             // Act
-            string result = test.ToDelimited(false);
+            string result = test.Select(x => x.ToDelimitedString()).ToDelimited(false, '\n');
 
             // Assert
             Assert.Equal($"0|1|2{Environment.NewLine}3|4|5{Environment.NewLine}6|7|8", result);
