@@ -112,7 +112,7 @@ namespace AD.IO
         /// <exception cref="ArgumentNullException"></exception>
         [Pure]
         [NotNull]
-        private static string GetDelimitedHeaders<T>([NotNull] IEnumerable<T> source, char delimiter = '|')
+        static string GetDelimitedHeaders<T>([NotNull] IEnumerable<T> source, char delimiter = '|')
         {
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
@@ -205,7 +205,7 @@ namespace AD.IO
         /// <returns>A string delimited by the delimiter.</returns>
         [Pure]
         [NotNull]
-        private static string GetDelimitedString([NotNull] XDocument source, bool headers = true, char delimiter = '|')
+        static string GetDelimitedString([NotNull] XDocument source, bool headers = true, char delimiter = '|')
         {
             if (source.Root is null || !source.Root.HasElements)
                 return string.Empty;
@@ -236,7 +236,7 @@ namespace AD.IO
         /// <returns></returns>
         [Pure]
         [NotNull]
-        private static string GetDelimitedHeaders([NotNull] IEnumerable<XElement> source, char delimiter = '|')
+        static string GetDelimitedHeaders([NotNull] IEnumerable<XElement> source, char delimiter = '|')
             => source.First()
                      .Elements()
                      .Select(x => x.Name.LocalName)
@@ -250,7 +250,7 @@ namespace AD.IO
         /// <param name="delimiter">The character to delimit the values of the child elements.</param>
         [Pure]
         [NotNull]
-        private static string GetDelimitedString([NotNull] XElement source, char delimiter = '|')
+        static string GetDelimitedString([NotNull] XElement source, char delimiter = '|')
             => source.HasElements
                    ? source.Elements().Select(x => x.Value).ToDelimitedString(delimiter)
                    : source.Value.ToDelimitedString();
@@ -269,7 +269,7 @@ namespace AD.IO
         /// </returns>
         [Pure]
         [NotNull]
-        private static string MakeSafeString([NotNull] string value, char delimiter)
+        static string MakeSafeString([NotNull] string value, char delimiter)
         {
             const char quote = '"';
 

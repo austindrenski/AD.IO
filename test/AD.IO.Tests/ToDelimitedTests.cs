@@ -232,10 +232,24 @@ namespace AD.IO.Tests
                             new XElement("Field5", 10))));
 
             // Act
-            string test = document.ToDelimited(delimiter: ',');
+            string test = document.ToDelimited(',');
 
             // Assert
             Assert.Equal($"Field1,Field2,Field3,Field4,Field5{Environment.NewLine}1,2,3,4,5{Environment.NewLine}2,4,6,8,10", test);
+        }
+
+        [Fact]
+        public void AnonymousTypeToDelimited()
+        {
+            var items = new[]
+            {
+                new { a = "value_a1", b = "value_b1" },
+                new { a = "value_a2", b = "value_b2" }
+            };
+
+            string value = items.ToDelimited(true, ',');
+
+            Assert.Equal($"a,b{Environment.NewLine}value_a1,value_b1{Environment.NewLine}value_a2,value_b2", value);
         }
     }
 }
