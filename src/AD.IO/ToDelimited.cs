@@ -120,7 +120,7 @@ namespace AD.IO
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            Type type = source.AsQueryable().ElementType;
+            Type type = source.FirstOrDefault()?.GetType() ?? source.GetType().GenericTypeArguments[0];
 
             if (type.Name.StartsWith(nameof(ValueTuple)))
             {
