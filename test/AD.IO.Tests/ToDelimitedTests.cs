@@ -251,5 +251,20 @@ namespace AD.IO.Tests
 
             Assert.Equal($"a,b{Environment.NewLine}value_a1,value_b1{Environment.NewLine}value_a2,value_b2", value);
         }
+
+        [Fact]
+        public void AnonymousTypeToDelimited2()
+        {
+            var items =
+                new[]
+                {
+                    new { a = 1, b = 2, c = 3 }
+                };
+
+            string value = items.ToDelimited(true, ',');
+
+            Assert.Equal($"a,b,c{Environment.NewLine}1,2,3", value);
+        }
+
     }
 }

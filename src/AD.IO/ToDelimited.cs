@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Primitives;
@@ -28,7 +29,9 @@ namespace AD.IO
             if (source == null)
                 return string.Empty;
 
-            if (typeof(T).IsPrimitive)
+            Type type = source.GetType();
+
+            if (type.IsPrimitive)
                 return source.ToString();
 
             switch (source)
@@ -43,20 +46,20 @@ namespace AD.IO
                     return values.Select(x => x).ToDelimitedString(delimiter);
             }
 
-            if (typeof(T).Name.StartsWith(nameof(ValueTuple)))
+            if (type.Name.StartsWith(nameof(ValueTuple)))
             {
                 return
-                    typeof(T).GetFields()
-                             .Select(y => y.GetValue(source))
-                             .Select(x => x?.ToString() ?? string.Empty)
-                             .ToDelimitedString(delimiter);
+                    type.GetRuntimeFields()
+                        .Select(y => y.GetValue(source))
+                        .Select(x => x?.ToString() ?? string.Empty)
+                        .ToDelimitedString(delimiter);
             }
 
             return
-                typeof(T).GetProperties()
-                         .Select(x => x.GetValue(source))
-                         .Select(x => x?.ToString() ?? string.Empty)
-                         .ToDelimitedString(delimiter);
+                type.GetRuntimeProperties()
+                    .Select(x => x.GetValue(source))
+                    .Select(x => x?.ToString() ?? string.Empty)
+                    .ToDelimitedString(delimiter);
         }
 
         /// <summary>
@@ -117,18 +120,20 @@ namespace AD.IO
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (typeof(T).Name.StartsWith(nameof(ValueTuple)))
+            Type type = source.AsQueryable().ElementType;
+
+            if (type.Name.StartsWith(nameof(ValueTuple)))
             {
                 return
-                    typeof(T).GetFields()
-                             .Select(x => MakeSafeString(x.Name, delimiter))
-                             .ToDelimitedString(delimiter);
+                    type.GetRuntimeFields()
+                        .Select(x => MakeSafeString(x.Name, delimiter))
+                        .ToDelimitedString(delimiter);
             }
 
             return
-                typeof(T).GetProperties()
-                         .Select(x => MakeSafeString(x.Name, delimiter))
-                         .ToDelimitedString(delimiter);
+                type.GetRuntimeProperties()
+                    .Select(x => MakeSafeString(x.Name, delimiter))
+                    .ToDelimitedString(delimiter);
         }
 
         #endregion
