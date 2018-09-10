@@ -2,8 +2,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <AssemblyName>AD.IO</AssemblyName>
-    <RootNamespace>AD.IO</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
+    <DocumentationFile>bin/Release/$(TargetFramework)/AD.IO.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyVersion/>
+    <FileVersion/>
+    <PackageVersion/>
+    <Version/>
   </PropertyGroup>
   <PropertyGroup>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -14,14 +22,8 @@
     <Description>C# extension library for input/output operations and data management.</Description>
     <RepositoryUrl>https://github.com/austindrenski/AD.IO</RepositoryUrl>
     <PackageTags>read-data read-xml read-csv read-delimited file data xml csv</PackageTags>
-    <AssemblyVersion>1.5.0</AssemblyVersion>
-    <FileVersion>1.5.0</FileVersion>
-    <Version>1.5.0</Version>
-    <PackageVersion>1.5.0</PackageVersion>
     <Authors>Austin Drenski</Authors>
     <Company>Austin Drenski</Company>
-    <DocumentationFile>bin\Release\netstandard2.0\AD.IO.xml</DocumentationFile>
-    <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\*">
@@ -30,8 +32,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.1" />
-    <PackageReference Include="System.IO.Packaging" Version="4.5.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.1" PrivateAssets="None"/>
+    <PackageReference Include="System.IO.Packaging" Version="4.5.0" PrivateAssets="None"/>
   </ItemGroup>
 </Project>

@@ -5,7 +5,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D5F037E-1B9B-4DC4-A4F4-AC1D7BC4D63B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		_config.yml = _config.yml
 		README.md = README.md
 		.appveyor.yml = .appveyor.yml
 		LICENSE = LICENSE

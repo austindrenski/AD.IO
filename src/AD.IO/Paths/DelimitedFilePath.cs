@@ -17,8 +17,7 @@ namespace AD.IO.Paths
         /// <summary>
         /// The full file path.
         /// </summary>
-        [NotNull]
-        private readonly string _path;
+        [NotNull] private readonly string _path;
 
         /// <inheritdoc />
         /// <summary>
@@ -62,13 +61,10 @@ namespace AD.IO.Paths
         public DelimitedFilePath([NotNull] string delimitedFilePath, char delimiter = '|')
         {
             if (delimitedFilePath is null)
-            {
                 throw new ArgumentNullException(nameof(delimitedFilePath));
-            }
+
             if (!File.Exists(delimitedFilePath))
-            {
                 throw new FileNotFoundException();
-            }
 
             _path = delimitedFilePath;
 
@@ -97,13 +93,12 @@ namespace AD.IO.Paths
         public static DelimitedFilePath Create([NotNull] string delimitedFilePath, char delimiter)
         {
             if (delimitedFilePath is null)
-            {
                 throw new ArgumentNullException(nameof(delimitedFilePath));
-            }
-            if (!File.Exists(delimitedFilePath))
-            {
-                File.Create(delimitedFilePath).Dispose();
-            }
+
+            if (File.Exists(delimitedFilePath))
+                return new DelimitedFilePath(delimitedFilePath, delimiter);
+
+            using (File.Create(delimitedFilePath)) {}
 
             return new DelimitedFilePath(delimitedFilePath, delimiter);
         }
@@ -116,9 +111,7 @@ namespace AD.IO.Paths
         public static DelimitedFilePath Create([NotNull] string path)
         {
             if (path is null)
-            {
                 throw new ArgumentNullException(nameof(path));
-            }
 
             return Create(path, '|');
         }
@@ -131,9 +124,7 @@ namespace AD.IO.Paths
         IPath IPath.Create([NotNull] string path)
         {
             if (path is null)
-            {
                 throw new ArgumentNullException(nameof(path));
-            }
 
             return Create(path);
         }
@@ -142,10 +133,7 @@ namespace AD.IO.Paths
         /// <summary>
         /// Returns the delimited file path.
         /// </summary>
-        public override string ToString()
-        {
-            return _path;
-        }
+        public override string ToString() => _path;
 
         /// <summary>
         /// Implicitly casts a DelimitedFilePath as its internal delimited file path string.
@@ -154,9 +142,7 @@ namespace AD.IO.Paths
         public static implicit operator string([NotNull] DelimitedFilePath delimitedFilePath)
         {
             if (delimitedFilePath is null)
-            {
                 throw new ArgumentNullException(nameof(delimitedFilePath));
-            }
 
             return delimitedFilePath._path;
         }
@@ -170,9 +156,7 @@ namespace AD.IO.Paths
         public static implicit operator DelimitedFilePath([NotNull] string delimitedFilePath)
         {
             if (delimitedFilePath is null)
-            {
                 throw new ArgumentNullException(nameof(delimitedFilePath));
-            }
 
             return new DelimitedFilePath(delimitedFilePath);
         }
@@ -186,9 +170,7 @@ namespace AD.IO.Paths
         public static explicit operator FilePath([NotNull] DelimitedFilePath delimitedFilePath)
         {
             if (delimitedFilePath is null)
-            {
                 throw new ArgumentNullException(nameof(delimitedFilePath));
-            }
 
             return new FilePath(delimitedFilePath);
         }
@@ -202,24 +184,16 @@ namespace AD.IO.Paths
         public static explicit operator UrlPath([NotNull] DelimitedFilePath delimitedFilePath)
         {
             if (delimitedFilePath is null)
-            {
                 throw new ArgumentNullException(nameof(delimitedFilePath));
-            }
 
             Uri uri = new Uri(delimitedFilePath);
             return new UrlPath(uri.AbsoluteUri);
         }
 
         /// <inheritdoc />
-        IEnumerator<char> IEnumerable<char>.GetEnumerator()
-        {
-            return _path.AsEnumerable().GetEnumerator();
-        }
+        IEnumerator<char> IEnumerable<char>.GetEnumerator() => _path.AsEnumerable().GetEnumerator();
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _path.AsEnumerable().GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _path.AsEnumerable().GetEnumerator();
     }
 }

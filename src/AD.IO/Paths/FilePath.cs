@@ -17,7 +17,7 @@ namespace AD.IO.Paths
         /// <summary>
         /// The full file path.
         /// </summary>
-        private readonly string _path;
+        readonly string _path;
 
         /// <inheritdoc />
         /// <summary>
@@ -36,12 +36,14 @@ namespace AD.IO.Paths
         /// </summary>
         /// <param name="filePath">A string file path.</param>
         /// <exception cref="FileNotFoundException"/>
-        public FilePath(string filePath)
+        public FilePath([NotNull] string filePath)
         {
+            if (filePath is null)
+                throw new ArgumentNullException(nameof(filePath));
+
             if (!File.Exists(filePath))
-            {
                 throw new FileNotFoundException();
-            }
+
             _path = filePath;
             Extension = Path.GetExtension(filePath);
             Name = Path.GetFileNameWithoutExtension(filePath);
@@ -50,12 +52,17 @@ namespace AD.IO.Paths
         /// <summary>
         /// Creates a file along the path if one does not exist.
         /// </summary>
-        public static FilePath Create(string filePath)
+        [NotNull]
+        public static FilePath Create([NotNull] string filePath)
         {
-            if (!File.Exists(filePath))
-            {
-                File.Create(filePath).Dispose();
-            }
+            if (filePath is null)
+                throw new ArgumentNullException(nameof(filePath));
+
+            if (File.Exists(filePath))
+                return new FilePath(filePath);
+
+            using (File.Create(filePath)) {}
+
             return new FilePath(filePath);
         }
 
@@ -63,44 +70,40 @@ namespace AD.IO.Paths
         /// <summary>
         /// Explicit IPath implementation.
         /// </summary>
-        IPath IPath.Create(string path)
+        [NotNull]
+        IPath IPath.Create([NotNull] string path)
         {
+            if (path is null)
+                throw new ArgumentNullException(nameof(path));
+
             return Create(path);
         }
 
         /// <summary>
         /// Returns the file path.
         /// </summary>
-        // ReSharper disable once InheritdocConsiderUsage
-        public override string ToString()
-        {
-            return _path;
-        }
+        public override string ToString() => _path;
 
-        IEnumerator<char> IEnumerable<char>.GetEnumerator()
-        {
-            return _path.AsEnumerable().GetEnumerator();
-        }
+        IEnumerator<char> IEnumerable<char>.GetEnumerator() => _path.AsEnumerable().GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _path.AsEnumerable().GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _path.AsEnumerable().GetEnumerator();
 
         /// <summary>
         /// Implicitly casts a FilePath as its internal file path string.
         /// </summary>
-        public static implicit operator string(FilePath filePath)
-        {
-            return filePath._path;
-        }
+        [CanBeNull]
+        public static implicit operator string([CanBeNull] FilePath filePath) => filePath?._path;
 
         /// <summary>
         /// Implicitly casts a string as a FilePath. An exception is thrown if the file is not found.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
-        public static implicit operator FilePath(string filePath)
+        [NotNull]
+        public static implicit operator FilePath([NotNull] string filePath)
         {
+            if (filePath is null)
+                throw new ArgumentNullException(nameof(filePath));
+
             return new FilePath(filePath);
         }
 
@@ -108,18 +111,20 @@ namespace AD.IO.Paths
         /// Implicitly casts a FilePath as a DocxFilePath. An exception is thrown if the file is not found.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
-        public static implicit operator DocxFilePath(FilePath filePath)
-        {
-            return new DocxFilePath(filePath);
-        }
+        [NotNull]
+        public static implicit operator DocxFilePath([NotNull] FilePath filePath) => new DocxFilePath(filePath);
 
         /// <summary>
         /// Implicitly casts a FilePath as a ZipFilePath. An exception is thrown if the file is not a zip file path, or if the file is not found.
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="System.ArgumentException"/>
-        public static explicit operator ZipFilePath(FilePath filePath)
+        [NotNull]
+        public static explicit operator ZipFilePath([NotNull] FilePath filePath)
         {
+            if (filePath is null)
+                throw new ArgumentNullException(nameof(filePath));
+
             return new ZipFilePath(filePath);
         }
 
@@ -128,10 +133,13 @@ namespace AD.IO.Paths
         /// </summary>
         /// <exception cref="FileNotFoundException"/>
         /// <exception cref="System.ArgumentException"/>
-        public static explicit operator UrlPath(FilePath filePath)
+        [NotNull]
+        public static explicit operator UrlPath([NotNull] FilePath filePath)
         {
-            Uri uri = new Uri(filePath);
-            return new UrlPath(uri.AbsoluteUri);
+            if (filePath is null)
+                throw new ArgumentNullException(nameof(filePath));
+
+            return new UrlPath(new Uri(filePath).AbsoluteUri);
         }
     }
 }

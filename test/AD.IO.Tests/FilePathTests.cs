@@ -83,7 +83,7 @@ namespace AD.IO.Tests
         public void FilePathTest6()
         {
             // Arrange
-            string path = Path.Combine(Path.GetTempPath(), "testdirectory", ".txt");
+            string path = Path.Combine(Path.GetTempPath(), "TestDirectory", "test.txt");
 
             // Act
             FilePath filePath = FilePath.Create(path);

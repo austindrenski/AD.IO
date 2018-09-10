@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Primitives;
@@ -21,7 +22,9 @@ namespace AD.IO
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
+        /// <returns>
+        /// A string delimited by the delimiter.
+        /// </returns>
         [Pure]
         [NotNull]
         public static string ToDelimitedString<T>([CanBeNull] this T source, char delimiter = '|')
@@ -67,7 +70,10 @@ namespace AD.IO
         /// </summary>
         /// <param name="source">A collection to be delimited.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
+        /// <returns>
+        /// A string delimited by the delimiter.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"></paramref ></exception>
         [Pure]
         [NotNull]
         public static string ToDelimitedString<T>([NotNull] [ItemCanBeNull] this IEnumerable<T> source, char delimiter = '|')
@@ -75,7 +81,18 @@ namespace AD.IO
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            return string.Join(delimiter.ToString(), source.Select(x => x.ToDelimitedString(delimiter)));
+            return
+                source.Select(x => x.ToDelimitedString(delimiter))
+                      .Aggregate(
+                           new StringBuilder(),
+                           (current, next) =>
+                           {
+                               if (current.Length != 0)
+                                   current.Append(delimiter);
+
+                               return current.Append(next);
+                           },
+                           result => result.ToString());
         }
 
         /// <summary>
@@ -84,7 +101,10 @@ namespace AD.IO
         /// <param name="source">A collection to be delimited.</param>
         /// <param name="headers">True if headers should be included; otherwise false.</param>
         /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
+        /// <returns>
+        /// A string delimited by the delimiter.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"></paramref ></exception>
         [Pure]
         [NotNull]
         public static string ToDelimited<T>([NotNull] [ItemCanBeNull] this IEnumerable<T> source, bool headers = true, char delimiter = '|')
@@ -92,48 +112,16 @@ namespace AD.IO
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!headers)
-                return string.Join(Environment.NewLine, source.Select(x => x.ToDelimitedString(delimiter)));
+            T[] array = source as T[] ?? source.ToArray();
 
-            source = source as T[] ?? source.ToArray();
+            StringBuilder sb = new StringBuilder();
 
-            return
-                string.Join(
-                    Environment.NewLine,
-                    GetDelimitedHeaders(source, delimiter),
-                    string.Join(
-                        Environment.NewLine,
-                        source.Select(x => x.ToDelimitedString(delimiter))));
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="delimiter"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        [Pure]
-        [NotNull]
-        static string GetDelimitedHeaders<T>([NotNull] IEnumerable<T> source, char delimiter = '|')
-        {
-            if (source is null)
-                throw new ArgumentNullException(nameof(source));
-
-            Type type = source.FirstOrDefault()?.GetType() ?? source.GetType().GenericTypeArguments[0];
-
-            if (type.Name.StartsWith(nameof(ValueTuple)))
-            {
-                return
-                    type.GetRuntimeFields()
-                        .Select(x => MakeSafeString(x.Name, delimiter))
-                        .ToDelimitedString(delimiter);
-            }
+            if (headers)
+                sb.AppendLine(GetDelimitedHeaders(array, delimiter));
 
             return
-                type.GetRuntimeProperties()
-                    .Select(x => MakeSafeString(x.Name, delimiter))
-                    .ToDelimitedString(delimiter);
+                array.Select(x => x.ToDelimitedString(delimiter))
+                     .Aggregate(sb, (current, next) => current.AppendLine(next), result => result.ToString());
         }
 
         #endregion
@@ -186,79 +174,17 @@ namespace AD.IO
             if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (!headers)
-                return string.Join(Environment.NewLine, source.Where(x => x != null).Select(x => GetDelimitedString(x, delimiter)));
+            XElement[] array = source as XElement[] ?? source.ToArray();
 
-            source = source as XElement[] ?? source.ToArray();
+            StringBuilder sb = new StringBuilder();
 
-            return
-                string.Join(
-                    Environment.NewLine,
-                    GetDelimitedHeaders(source, delimiter),
-                    string.Join(
-                        Environment.NewLine,
-                        source.Where(x => x != null)
-                              .Select(x => GetDelimitedString(x, delimiter))));
-        }
-
-        /// <summary>
-        /// Appends the elements of the document by a delimiter.
-        /// </summary>
-        /// <param name="source">An XDocument to be transformed into a delimited string.</param>
-        /// <param name="headers">True if headers should be included; otherwise false.</param>
-        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
-        /// <returns>A string delimited by the delimiter.</returns>
-        [Pure]
-        [NotNull]
-        static string GetDelimitedString([NotNull] XDocument source, bool headers = true, char delimiter = '|')
-        {
-            if (source.Root is null || !source.Root.HasElements)
-                return string.Empty;
-
-            if (!headers)
-                return string.Join(Environment.NewLine, source.Root.Elements().Where(x => x != null).Select(x => GetDelimitedString(x, delimiter)));
-
-            XElement[] elements =
-                source.Root
-                      .Elements()
-                      .ToArray();
+            if (headers)
+                sb.AppendLine(GetDelimitedHeaders(array, delimiter));
 
             return
-                string.Join(
-                    Environment.NewLine,
-                    GetDelimitedHeaders(elements, delimiter),
-                    string.Join(
-                        Environment.NewLine,
-                        elements.Where(x => x != null)
-                                .Select(x => GetDelimitedString(x, delimiter))));
+                array.Select(x => GetDelimitedString(x, delimiter))
+                     .Aggregate(sb, (current, next) => current.AppendLine(next), result => result.ToString());
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="delimiter"></param>
-        /// <returns></returns>
-        [Pure]
-        [NotNull]
-        static string GetDelimitedHeaders([NotNull] IEnumerable<XElement> source, char delimiter = '|')
-            => source.First()
-                     .Elements()
-                     .Select(x => x.Name.LocalName)
-                     .Select(x => MakeSafeString(x, delimiter))
-                     .ToDelimitedString(delimiter);
-
-        /// <summary>
-        /// Returns the delimited values of the <see cref="XElement"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XElement"/> from which values are retrieved.</param>
-        /// <param name="delimiter">The character to delimit the values of the child elements.</param>
-        [Pure]
-        [NotNull]
-        static string GetDelimitedString([NotNull] XElement source, char delimiter = '|')
-            => source.HasElements
-                   ? source.Elements().Select(x => x.Value).ToDelimitedString(delimiter)
-                   : source.Value.ToDelimitedString();
 
         #endregion
 
@@ -310,6 +236,92 @@ namespace AD.IO
             }
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Gets a string of the delimited headers.
+        /// </summary>
+        /// <param name="source">A collection from which headers are delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the headers.</param>
+        /// <returns>
+        /// A header string delimited by the delimiter.
+        /// </returns>
+        [Pure]
+        [NotNull]
+        static string GetDelimitedHeaders<T>([NotNull] T[] source, char delimiter = '|')
+        {
+            Type type = source.FirstOrDefault()?.GetType() ?? source.GetType().GenericTypeArguments[0];
+
+            if (type.Name.StartsWith(nameof(ValueTuple)))
+            {
+                return
+                    type.GetRuntimeFields()
+                        .Select(x => MakeSafeString(x.Name, delimiter))
+                        .ToDelimitedString(delimiter);
+            }
+
+            return
+                type.GetRuntimeProperties()
+                    .Select(x => MakeSafeString(x.Name, delimiter))
+                    .ToDelimitedString(delimiter);
+        }
+
+        /// <summary>
+        /// Gets a string of the delimited headers.
+        /// </summary>
+        /// <param name="source">A collection from which headers are delimited.</param>
+        /// <param name="delimiter">The delimiter used to delimit the headers.</param>
+        /// <returns>
+        /// A header string delimited by the delimiter.
+        /// </returns>
+        [Pure]
+        [NotNull]
+        static string GetDelimitedHeaders([NotNull] XElement[] source, char delimiter = '|')
+            => source.First()
+                     .Elements()
+                     .Select(x => x.Name.LocalName)
+                     .Select(x => MakeSafeString(x, delimiter))
+                     .ToDelimitedString(delimiter);
+
+        /// <summary>
+        /// Returns the delimited values of the <see cref="XElement"/>.
+        /// </summary>
+        /// <param name="source">The <see cref="XElement"/> from which values are retrieved.</param>
+        /// <param name="delimiter">The character to delimit the values of the child elements.</param>
+        [Pure]
+        [NotNull]
+        static string GetDelimitedString([NotNull] XElement source, char delimiter = '|')
+            => source.HasElements
+                   ? source.Elements().Select(x => x.Value).ToDelimitedString(delimiter)
+                   : source.Value.ToDelimitedString();
+
+        /// <summary>
+        /// Appends the elements of the document by a delimiter.
+        /// </summary>
+        /// <param name="source">An XDocument to be transformed into a delimited string.</param>
+        /// <param name="headers">True if headers should be included; otherwise false.</param>
+        /// <param name="delimiter">The delimiter used to delimit the collection.</param>
+        /// <returns>A string delimited by the delimiter.</returns>
+        [Pure]
+        [NotNull]
+        static string GetDelimitedString([NotNull] XDocument source, bool headers = true, char delimiter = '|')
+        {
+            if (source.Root is null || !source.Root.HasElements)
+                return string.Empty;
+
+            XElement[] elements =
+                source.Root
+                      .Elements()
+                      .ToArray();
+
+            StringBuilder sb = new StringBuilder();
+
+            if (headers)
+                sb.AppendLine(GetDelimitedHeaders(elements, delimiter));
+
+            return
+                elements.Select(x => GetDelimitedString(x, delimiter))
+                        .Aggregate(sb, (current, next) => current.AppendLine(next), result => result.ToString());
         }
 
         #endregion

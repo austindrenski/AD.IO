@@ -58,7 +58,7 @@ namespace AD.IO.Tests
         public void DelimitedFilePathTest4()
         {
             // Arrange
-            string path = Path.Combine(Path.GetTempPath(), "testdirectory", ".csv");
+            string path = Path.Combine(Path.GetTempPath(), "TestDirectory", "test.csv");
 
             // Act
             DelimitedFilePath filePath = DelimitedFilePath.Create(path, '|');
